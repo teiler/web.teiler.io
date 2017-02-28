@@ -10,4 +10,8 @@ addons:
 script:
   - sonar-scanner
 notifications:
-  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=JOuQI5jyJE4Du6RmVpMvAqgMVvTskbgNErHbiZ0cL89TrOLTHX
+  webhooks: 
+    urls:
+      - https://fathomless-fjord-24024.herokuapp.com/notify?secret=JOuQI5jyJE4Du6RmVpMvAqgMVvTskbgNErHbiZ0cL89TrOLTHX
+    on_success: change # default: always
+    on_failure: always # default: always
