@@ -9,3 +9,5 @@ addons:
       secure: 70c45aec45b92f28e14b9159a18a20c92e2dddae
 script:
   - sonar-scanner
+notifications:
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=JOuQI5jyJE4Du6RmVpMvAqgMVvTskbgNErHbiZ0cL89TrOLTHX
