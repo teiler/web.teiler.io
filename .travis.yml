@@ -1,3 +1,4 @@
+dist: trusty
 language: node_js
 
 node_js:
@@ -5,7 +6,7 @@ node_js:
 
 
 addons:
-  ssh_known_hosts: api.teiler.io
+  ssh_known_hosts: web.teiler.io
 
 install:
 - cd backend && npm i --test && cd ..
