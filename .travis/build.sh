@@ -7,5 +7,5 @@ set -x
 [ -d backend/node_modules ] && rm -rf backend/node_modules
 
 cd frontend
-npm install --prod
+npm install --production
 ng build --prod
