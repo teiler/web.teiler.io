@@ -1,0 +1,17 @@
+{
+  "name": "tylr-web",
+  "version": "1.0.0",
+  "description": "Engineering Project",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thde/tylr-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thde/tylr-web/issues"
+  },
+  "homepage": "https://github.com/thde/tylr-web#readme"
+}
