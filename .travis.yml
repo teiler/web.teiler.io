@@ -3,6 +3,10 @@ language: node_js
 node_js:
 - '6'
 
+
+addons:
+  ssh_known_hosts: api.teiler.io
+
 install:
 - cd backend && npm i --test && cd ..
 - cd frontend && npm i --test && cd ..
