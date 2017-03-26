@@ -45,6 +45,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: process.env.TRAVIS ? ['Chrome_travis_ci'] : ['Chrome'],
-    singleRun: false
+    singleRun: process.env.TRAVIS ? true : false
   });
 };

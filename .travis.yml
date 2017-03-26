@@ -28,10 +28,6 @@ before_script:
 # check code quality
 - npm run lint
 
-script:
-# unit test
-- ng test --single-run
-
 before_deploy:
 - .travis/build.sh
 
