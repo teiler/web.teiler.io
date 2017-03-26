@@ -1,10 +1,10 @@
-import { FrontendPage } from './app.po';
+import { TylrWebPage } from './app.po';
 
-describe('frontend App', () => {
-  let page: FrontendPage;
+describe('tylr-web App', () => {
+  let page: TylrWebPage;
 
   beforeEach(() => {
-    page = new FrontendPage();
+    page = new TylrWebPage();
   });
 
   it('should display message saying app works', () => {
