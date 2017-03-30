@@ -8,8 +8,8 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./group-login.component.css']
 })
 export class GroupLoginComponent implements OnInit {
-  private groupId: string;
-  private response: string;
+  public groupId: string;
+  public response: string;
 
   constructor(private groupService: GroupService) {
   }
