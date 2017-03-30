@@ -31,8 +31,7 @@ before_script:
 script:
 # unit test
 - ng test --single-run
-
-before_deploy:
+# build production
 - .travis/build.sh
 
 deploy:
