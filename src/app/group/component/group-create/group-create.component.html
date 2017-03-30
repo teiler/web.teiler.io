@@ -1,0 +1,14 @@
+<h2>Create Group</h2>
+
+
+<form (ngSubmit)="createGroup(createGroupForm)" #createGroupForm="ngForm">
+
+  <input type="text" id="groupName" placeholder="Your group name"
+         name="groupName" [(ngModel)]="groupName" required>
+
+  <button type="submit" [disabled]="!createGroupForm.form.valid">
+    Create
+  </button>
+
+</form>
+{{response}}
