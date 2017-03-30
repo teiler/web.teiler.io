@@ -9,7 +9,7 @@ import {GroupService} from '../../service/group.service';
 })
 export class GroupCreateComponent implements OnInit {
   public groupName = '';
-  public response = 'test';
+  public response: string;
 
   constructor(private groupService: GroupService) {
   }
@@ -21,8 +21,8 @@ export class GroupCreateComponent implements OnInit {
     if (createGroupForm.form.valid) {
       console.log(`component: submit create form - ${this.groupName}`);
       this.groupService.createGroup(this.groupName)
-        .subscribe((response: string) => {
-          this.response = response;
+        .subscribe((response: any) => {
+          this.response = JSON.stringify(response.value);
         });
     }
     return false;

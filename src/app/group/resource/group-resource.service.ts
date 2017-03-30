@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
@@ -11,17 +11,33 @@ export class GroupResourceService {
   }
 
   public createGroup(name: string): Observable<any> {
-
     const requestBody = {
       name
     };
 
     return this.http.post(this.getRequesturl('group'), requestBody)
       .map((response: Response) => {
-        console.log('resource service: api response - ', response);
-        return Observable.of<any>(response.json());
+        const result = response.json();
+        console.log('resource service: api response - ', result);
+        return Observable.of<any>(result);
       }).catch((error: any) => {
         return Observable.of<any>(error);
+      });
+  }
+
+  public getGroup(id: string): Observable<any> {
+    const headers = new Headers({
+      'X-Teiler-GroupID': id
+    });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.getRequesturl('group'), options)
+      .map((response: Response) => {
+        const result = response.json();
+        console.log('resource service: api response - ', result);
+        return Observable.of<any>(result);
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
       });
   }
 

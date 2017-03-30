@@ -6,6 +6,8 @@ import {GroupCreateComponent} from './component/group-create/group-create.compon
 import {FormsModule} from '@angular/forms';
 import {GroupService} from './service/group.service';
 import {GroupResourceService} from './resource/group-resource.service';
+import { GroupLoginComponent } from './component/group-login/group-login.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -14,9 +16,9 @@ import {GroupResourceService} from './resource/group-resource.service';
 
     FormsModule
   ],
-  declarations: [GroupCreateComponent],
+  declarations: [GroupCreateComponent, GroupLoginComponent, DashboardComponent],
   exports: [
-    GroupCreateComponent
+    GroupCreateComponent, GroupLoginComponent
   ],
   providers: [
     GroupService,
