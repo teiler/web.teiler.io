@@ -22,7 +22,7 @@ export class GroupCreateComponent implements OnInit {
       console.log(`component: submit create form - ${this.groupName}`);
       this.groupService.createGroup(this.groupName)
         .subscribe((response: any) => {
-          this.response = JSON.stringify(response.value);
+          this.response = JSON.stringify(response.valu);
         });
     }
     return false;
