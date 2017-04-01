@@ -14,8 +14,15 @@ export class GroupService {
   }
 
   public getGroup(id: string): Observable<any> {
+    if (!id) {
+      return Observable.throw(new Error('Group ID is empty'));
+    }
     console.log(`service: login ${name} - should return Group Model`);
     return this.groupResourceService.getGroup(id);
+  }
+
+  public createGroup2(name: string): any {
+    return this.groupResourceService.createGroup(name);
   }
 
 }
