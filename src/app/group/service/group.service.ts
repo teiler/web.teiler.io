@@ -21,8 +21,4 @@ export class GroupService {
     return this.groupResourceService.getGroup(id);
   }
 
-  public createGroup2(name: string): any {
-    return this.groupResourceService.createGroup(name);
-  }
-
 }
