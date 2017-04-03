@@ -1,16 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {WelcomeComponent} from './welcome';
-import {GroupComponent} from './group';
 
-const appRoutes: Routes = [
-  {
-    path: '', component: WelcomeComponent, pathMatch: 'full'
-  },
-  {
-    path: 'group', component: GroupComponent
-  }
-];
+const appRoutes: Routes = [];
 
 @NgModule({
   imports: [
