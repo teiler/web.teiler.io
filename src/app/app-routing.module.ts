@@ -1,12 +1,7 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {WelcomeComponent} from './welcome/component/welcome/welcome.component';
 
-const appRoutes: Routes = [
-  {
-    path: '', component: WelcomeComponent
-  }
-];
+const appRoutes: Routes = [];
 
 @NgModule({
   imports: [
@@ -17,4 +12,5 @@ const appRoutes: Routes = [
   ],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

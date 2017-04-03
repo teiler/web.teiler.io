@@ -6,6 +6,6 @@ export class TylrWebPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('tylr-root h1')).getText();
   }
 }
