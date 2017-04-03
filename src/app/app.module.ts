@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {WelcomeModule} from './welcome';
+import {GroupModule} from './group';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {WelcomeModule} from './welcome';
     HttpModule,
 
     WelcomeModule.forRoot(),
+    GroupModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],
