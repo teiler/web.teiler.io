@@ -1,14 +1,15 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
+import {SharedModule} from 'app/shared';
 import {WelcomeRoutingModule} from './welcome-routing.module';
 import {WelcomeComponent, HomeComponent, DesignComponent} from './component';
 import {GroupModule} from '../group';
 
+
 @NgModule({
   declarations: [HomeComponent, DesignComponent, WelcomeComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     WelcomeRoutingModule,
 
     GroupModule

@@ -4,9 +4,9 @@ import {GroupComponent, DashboardComponent} from './component';
 
 const routes: Routes = [
   {
-    path: 'group', component: GroupComponent,
+    path: 'groups', component: GroupComponent,
     children: [
-      {path: '', component: DashboardComponent, pathMatch: 'full'}
+      {path: '', component: DashboardComponent}
     ]
   }
 ];
