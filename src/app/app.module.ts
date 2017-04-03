@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
-import { AppComponent } from './app.component';
-import {GroupModule} from './group/group.module';
+import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {WelcomeModule} from './welcome/welcome.module';
+import {WelcomeModule} from './welcome';
+import {GroupModule} from './group';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,13 +15,15 @@ import {WelcomeModule} from './welcome/welcome.module';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
 
-    AppRoutingModule,
-    WelcomeModule
+    CoreModule.forRoot(),
+    WelcomeModule.forRoot(),
+    GroupModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
