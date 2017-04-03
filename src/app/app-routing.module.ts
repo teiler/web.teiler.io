@@ -1,9 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Routes, RouterModule} from '@angular/router';
+import {WelcomeComponent} from './welcome/component/welcome/welcome.component';
+
+const appRoutes: Routes = [
+  {
+    path: '', component: WelcomeComponent
+  }
+];
 
 @NgModule({
   imports: [
-    CommonModule
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    RouterModule
   ],
   declarations: []
 })
