@@ -1,10 +1,14 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {WelcomeComponent} from './welcome/component/welcome/welcome.component';
+import {WelcomeComponent} from './welcome';
+import {GroupComponent} from './group';
 
 const appRoutes: Routes = [
   {
-    path: '', component: WelcomeComponent
+    path: '', component: WelcomeComponent, pathMatch: 'full'
+  },
+  {
+    path: 'group', component: GroupComponent
   }
 ];
 
@@ -17,4 +21,5 @@ const appRoutes: Routes = [
   ],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
