@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {GroupModule} from './group/group.module';
+import {AppRoutingModule} from './app-routing.module';
+import {WelcomeModule} from './welcome/welcome.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import {GroupModule} from './group/group.module';
     FormsModule,
     HttpModule,
 
-    GroupModule
+    AppRoutingModule,
+    WelcomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
