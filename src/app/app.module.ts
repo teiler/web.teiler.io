@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {WelcomeModule} from './welcome';
 import {GroupModule} from './group';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {GroupModule} from './group';
     BrowserModule,
     HttpModule,
 
+    CoreModule.forRoot(),
     WelcomeModule.forRoot(),
     GroupModule.forRoot(),
     AppRoutingModule
