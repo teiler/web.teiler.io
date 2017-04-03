@@ -1,13 +1,12 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './component/home/home.component';
-import {DesignComponent} from './component/design/design.component';
+import {WelcomeComponent, HomeComponent, DesignComponent} from './component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
+    path: '', component: WelcomeComponent,
     children: [
-      {path: '', component: HomeComponent},
+      {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'design', component: DesignComponent}
     ]
   }

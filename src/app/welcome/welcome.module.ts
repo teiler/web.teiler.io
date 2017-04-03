@@ -1,11 +1,9 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {WelcomeRoutingModule} from './welcome-routing.module';
-import {HomeComponent} from './component/home/home.component';
-import {DesignComponent} from './component/design/design.component';
-import {WelcomeComponent} from './component/welcome/welcome.component';
-import {GroupModule} from '../group/group.module';
+import {WelcomeComponent, HomeComponent, DesignComponent} from './component';
+import {GroupModule} from '../group';
 
 @NgModule({
   declarations: [HomeComponent, DesignComponent, WelcomeComponent],
@@ -18,7 +16,12 @@ import {GroupModule} from '../group/group.module';
   exports: [
     WelcomeComponent
   ]
-
 })
 export class WelcomeModule {
+  static forRoot(config?: {}): ModuleWithProviders {
+    return {
+      ngModule: WelcomeModule,
+      providers: []
+    };
+  }
 }
