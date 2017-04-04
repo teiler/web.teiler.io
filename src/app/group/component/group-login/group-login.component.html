@@ -1,9 +1,6 @@
-<h2>Login Group</h2>
-
-
 <form (ngSubmit)="loginGroup(loginGroupForm)" #loginGroupForm="ngForm">
 
-  <input type="text" id="groupId" placeholder="Your group name"
+  <input type="text" id="groupId" placeholder="ID"
          name="groupId" [(ngModel)]="groupId" required>
 
   <button type="submit" [disabled]="!loginGroupForm.form.valid">

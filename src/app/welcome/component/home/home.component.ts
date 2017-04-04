@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'Angular4 works!';
+  title = 'teiler.io';
   constructor() { }
 
   ngOnInit() {
