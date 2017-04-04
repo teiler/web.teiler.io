@@ -16,6 +16,10 @@ export class NavigationService {
     this.router.navigate(['/groups/', id]);
   }
 
+  public goToGroupEdit(id: string): void {
+    this.router.navigate(['/groups/', id, 'edit']);
+  }
+
   constructor(private router: Router) {
   }
 }
