@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: 'groups', component: GroupComponent,
     children: [
-      {path: '', component: DashboardComponent}
+      {path: ':id', component: DashboardComponent}
     ]
   }
 ];

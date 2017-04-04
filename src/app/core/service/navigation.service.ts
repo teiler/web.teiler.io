@@ -12,8 +12,8 @@ export class NavigationService {
     this.goToUrl('/');
   }
 
-  public goToDashboard(): void {
-    this.goToUrl('/dashboard');
+  public goToDashboard(id: string): void {
+    this.router.navigate(['/groups/', id]);
   }
 
   constructor(private router: Router) {
