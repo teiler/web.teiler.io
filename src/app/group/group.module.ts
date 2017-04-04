@@ -11,6 +11,7 @@ import {
 } from './component';
 import {GroupService} from './service';
 import {GroupResourceService} from './resource';
+import { GroupEditComponent } from './component/group-edit/group-edit.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import {GroupResourceService} from './resource';
     GroupRoutingModule
   ],
   declarations: [
-    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent
+    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent, GroupEditComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
