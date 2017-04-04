@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
+import {ResourceBase} from 'app/shared';
+import {Group} from '../model/group';
 
 @Injectable()
-export class GroupResourceService {
+export class GroupResourceService extends ResourceBase {
 
-  private readonly apiUrl = 'https://api.teiler.io/v1/';
+  private readonly apiUrl = 'groups/';
 
-  constructor(private http: Http) {
+  constructor(http: Http) {
+    super(http);
   }
 
   public createGroup(name: string): Observable<any> {
@@ -15,7 +18,7 @@ export class GroupResourceService {
       name
     };
 
-    return this.http.post(this.getRequesturl('group'), requestBody)
+    return this.post(this.getRequesturl('group'), requestBody)
       .map((response: Response) => {
         const result = response.json();
         console.log('resource service: api response - ', result);
@@ -26,16 +29,9 @@ export class GroupResourceService {
   }
 
   public getGroup(id: string): Observable<any> {
-    const headers = new Headers({
-      'X-Teiler-GroupID': id
-    });
-    const options = new RequestOptions({ headers: headers });
-
-    return this.http.get(this.getRequesturl('group'), options)
+    return this.get(this.getRequesturl(id))
       .map((response: Response) => {
-        const result = response.json();
-        console.log('resource service: api response - ', result);
-        return Observable.of<any>(result);
+        return response.json().data;
       }).catch((error: any) => {
         return Observable.throw(new Error(error.json().error));
       });
