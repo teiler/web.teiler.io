@@ -1,27 +1,44 @@
-<header>
-  <svg class="logo"></svg>
-  <h1>Dashboard</h1>
-  <nav class="main">
+<header class="row">
+  <img class="logo small-2" src="assets/logo.svg" alt="Logo Teiler.io">
+  <h1 class="title small-9">Dashboard</h1>
+  <nav class="main small-10">
     <ul>
       <li>Ferien</li>
       <li>WG</li>
-      <li>Stuium</li>
-    </ul>
-  </nav>
-  <nav class="user">
-    <svg class="user"></svg>
-    <ul>
-      <li>Demian</li>
-      <li>Edit</li>
-      <li>Logout</li>
+      <li>Studium</li>
     </ul>
   </nav>
 </header>
 
 <section class="overview">
   <h2>Overview</h2>
+  <div name="person">
+    <h3 class="name">Patrick</h3>
+    <span class="currency">CHF</span>
+    <span class="value">- 8.00</span>
+  </div>
 
-  <button class="button">Save</button>
+  <div name="person">
+    <h3 class="name">Kirthi</h3>
+    <span class="currency">CHF</span>
+    <span class="value">+ 12.00</span>
+  </div>
+
+  <div name="person">
+    <h3 class="name">Lukas</h3>
+    <span class="currency">CHF</span>
+    <span class="value">- 4.00</span>
+  </div>
+
+  <div name="person" class="current">
+    <h3 class="name">Demian</h3>
+    <span class="currency">CHF</span>
+    <span class="value">0.00</span>
+  </div>
+
+  <button>Add Expense</button>
+  <button>Add Compensation</button>
+  <button class="secondary">Suggest Payments</button>
 </section>
 
 <section class="payments">

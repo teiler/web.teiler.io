@@ -1,9 +1,6 @@
-<h2>Create Group</h2>
-
-
 <form (ngSubmit)="createGroup(createGroupForm)" #createGroupForm="ngForm">
 
-  <input type="text" id="groupName" placeholder="Your group name"
+  <input type="text" id="groupName" placeholder="Name"
          name="groupName" [(ngModel)]="groupName" required>
 
   <button type="submit" [disabled]="!createGroupForm.form.valid">
