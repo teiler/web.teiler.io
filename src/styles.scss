@@ -12,6 +12,7 @@
 @include foundation-global-styles;
 @include foundation-flex-grid;
 @include foundation-flex-classes;
+@include foundation-typography;
 
 @import 'sass/app.body';
 @import 'sass/app.elements';
@@ -19,7 +20,7 @@
 
 /* These are unused Foundation components. Just uncomment to activate. */
 
-/* @include foundation-typography;
+/*
 @include foundation-forms;
 @include foundation-button;
 @include foundation-accordion;
