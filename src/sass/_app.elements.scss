@@ -18,6 +18,16 @@ input {
 
   padding-left: 0.5em;
 
+  &.error {
+    border-color: $tylr-success-color;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  &.success {
+    border-color: $tylr-success-color;
+  }
+
   width: 100%;
 }
 
