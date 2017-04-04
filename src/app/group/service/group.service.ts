@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {GroupResourceService} from '../resource/group-resource.service';
+import {Group} from '../model/group';
 
 @Injectable()
 export class GroupService {
@@ -13,12 +14,15 @@ export class GroupService {
     return this.groupResourceService.createGroup(name);
   }
 
-  public getGroup(id: string): Observable<any> {
+  public getGroup(id: string): Observable<Group> {
     if (!id) {
       return Observable.throw(new Error('Group ID is empty'));
     }
-    console.log(`service: login ${name} - should return Group Model`);
-    return this.groupResourceService.getGroup(id);
+    return this.groupResourceService.getGroup(id)
+      .map((dto: any) => {
+        return Group.fromDto(dto);
+      }).catch((error: any) => {
+        return Observable.throw(error);
+      });
   }
-
 }

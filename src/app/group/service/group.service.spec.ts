@@ -3,6 +3,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {GroupResourceService} from '../resource/group-resource.service';
 import {Observable} from 'rxjs/Rx';
 import * as assert from 'assert';
+import {Group} from '../model/group';
 
 describe('GroupService', () => {
   beforeEach(() => {
@@ -13,8 +14,9 @@ describe('GroupService', () => {
       return Observable.of<any>({'group-uuid': 1234, name});
     });
 
+    // DAL should return a Group DTO
     spy.getGroup.and.callFake((id) => {
-      return Observable.of<any>({'group-uuid': id, name: 'test'});
+      return Observable.of<any>({id, name: 'test'});
     });
 
     TestBed.configureTestingModule({
@@ -39,8 +41,8 @@ describe('GroupService', () => {
     expect(service).toBeTruthy();
 
     service.getGroup('1234').subscribe(
-      (groupModel) => {
-        expect(groupModel['group-uuid']).toEqual('1234');
+      (group) => {
+        expect(group.id).toEqual('1234');
       }
     );
   }));
@@ -49,8 +51,8 @@ describe('GroupService', () => {
     expect(service).toBeTruthy();
 
     service.getGroup(null).subscribe(
-      (groupModel) => {
-        console.log(groupModel);
+      (group) => {
+        console.log(group);
         assert(false, 'exception expected');
       },
       (error) => {

@@ -1,7 +1,6 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 
+import {SharedModule} from 'app/shared';
 import {GroupRoutingModule} from './group-routing.module';
 
 import {
@@ -10,19 +9,19 @@ import {
   GroupCreateComponent,
   GroupLoginComponent
 } from './component';
-
 import {GroupService} from './service';
 import {GroupResourceService} from './resource';
+import { GroupEditComponent } from './component/group-edit/group-edit.component';
+
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
+    SharedModule,
 
     GroupRoutingModule
   ],
   declarations: [
-    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent
+    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent, GroupEditComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent

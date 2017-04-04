@@ -25,7 +25,9 @@
     "foundation-sites": "^6.3.1",
     "normalize.css": "^6.0.0",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+
+    "angular-in-memory-web-api": "^0.3.1"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
