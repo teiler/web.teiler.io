@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from '../../service/group.service';
 import {NgForm} from '@angular/forms';
+import {Group} from '../../model/group';
+import {NavigationService} from 'app/core';
 
 @Component({
   selector: 'tylr-group-login',
@@ -11,7 +13,8 @@ export class GroupLoginComponent implements OnInit {
   public groupId: string;
   public response: string;
 
-  constructor(private groupService: GroupService) {
+  constructor(private groupService: GroupService,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -19,12 +22,10 @@ export class GroupLoginComponent implements OnInit {
 
   public loginGroup(loginGroupForm: NgForm): boolean {
     if (loginGroupForm.form.valid) {
-      console.log(`component: login - ${this.groupId}`);
       this.groupService.getGroup(this.groupId)
         .subscribe(
-          (response: any) => {
-            console.log('login response', response.value);
-            this.response = JSON.stringify(response.value);
+          (group: Group) => {
+            this.navigationService.goToDashboard(group.id);
           },
           (error: any) => {
             console.log('error', error);
