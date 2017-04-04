@@ -1,9 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<header>
+  <img class="logo" src="assets/logo.svg">
+  <h1 class="title">
+    {{title}}
+  </h1>
+</header>
 
-<p>Already signed up?</p>
-<tylr-group-login></tylr-group-login>
+<section class="login">
+  <span>Already signed up?</span>
+  <tylr-group-login></tylr-group-login>
+</section>
 
-<p>Create a group to get started:</p>
-<tylr-group-create></tylr-group-create>
+<section class="create">
+  <span>Create a group to get started:</span>
+  <tylr-group-create></tylr-group-create>
+</section>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="https://docs.teiler.io">Docs</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="mailto:contact@teiler.io">Contact</a></li>
+    </ul>
+  </nav>
+</footer>
