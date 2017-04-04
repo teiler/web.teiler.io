@@ -17,21 +17,3 @@ section {
   margin: 0.5em;
   margin-bottom: 1.5em;
 }
-
-footer {
-  nav {
-    text-align: center;
-
-    ul {
-      margin: 0;
-
-      li + li::before {
-        content: " | ";
-      }
-
-      li {
-        display: inline;
-      }
-    }
-  }
-}

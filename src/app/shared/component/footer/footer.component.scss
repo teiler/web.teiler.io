@@ -1,0 +1,17 @@
+footer {
+  nav {
+    text-align: center;
+
+    ul {
+      margin: 0;
+
+      li + li::before {
+        content: " | ";
+      }
+
+      li {
+        display: inline;
+      }
+    }
+  }
+}
