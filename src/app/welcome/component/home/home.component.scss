@@ -3,17 +3,13 @@ header {
   margin-bottom: 2em;
 
   .logo {
-    max-width: 20%;
+    width: 100%;
+    height: 100%;
+    max-width: 15em;
   }
 
   .title {
-    display: inline-block;
-    padding-left: 0.25em;
-    margin: 0;
-    line-height: 1em;
-
     font-size: 400%;
-    vertical-align: bottom;
     text-align: center;
   }
 }
