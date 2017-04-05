@@ -3,8 +3,7 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import {SharedModule} from 'app/shared';
 import {WelcomeRoutingModule} from './welcome-routing.module';
 import {WelcomeComponent, HomeComponent, DesignComponent} from './component';
-import {GroupModule} from '../group';
-
+import {GroupModule} from 'app/group';
 
 @NgModule({
   declarations: [HomeComponent, DesignComponent, WelcomeComponent],
