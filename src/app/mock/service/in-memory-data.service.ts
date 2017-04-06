@@ -7,19 +7,27 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb(): {} {
     const groups = [
       {
-        id: 'abcd',
-        name: 'HSR',
+        id: '4h43pgmi',
+        name: 'Alpha',
+        currency: 'chf',
+        'update-time': '2017-04-06T20:00:41.504Z',
+        'create-time': '2017-04-06T20:00:41.504Z',
         people: [
           {
             id: 4,
-            name: 'Person C'
+            name: 'Person C',
+            groupId: '4h43pgmi',
+            'update-time': '2017-04-06T20:00:41.504Z',
+            'create-time': '2017-04-06T20:00:41.504Z'
           },
           {
             id: 5,
-            name: 'Person D'
+            name: 'Person D',
+            groupId: '4h43pgmi',
+            'update-time': '2017-04-06T20:00:41.504Z',
+            'create-time': '2017-04-06T20:00:41.504Z'
           }
-        ],
-        'currency': 'chf'
+        ]
       },
       {
         id: 'asdf',
