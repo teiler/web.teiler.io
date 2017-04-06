@@ -17,7 +17,7 @@ import {MockModule} from './mock/mock.module';
     BrowserModule,
     HttpModule,
 
-    MockModule,
+    // MockModule,
 
     CoreModule.forRoot(),
     WelcomeModule.forRoot(),

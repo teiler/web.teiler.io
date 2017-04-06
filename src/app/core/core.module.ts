@@ -1,6 +1,6 @@
 import {NgModule, ModuleWithProviders, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NavigationService} from './service';
+import {NavigationService, LogService} from './service';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         // DI Providers (Services, Tokens, Factories...) to be used globally and instantiated only once
-        NavigationService
+        NavigationService,
+        LogService
       ]
     };
   }
