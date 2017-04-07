@@ -3,6 +3,8 @@ import {Group} from '../../model/group';
 import {ActivatedRoute, Params} from '@angular/router';
 import {GroupService} from '../../service/group.service';
 import {LogService} from '../../../core/service/log.service';
+import {NgFor} from '@angular/common';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'tylr-group-edit',
@@ -32,6 +34,17 @@ export class GroupEditComponent implements OnInit {
       },
       error => this.logService.error(error)
     );
+  }
+
+  public editGroup(groupEditForm: NgForm): boolean {
+    if (groupEditForm.form.valid) {
+      return false;
+    }
+    return false;
+  }
+
+  public onCancel() {
+
   }
 
 }
