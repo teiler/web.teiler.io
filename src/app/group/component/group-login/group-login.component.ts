@@ -33,7 +33,7 @@ export class GroupLoginComponent implements OnInit {
             this.navigationService.goToDashboard(group.id);
           },
           (error: any) => {
-            this.logService.ERROR(error);
+            this.logService.error(error);
             this.response = error.message;
           }
         );
