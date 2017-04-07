@@ -1,11 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+// import {Location} from '@angular/common';
 
 @Injectable()
 export class NavigationService {
 
+  constructor(private router: Router) {
+  }
+
   public goToUrl(url: string): void {
     this.router.navigateByUrl(url);
+  }
+
+  public goBack(): void {
+    // this.location.back();
   }
 
   public goHome(): void {
@@ -20,6 +28,4 @@ export class NavigationService {
     this.router.navigate(['/groups/', id, 'edit']);
   }
 
-  constructor(private router: Router) {
-  }
 }
