@@ -8,18 +8,13 @@ import {Group} from '../../model/group';
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
-  public recentGroups: Group[] = [];
 
-  constructor(private groupStorageService: GroupStorageService) {
+
+  constructor() {
   }
 
   ngOnInit() {
-    const groupIterator = this.groupStorageService.getRecentGroups().values();
-    let group = groupIterator.next();
-    while (group.value) {
-      this.recentGroups.push(group.value);
-      group = groupIterator.next();
-    }
+
   }
 
 }
