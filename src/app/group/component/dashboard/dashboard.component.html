@@ -1,16 +1,18 @@
-<p>
-  Group overview component comes here
-</p>
+<section class="overview">
+  <h2>Overview</h2>
 
-<div *ngIf="group">
-  People {{group.name}}
+  <div *ngIf="group">
+    <div name="person" *ngFor="let p of group.people">
+      <h3 class="name">{{p.name}}</h3>
+      <span class="currency">CHF</span>
+      <span class="value">- 8.00</span>
+    </div>
+  </div>
 
-  <div *ngFor="let p of group.people">{{p.name}}</div>
-</div>
-
-<br>
-<br>
-<br><!--temporary breaks for separation-->
+  <button>Add Expense</button>
+  <button>Add Compensation</button>
+  <button class="secondary">Suggest Payments</button>
+</section>
 
 <p>
   Last payments component comes here
