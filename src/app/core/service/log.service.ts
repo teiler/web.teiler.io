@@ -18,15 +18,15 @@ export class LogService {
     console.log(this.generateLog(Level.DEBUG, message));
   }
 
-  public INFO(message: string) {
+  public info(message: string) {
     console.log(this.generateLog(Level.INFO, message));
   }
 
-  public WARN(message: string) {
+  public warn(message: string) {
     console.warn(this.generateLog(Level.WARN, message));
   }
 
-  public ERROR(error: Error) {
+  public error(error: Error) {
     console.error(this.generateLog(Level.ERROR, error.message));
   }
 
