@@ -7,7 +7,9 @@ import {InMemoryDataService} from './service/in-memory-data.service';
 @NgModule({
   imports: [
     CommonModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService)
+    InMemoryWebApiModule.forRoot(InMemoryDataService, {
+      passThruUnknownUrl : true
+    })
   ],
   exports: [
     InMemoryWebApiModule

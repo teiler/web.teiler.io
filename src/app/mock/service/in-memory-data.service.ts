@@ -1,24 +1,33 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
+import {ResponseOptions, RequestMethod} from '@angular/http';
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   createDb(): {} {
     const groups = [
       {
-        id: 'abcd',
-        name: 'HSR',
+        id: '4h43pgmi',
+        name: 'Alpha',
+        currency: 'chf',
+        'update-time': '2017-04-06T20:00:41.504Z',
+        'create-time': '2017-04-06T20:00:41.504Z',
         people: [
           {
             id: 4,
-            name: 'Person C'
+            name: 'Person C',
+            groupId: '4h43pgmi',
+            'update-time': '2017-04-06T20:00:41.504Z',
+            'create-time': '2017-04-06T20:00:41.504Z'
           },
           {
             id: 5,
-            name: 'Person D'
+            name: 'Person D',
+            groupId: '4h43pgmi',
+            'update-time': '2017-04-06T20:00:41.504Z',
+            'create-time': '2017-04-06T20:00:41.504Z'
           }
-        ],
-        'currency': 'chf'
+        ]
       },
       {
         id: 'asdf',
@@ -37,5 +46,14 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
     return {groups};
+  }
+
+  // intercept response from the default HTTP method handlers
+  responseInterceptor(response: ResponseOptions, reqInfo: RequestInfo) {
+    const body = JSON.stringify(response.body);
+    if (body.indexOf('data') !== -1) {
+      response.body = JSON.parse(body).data;
+    }
+    return response;
   }
 }

@@ -31,7 +31,7 @@ export class GroupResourceService extends ResourceBase {
   public getGroup(id: string): Observable<any> {
     return this.get(this.getRequesturl(id))
       .map((response: Response) => {
-        return response.json().data;
+        return response.json();
       }).catch((error: any) => {
         return Observable.throw(new Error(error.json().error));
       });

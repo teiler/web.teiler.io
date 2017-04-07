@@ -9,7 +9,7 @@ import {
   GroupCreateComponent,
   GroupLoginComponent
 } from './component';
-import {GroupService} from './service';
+import {GroupService, GroupStorageService} from './service';
 import {GroupResourceService} from './resource';
 import { GroupEditComponent } from './component/group-edit/group-edit.component';
 
@@ -35,7 +35,8 @@ export class GroupModule {
       ngModule: GroupModule,
       providers: [
         GroupService,
-        GroupResourceService
+        GroupResourceService,
+        GroupStorageService
       ]
     };
   }

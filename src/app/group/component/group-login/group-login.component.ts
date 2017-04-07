@@ -3,6 +3,8 @@ import {GroupService} from '../../service/group.service';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../model/group';
 import {NavigationService} from 'app/core';
+import {LogService} from '../../../core/service/log.service';
+import {GroupStorageService} from '../../service/group-storage.service';
 
 @Component({
   selector: 'tylr-group-login',
@@ -14,6 +16,8 @@ export class GroupLoginComponent implements OnInit {
   public response: string;
 
   constructor(private groupService: GroupService,
+              private groupStorageService: GroupStorageService,
+              private logService: LogService,
               private navigationService: NavigationService) {
   }
 
@@ -25,10 +29,11 @@ export class GroupLoginComponent implements OnInit {
       this.groupService.getGroup(this.groupId)
         .subscribe(
           (group: Group) => {
+            this.groupStorageService.storeGroup(group);
             this.navigationService.goToDashboard(group.id);
           },
           (error: any) => {
-            console.log('error', error);
+            this.logService.error(error);
             this.response = error.message;
           }
         );

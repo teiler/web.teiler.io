@@ -1,3 +1,17 @@
 <p>
-  dashboard works!
+  Group overview component comes here
+</p>
+
+<div *ngIf="group">
+  People {{group.name}}
+
+  <div *ngFor="let p of group.people">{{p.name}}</div>
+</div>
+
+<br>
+<br>
+<br><!--temporary breaks for separation-->
+
+<p>
+  Last payments component comes here
 </p>
