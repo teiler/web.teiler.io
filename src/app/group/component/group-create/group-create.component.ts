@@ -1,17 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {GroupService} from '../../service/group.service';
+import {GroupService, GroupStorageService} from '../../service';
+import {Group} from '../../model/group';
+import {LogService, NavigationService} from 'app/core';
 
 @Component({
   selector: 'tylr-group-create',
   templateUrl: './group-create.component.html',
-  styleUrls: ['./group-create.component.css']
+  styleUrls: ['./group-create.component.scss']
 })
 export class GroupCreateComponent implements OnInit {
   public groupName = '';
   public response: string;
 
-  constructor(private groupService: GroupService) {
+  constructor(private groupService: GroupService,
+              private groupStorageService: GroupStorageService,
+              private logService: LogService,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -21,9 +26,14 @@ export class GroupCreateComponent implements OnInit {
     if (createGroupForm.form.valid) {
       console.log(`component: submit create form - ${this.groupName}`);
       this.groupService.createGroup(this.groupName)
-        .subscribe((response: any) => {
-          this.response = JSON.stringify(response.value);
-        });
+        .subscribe((group: Group) => {
+            this.groupStorageService.storeGroup(group);
+            this.navigationService.goToDashboard(group.id);
+          },
+          (error: any) => {
+            this.logService.error(error);
+            this.response = error.message;
+          });
     }
     return false;
   }
