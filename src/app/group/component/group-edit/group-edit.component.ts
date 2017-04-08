@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Group} from '../../model/group';
 import {ActivatedRoute, Params} from '@angular/router';
-import {GroupService} from '../../service/group.service';
-import {LogService} from '../../../core/service/log.service';
-import {NgFor} from '@angular/common';
 import {NgForm} from '@angular/forms';
+
+import {LogService, NavigationService} from 'app/core';
+
+import {Group} from '../../model';
+import {GroupService} from '../../service';
 
 @Component({
   selector: 'tylr-group-edit',
@@ -16,7 +17,8 @@ export class GroupEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
-              private logService: LogService) {
+              private logService: LogService,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class GroupEditComponent implements OnInit {
   }
 
   public onCancel() {
-
+    this.navigationService.goBack();
   }
 
 }

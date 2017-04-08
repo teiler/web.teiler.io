@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-// import {Location} from '@angular/common';
+import {Location} from '@angular/common';
 
 @Injectable()
 export class NavigationService {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private location: Location) {
   }
 
   public goToUrl(url: string): void {
@@ -13,7 +14,8 @@ export class NavigationService {
   }
 
   public goBack(): void {
-    // this.location.back();
+    console.log('back');
+    this.location.back();
   }
 
   public goHome(): void {
