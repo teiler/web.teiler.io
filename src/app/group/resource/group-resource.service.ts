@@ -7,7 +7,7 @@ import {Group} from '../model/group';
 @Injectable()
 export class GroupResourceService extends ResourceBase {
 
-  private readonly apiUrl = 'groups/';
+  private readonly apiUrl = 'groups';
 
   constructor(http: Http) {
     super(http);
@@ -18,18 +18,16 @@ export class GroupResourceService extends ResourceBase {
       name
     };
 
-    return this.post(this.getRequesturl('group'), requestBody)
+    return this.post(this.getRequesturl(''), requestBody)
       .map((response: Response) => {
-        const result = response.json();
-        console.log('resource service: api response - ', result);
-        return Observable.of<any>(result);
+        return response.json();
       }).catch((error: any) => {
-        return Observable.of<any>(error);
+        return Observable.throw(new Error(error.json().error));
       });
   }
 
   public getGroup(id: string): Observable<any> {
-    return this.get(this.getRequesturl(id))
+    return this.get(this.getRequesturl(`/${id}`))
       .map((response: Response) => {
         return response.json();
       }).catch((error: any) => {

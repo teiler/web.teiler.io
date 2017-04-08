@@ -12,25 +12,11 @@ import {LogService} from '../../../core/service/log.service';
 export class DashboardComponent implements OnInit {
   public group: Group;
 
-  constructor(private route: ActivatedRoute,
-              private groupService: GroupService,
+  constructor(private groupService: GroupService,
               private logService: LogService) {
   }
 
   ngOnInit() {
     // initialize components (probably a loading icon)
-    this.getGroup();
-  }
-
-  public getGroup() {
-    this.route.params.switchMap((params: Params) => {
-      const id = params['id'];
-      return this.groupService.getGroup(id);
-    }).subscribe(
-      (group: Group) => {
-        this.group = group;
-      },
-      error => this.logService.error(error)
-    );
   }
 }

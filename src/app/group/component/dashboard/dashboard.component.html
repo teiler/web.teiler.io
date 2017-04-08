@@ -1,6 +1,3 @@
-
-<a routerLink="edit">edit</a>
-
 <section class="overview">
   <h2>Overview</h2>
 
@@ -10,6 +7,10 @@
       <span class="currency">CHF</span>
       <span class="value">- 8.00</span>
     </div>
+  </div>
+
+  <div #elseBlock>
+    Oh no! You don't have any group members. Let's add some <a routerLink="edit">here</a>
   </div>
 
   <button>Add Expense</button>
