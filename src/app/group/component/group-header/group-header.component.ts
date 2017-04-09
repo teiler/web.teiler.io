@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Group} from '../../model/group';
 import {GroupStorageService} from 'app/group';
+import {Subscription} from 'rxjs/Subscription';
+import {LogService} from 'app/core';
 
 @Component({
   selector: 'tylr-group-header',
@@ -8,18 +10,21 @@ import {GroupStorageService} from 'app/group';
   styleUrls: ['./group-header.component.scss']
 })
 export class GroupHeaderComponent implements OnInit {
+  private readonly NAME = 'GroupHeaderComponent';
   public recentGroups: Group[] = [];
+  private recentGroupsSubscription: Subscription;
 
-  constructor(private groupStorageService: GroupStorageService) {
+  constructor(private groupStorageService: GroupStorageService,
+              private logService: LogService) {
   }
 
   ngOnInit() {
-    const groupIterator = this.groupStorageService.getRecentGroups().values();
-    let group = groupIterator.next();
-    while (group.value) {
-      this.recentGroups.push(group.value);
-      group = groupIterator.next();
-    }
+    this.recentGroups = this.groupStorageService.getRecentGroups();
+    this.recentGroupsSubscription = this.groupStorageService.onRecentGroupsChanged
+      .subscribe(
+        (groups: Group[]) => this.recentGroups = groups,
+        (error: Error) => this.logService.error(error, this.NAME)
+      );
   }
 
 

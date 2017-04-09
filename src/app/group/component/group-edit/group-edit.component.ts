@@ -25,11 +25,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // initialize components (probably a loading icon)
-    this.getGroup();
-  }
-
-  public getGroup() {
-    // initialize components (probably a loading icon)
+    this.group = this.groupStorageService.getCurrentGroup();
     this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
       .subscribe(
         (group: Group) => {
