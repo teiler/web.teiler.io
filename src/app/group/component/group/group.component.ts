@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, OnChanges} from '@angular/core';
 import {Group} from '../../model/group';
 import {ActivatedRoute, Params} from '@angular/router';
 import {GroupService, GroupStorageService} from '../../service';
@@ -12,7 +12,6 @@ import {LogService, NavigationService} from 'app/core/';
 export class GroupComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupComponent';
   private readonly CACHE_INVALID_TIME = 2000; // ms
-  private isGroupLoaded = false;
 
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
@@ -23,25 +22,21 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('init');
-    if (!this.isGroupLoaded) {
-      this.loadGroup();
-    }
   }
 
   checkGroupFromStorage() {
     this.route.params.map((params: Params) => {
       const id = params['id'];
-      console.log(id);
+
       // check recently logged in group from storage
       const loggedInGroup: Group = this.groupStorageService.getCurrentGroup();
+
       if (loggedInGroup && loggedInGroup.id === id &&
         (loggedInGroup.fetchedTime.getTime() - new Date().getTime()) < this.CACHE_INVALID_TIME) {
-        this.isGroupLoaded = true;
-        this.logService.debug('group is loaded from storage', this.NAME);
+        this.logService.debug('group is already in storage', this.NAME);
       } else {
         this.groupStorageService.removeCurrentGroup();
-        this.isGroupLoaded = false;
+        this.loadGroup();
       }
     }).subscribe();
   }
@@ -50,11 +45,9 @@ export class GroupComponent implements OnInit, OnDestroy {
     this.logService.debug('fetch group from api', this.NAME);
     this.route.params.switchMap((params: Params) => {
       const id = params['id'];
-
       return this.groupService.getGroup(id);
     }).subscribe(
       (group: Group) => {
-        this.isGroupLoaded = true;
         this.groupStorageService.storeGroup(group);
       },
       error => {
@@ -65,7 +58,6 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('destroy');
     this.groupStorageService.removeCurrentGroup();
   }
 }

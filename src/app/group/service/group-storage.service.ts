@@ -9,11 +9,16 @@ export class GroupStorageService {
   private readonly CURRENT_GROUP = 'current-group';
 
   private currentGroup: Group;
-  public onCurrentGroupChanged: EventEmitter<Group> = new EventEmitter<Group>();
+  public onCurrentGroupChanged: EventEmitter<Group> = new EventEmitter();
+
+  private recentGroups: Map<string, Group> = new Map();
+  public onRecentGroupsChanged: EventEmitter<Group[]> = new EventEmitter();
 
   constructor(private logService: LogService) {
     if (!localStorage.getItem(this.RECENT_GROUPS)) {
-      this.setRecentGroups(new Map<string, Group>());
+      this.setRecentGroups(this.recentGroups);
+    } else {
+      this.recentGroups = this.getRecentGroupsFromStorage();
     }
   }
 
@@ -22,9 +27,8 @@ export class GroupStorageService {
     this.storeCurrentGroup(group);
 
     // update local storage
-    const recentGroups: Map<string, Group> = this.getRecentGroups();
-    recentGroups.set(group.id, group);
-    this.setRecentGroups(recentGroups);
+    this.recentGroups.set(group.id, group);
+    this.setRecentGroups(this.recentGroups);
   }
 
   private storeCurrentGroup(group: Group) {
@@ -33,7 +37,7 @@ export class GroupStorageService {
   }
 
   public getGroup(id: string): Group {
-    return this.getRecentGroups().get(id);
+    return this.recentGroups.get(id);
   }
 
   public getCurrentGroup(): Group {
@@ -41,9 +45,8 @@ export class GroupStorageService {
   }
 
   public removeGroup(id: string) {
-    const recentGroups: Map<string, Group> = this.getRecentGroups();
-    recentGroups.delete(id);
-    this.setRecentGroups(recentGroups);
+    this.recentGroups.delete(id);
+    this.setRecentGroups(this.recentGroups);
   }
 
   public removeCurrentGroup() {
@@ -52,12 +55,24 @@ export class GroupStorageService {
     this.onCurrentGroupChanged.emit(this.currentGroup);
   }
 
-  public getRecentGroups(): Map<string, Group> {
+  public getRecentGroups(): Group[] {
+    const groupIterator = this.recentGroups.values();
+    let mapItem = groupIterator.next();
+    const groups: Group[] = [];
+    while (mapItem.value) {
+      groups.push(mapItem.value);
+      mapItem = groupIterator.next();
+    }
+    return groups;
+  }
+
+  private getRecentGroupsFromStorage(): Map<string, Group> {
     return this.stringToMap(localStorage.getItem(this.RECENT_GROUPS));
   }
 
   private setRecentGroups(map: Map<string, Group>) {
     localStorage.setItem(this.RECENT_GROUPS, this.mapToString(map));
+    this.onRecentGroupsChanged.emit(this.getRecentGroups());
   }
 
   private mapToString(map: Map<string, Group>) {
