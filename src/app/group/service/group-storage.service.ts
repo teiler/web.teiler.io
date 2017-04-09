@@ -51,6 +51,7 @@ export class GroupStorageService {
 
   public removeCurrentGroup() {
     this.currentGroup = null;
+
     this.logService.debug('current group is removed from storage', this.NAME);
     this.onCurrentGroupChanged.emit(this.currentGroup);
   }
