@@ -31,4 +31,11 @@ export class GroupService {
         return Observable.throw(error);
       });
   }
+
+  public deleteGroup(id: string): Observable<boolean> {
+    if (!id) {
+      return Observable.throw(new Error('Group ID is empty'));
+    }
+    return this.groupResourceService.deleteGroup(id);
+  }
 }

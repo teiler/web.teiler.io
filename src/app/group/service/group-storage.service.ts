@@ -36,7 +36,7 @@ export class GroupStorageService {
     this.onCurrentGroupChanged.emit(this.currentGroup);
   }
 
-  public getGroup(id: string): Group {
+  public getRecentGroup(id: string): Group {
     return this.recentGroups.get(id);
   }
 
@@ -44,16 +44,21 @@ export class GroupStorageService {
     return this.currentGroup;
   }
 
-  public removeGroup(id: string) {
+  public removeRecentGroup(id: string) {
     this.recentGroups.delete(id);
     this.setRecentGroups(this.recentGroups);
   }
 
-  public removeCurrentGroup() {
-    this.currentGroup = null;
+  public removeCurrentGroup(shouldClearTrace = false) {
+    if (this.currentGroup) {
+      if (shouldClearTrace) {
+        this.removeRecentGroup(this.currentGroup.id);
+      }
 
-    this.logService.debug('current group is removed from storage', this.NAME);
-    this.onCurrentGroupChanged.emit(this.currentGroup);
+      this.currentGroup = null;
+      this.logService.debug('current group is removed from storage', this.NAME);
+      this.onCurrentGroupChanged.emit(this.currentGroup);
+    }
   }
 
   public getRecentGroups(): Group[] {

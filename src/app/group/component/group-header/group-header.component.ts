@@ -3,6 +3,7 @@ import {Group} from '../../model/group';
 import {GroupStorageService} from 'app/group';
 import {Subscription} from 'rxjs/Subscription';
 import {LogService, NavigationService} from 'app/core';
+import {GroupService} from '../../service/group.service';
 
 @Component({
   selector: 'tylr-group-header',
@@ -14,7 +15,8 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   public recentGroups: Group[] = [];
   private recentGroupsSubscription: Subscription;
 
-  constructor(private groupStorageService: GroupStorageService,
+  constructor(private groupService: GroupService,
+              private groupStorageService: GroupStorageService,
               private navigationService: NavigationService,
               private logService: LogService) {
   }
@@ -29,8 +31,22 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.groupStorageService.removeGroup(this.groupStorageService.getCurrentGroup().id);
+    this.groupStorageService.removeRecentGroup(this.groupStorageService.getCurrentGroup().id);
     this.navigationService.goHome();
+  }
+
+  delete() {
+    const currentGroupId = this.groupStorageService.getCurrentGroup().id;
+    this.groupService.deleteGroup(currentGroupId)
+      .subscribe(
+        (isDeleted: boolean) => {
+          this.groupStorageService.removeRecentGroup(currentGroupId);
+          this.navigationService.goHome();
+        },
+        (error: Error) => {
+          this.logService.error(error, this.NAME);
+        }
+      );
   }
 
   ngOnDestroy() {

@@ -43,14 +43,16 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   private loadGroup() {
     this.logService.debug('fetch group from api', this.NAME);
+    let id: string;
     this.route.params.switchMap((params: Params) => {
-      const id = params['id'];
+      id = params['id'];
       return this.groupService.getGroup(id);
     }).subscribe(
       (group: Group) => {
         this.groupStorageService.storeGroup(group);
       },
       error => {
+        this.groupStorageService.removeRecentGroup(id);
         this.logService.error(error);
         this.navigationService.goHome();
       }
