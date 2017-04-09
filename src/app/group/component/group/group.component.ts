@@ -11,7 +11,6 @@ import {LogService, NavigationService} from 'app/core/';
 })
 export class GroupComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupComponent';
-  private readonly CACHE_INVALID_TIME = 2000; // ms
 
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
@@ -31,8 +30,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       // check recently logged in group from storage
       const loggedInGroup: Group = this.groupStorageService.getCurrentGroup();
 
-      if (loggedInGroup && loggedInGroup.id === id &&
-        (loggedInGroup.fetchedTime.getTime() - new Date().getTime()) < this.CACHE_INVALID_TIME) {
+      if (loggedInGroup && loggedInGroup.id === id) {
         this.logService.debug('group is already in storage', this.NAME);
       } else {
         this.groupStorageService.removeCurrentGroup();

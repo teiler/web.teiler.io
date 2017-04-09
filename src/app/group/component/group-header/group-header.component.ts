@@ -4,6 +4,7 @@ import {GroupStorageService} from 'app/group';
 import {Subscription} from 'rxjs/Subscription';
 import {LogService, NavigationService} from 'app/core';
 import {GroupService} from '../../service/group.service';
+import {GroupStorageAdapter} from '../../model/group-storage-adapter';
 
 @Component({
   selector: 'tylr-group-header',
@@ -12,7 +13,7 @@ import {GroupService} from '../../service/group.service';
 })
 export class GroupHeaderComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupHeaderComponent';
-  public recentGroups: Group[] = [];
+  public recentGroups: GroupStorageAdapter[] = [];
   private recentGroupsSubscription: Subscription;
 
   constructor(private groupService: GroupService,
@@ -25,7 +26,7 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
     this.recentGroups = this.groupStorageService.getRecentGroups();
     this.recentGroupsSubscription = this.groupStorageService.onRecentGroupsChanged
       .subscribe(
-        (groups: Group[]) => this.recentGroups = groups,
+        (groups: GroupStorageAdapter[]) => this.recentGroups = groups,
         (error: Error) => this.logService.error(error, this.NAME)
       );
   }
