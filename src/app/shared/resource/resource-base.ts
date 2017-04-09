@@ -21,4 +21,8 @@ export abstract class ResourceBase {
       JSON.stringify(dto),
       this.requestOptions.merge(options));
   }
+
+  protected delete<T>(path: string): Observable<Response> {
+    return this.http.delete(environment.serverBaseUrl + path);
+  }
 }
