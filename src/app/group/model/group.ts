@@ -1,5 +1,6 @@
 import {Person} from './person';
 export class Group {
+  private _fetchedTime: Date;
   public static fromDto(dto: any): Group {
     return new Group(
       dto.id,
@@ -12,6 +13,11 @@ export class Group {
               public name: string,
               public people: Person[],
               public currency: string) {
+    this._fetchedTime = new Date();
+  }
+
+  get fetchedTime(): Date{
+    return this._fetchedTime;
   }
 
   public toDto(): any {

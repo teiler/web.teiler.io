@@ -1,22 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 import {LogService, NavigationService} from 'app/core';
 
 import {Group} from '../../model';
 import {GroupService} from '../../service';
+import {Subscription} from 'rxjs/Subscription';
+import {GroupStorageService} from '../../service/group-storage.service';
 
 @Component({
   selector: 'tylr-group-edit',
   templateUrl: './group-edit.component.html',
   styleUrls: ['./group-edit.component.scss']
 })
-export class GroupEditComponent implements OnInit {
+export class GroupEditComponent implements OnInit, OnDestroy {
   public group: Group;
+  private groupSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
-              private groupService: GroupService,
+  constructor(private groupService: GroupService,
+              private groupStorageService: GroupStorageService,
               private logService: LogService,
               private navigationService: NavigationService) {
   }
@@ -27,15 +29,14 @@ export class GroupEditComponent implements OnInit {
   }
 
   public getGroup() {
-    this.route.params.switchMap((params: Params) => {
-      const id = params['id'];
-      return this.groupService.getGroup(id);
-    }).subscribe(
-      (group: Group) => {
-        this.group = group;
-      },
-      error => this.logService.error(error)
-    );
+    // initialize components (probably a loading icon)
+    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
+      .subscribe(
+        (group: Group) => {
+          this.group = group;
+        },
+        (error: Error) => this.logService.error(error)
+      );
   }
 
   public editGroup(groupEditForm: NgForm): boolean {
@@ -49,4 +50,7 @@ export class GroupEditComponent implements OnInit {
     this.navigationService.goBack();
   }
 
+  ngOnDestroy(): void {
+    this.groupSubscription.unsubscribe();
+  }
 }

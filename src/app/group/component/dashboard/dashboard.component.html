@@ -1,17 +1,24 @@
 <section class="overview">
   <h2>Overview</h2>
 
-  <div *ngIf="group">
-    <div name="person" *ngFor="let p of group.people">
-      <h3 class="name">{{p.name}}</h3>
-      <span class="currency">CHF</span>
-      <span class="value">- 8.00</span>
+  <div *ngIf="group; else nullGroupBlock">
+
+    <div *ngIf="group.people.length; else emptyPeopleBlock">
+      <div name="person" *ngFor="let p of group.people">
+        <h3 class="name">{{p.name}}</h3>
+        <span class="currency">CHF</span>
+        <span class="value">- 8.00</span>
+      </div>
     </div>
+
+    <ng-template #emptyPeopleBlock>
+      Oh no! You don't have any group members. Let's add some <a routerLink="edit">here</a>
+    </ng-template>
   </div>
 
-  <div #elseBlock>
-    Oh no! You don't have any group members. Let's add some <a routerLink="edit">here</a>
-  </div>
+  <ng-template #nullGroupBlock>
+    Group Loading
+  </ng-template>
 
   <button>Add Expense</button>
   <button>Add Compensation</button>

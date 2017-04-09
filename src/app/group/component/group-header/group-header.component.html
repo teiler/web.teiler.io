@@ -3,10 +3,13 @@
   <h1 class="title small-9">Dashboard</h1>
   <nav class="main small-10">
     <ul>
-      <li *ngFor="let g of recentGroups">{{g.name}}</li>
+      <li *ngFor="let g of recentGroups">
+        <a routerLink="/groups/{{g.id}}">{{g.name}}</a>
+      </li>
     </ul>
   </nav>
 </header>
 
 <a routerLink="edit">edit</a>
 <a routerLink="delete">delete</a>
+<a routerLink="/">logout</a>

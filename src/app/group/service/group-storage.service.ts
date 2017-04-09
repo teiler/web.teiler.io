@@ -1,30 +1,55 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Group} from '../model/group';
+import {LogService} from 'app/core';
 
 @Injectable()
 export class GroupStorageService {
+  private readonly NAME = 'GroupStorageService';
   private readonly RECENT_GROUPS = 'recent-groups';
+  private readonly CURRENT_GROUP = 'current-group';
 
-  constructor() {
+  private currentGroup: Group;
+  public onCurrentGroupChanged: EventEmitter<Group> = new EventEmitter<Group>();
+
+  constructor(private logService: LogService) {
     if (!localStorage.getItem(this.RECENT_GROUPS)) {
       this.setRecentGroups(new Map<string, Group>());
     }
   }
 
   public storeGroup(group: Group) {
+    // update session storage
+    this.storeCurrentGroup(group);
+
+    // update local storage
     const recentGroups: Map<string, Group> = this.getRecentGroups();
     recentGroups.set(group.id, group);
     this.setRecentGroups(recentGroups);
+  }
+
+  private storeCurrentGroup(group: Group) {
+    this.currentGroup = group;
+    this.onCurrentGroupChanged.emit(this.currentGroup);
   }
 
   public getGroup(id: string): Group {
     return this.getRecentGroups().get(id);
   }
 
+  public getCurrentGroup(): Group {
+    return this.currentGroup;
+  }
+
   public removeGroup(id: string) {
     const recentGroups: Map<string, Group> = this.getRecentGroups();
     recentGroups.delete(id);
     this.setRecentGroups(recentGroups);
+  }
+
+  public removeCurrentGroup() {
+    this.currentGroup = null;
+    this.logService.debug('current group is removed from storage', this.NAME);
+    this.onCurrentGroupChanged.emit(this.currentGroup);
   }
 
   public getRecentGroups(): Map<string, Group> {
