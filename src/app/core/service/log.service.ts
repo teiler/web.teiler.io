@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {environment} from 'app/../../src/environments/environment';
-import {logging} from 'selenium-webdriver';
 
 enum Level {
   DEBUG,

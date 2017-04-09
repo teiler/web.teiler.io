@@ -14,7 +14,6 @@ export class NavigationService {
   }
 
   public goBack(): void {
-    console.log('back');
     this.location.back();
   }
 
