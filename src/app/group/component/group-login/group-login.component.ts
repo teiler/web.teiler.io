@@ -9,7 +9,7 @@ import {GroupStorageService} from '../../service/group-storage.service';
 @Component({
   selector: 'tylr-group-login',
   templateUrl: './group-login.component.html',
-  styleUrls: ['./group-login.component.css']
+  styleUrls: ['./group-login.component.scss']
 })
 export class GroupLoginComponent implements OnInit {
   public groupId: string;

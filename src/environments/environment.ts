@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  serverBaseUrl: 'https://api.teiler.io/v1/'
+  serverBaseUrl: 'https://api.teiler.io/v1/',
+  logLevel: 'DEBUG'
 };

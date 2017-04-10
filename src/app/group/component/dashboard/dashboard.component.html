@@ -1,16 +1,29 @@
-<p>
-  Group overview component comes here
-</p>
+<section class="overview">
+  <h2>{{group?.name}} Overview</h2>
 
-<div *ngIf="group">
-  People {{group.name}}
+  <div *ngIf="group; else nullGroupBlock">
 
-  <div *ngFor="let p of group.people">{{p.name}}</div>
-</div>
+    <div *ngIf="group.people.length; else emptyPeopleBlock">
+      <div name="person" *ngFor="let p of group.people">
+        <h3 class="name">{{p.name}}</h3>
+        <span class="currency">CHF</span>
+        <span class="value">- 8.00</span>
+      </div>
+    </div>
 
-<br>
-<br>
-<br><!--temporary breaks for separation-->
+    <ng-template #emptyPeopleBlock>
+      Oh no! You don't have any group members. Let's add some <a routerLink="edit">here</a>
+    </ng-template>
+  </div>
+
+  <ng-template #nullGroupBlock>
+    Group Loading
+  </ng-template>
+
+  <button>Add Expense</button>
+  <button>Add Compensation</button>
+  <button class="secondary">Suggest Payments</button>
+</section>
 
 <p>
   Last payments component comes here
