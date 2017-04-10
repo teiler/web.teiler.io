@@ -38,16 +38,22 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
 
   delete() {
     const currentGroupId = this.groupStorageService.getCurrentGroup().id;
-    this.groupService.deleteGroup(currentGroupId)
-      .subscribe(
-        (isDeleted: boolean) => {
-          this.groupStorageService.removeRecentGroup(currentGroupId);
-          this.navigationService.goHome();
-        },
-        (error: Error) => {
-          this.logService.error(error, this.NAME);
-        }
-      );
+    const deleteConfirmation = prompt(
+      'Are you sure that you want to delete the group?\nIf so, please complete the group id.',
+      currentGroupId.substr(0, 4));
+
+    if (deleteConfirmation === currentGroupId) {
+      this.groupService.deleteGroup(currentGroupId)
+        .subscribe(
+          (isDeleted: boolean) => {
+            this.groupStorageService.removeRecentGroup(currentGroupId);
+            this.navigationService.goHome();
+          },
+          (error: Error) => {
+            this.logService.error(error, this.NAME);
+          }
+        );
+    }
   }
 
   ngOnDestroy() {
