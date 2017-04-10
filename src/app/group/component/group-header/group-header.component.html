@@ -1,0 +1,15 @@
+<header class="row">
+  <img class="logo small-2" src="assets/logo.svg" alt="Logo Teiler.io">
+  <h1 class="title small-9">Dashboard</h1>
+  <nav class="main small-10">
+    <ul>
+      <li *ngFor="let g of recentGroups">
+        <a routerLink="/groups/{{g.id}}">{{g.name}}</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<a routerLink="edit">edit</a>
+<a (click)="delete()">delete</a>
+<a (click)="logout()">logout</a>

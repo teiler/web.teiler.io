@@ -1,25 +1,63 @@
-import {Component, OnInit} from '@angular/core';
-import {GroupStorageService} from '../../service/group-storage.service';
+import {Component, OnInit, OnDestroy, OnChanges} from '@angular/core';
 import {Group} from '../../model/group';
+import {ActivatedRoute, Params} from '@angular/router';
+import {GroupService, GroupStorageService} from '../../service';
+import {LogService, NavigationService} from 'app/core/';
 
 @Component({
   selector: 'tylr-group',
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.scss']
 })
-export class GroupComponent implements OnInit {
-  public recentGroups: Group[] = [];
+export class GroupComponent implements OnInit, OnDestroy {
+  private readonly NAME = 'GroupComponent';
 
-  constructor(private groupStorageService: GroupStorageService) {
+  constructor(private route: ActivatedRoute,
+              private groupService: GroupService,
+              private logService: LogService,
+              private navigationService: NavigationService,
+              private groupStorageService: GroupStorageService) {
+    this.checkGroupFromStorage();
   }
 
   ngOnInit() {
-    const groupIterator = this.groupStorageService.getRecentGroups().values();
-    let group = groupIterator.next();
-    while (group.value) {
-      this.recentGroups.push(group.value);
-      group = groupIterator.next();
-    }
   }
 
+  checkGroupFromStorage() {
+    this.route.params.map((params: Params) => {
+      const id = params['id'];
+
+      // check recently logged in group from storage
+      const loggedInGroup: Group = this.groupStorageService.getCurrentGroup();
+
+      if (loggedInGroup && loggedInGroup.id === id) {
+        this.logService.debug('group is already in storage', this.NAME);
+      } else {
+        this.groupStorageService.removeCurrentGroup();
+        this.loadGroup();
+      }
+    }).subscribe();
+  }
+
+  private loadGroup() {
+    this.logService.debug('fetch group from api', this.NAME);
+    let id: string;
+    this.route.params.switchMap((params: Params) => {
+      id = params['id'];
+      return this.groupService.getGroup(id);
+    }).subscribe(
+      (group: Group) => {
+        this.groupStorageService.storeGroup(group);
+      },
+      error => {
+        this.groupStorageService.removeRecentGroup(id);
+        this.logService.error(error);
+        this.navigationService.goHome();
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.groupStorageService.removeCurrentGroup();
+  }
 }

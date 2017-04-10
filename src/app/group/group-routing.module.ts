@@ -5,10 +5,10 @@ import {GroupEditComponent} from './component/group-edit/group-edit.component';
 
 const routes: Routes = [
   {
-    path: 'groups', component: GroupComponent,
+    path: 'groups/:id', component: GroupComponent,
     children: [
-      {path: ':id', component: DashboardComponent},
-      {path: ':id/edit', component: GroupEditComponent}
+      {path: '', component: DashboardComponent},
+      {path: 'edit', component: GroupEditComponent}
     ]
   }
 ];

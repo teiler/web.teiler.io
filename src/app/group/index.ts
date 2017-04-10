@@ -4,3 +4,4 @@
 export * from './component';
 export * from './service';
 export * from './group.module';
+export * from './model';

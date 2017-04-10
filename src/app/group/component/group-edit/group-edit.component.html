@@ -1,3 +1,42 @@
-<p>
-  group-edit works!
-</p>
+<section class="overview">
+  <h2>Group {{group?.name}} - Edit</h2>
+
+  <form *ngIf="group" (ngSubmit)="editGroup(groupEditForm)" #groupEditForm="ngForm">
+    <div class="row">
+      <div class="medium-12 columns">
+        <label>Group name
+          <input type="text" placeholder="group name" name="group-name" [(ngModel)]="group.name">
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="medium-12 columns">
+        <label>People</label>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="small-12 medium-6 columns" *ngFor="let p of group.people">
+        <input type="text" placeholder="person" value="{{p.name}}">
+      </div>
+    </div>
+
+    <div class="row form-button-holder">
+      <button type="button" class="secondary small-12 medium-6 large-6 columns"
+              (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="submit" class="small-12 medium-6 large-6 columns"
+              [disabled]="!groupEditForm.form.valid">
+        Save
+      </button>
+    </div>
+  </form>
+
+  <ng-template #elseBlock>
+    Group loading...
+  </ng-template>
+
+
+</section>

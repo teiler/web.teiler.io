@@ -7,7 +7,7 @@ import {Group} from '../model/group';
 @Injectable()
 export class GroupResourceService extends ResourceBase {
 
-  private readonly apiUrl = 'groups/';
+  private readonly apiUrl = 'groups';
 
   constructor(http: Http) {
     super(http);
@@ -18,24 +18,33 @@ export class GroupResourceService extends ResourceBase {
       name
     };
 
-    return this.post(this.getRequesturl('group'), requestBody)
-      .map((response: Response) => {
-        const result = response.json();
-        console.log('resource service: api response - ', result);
-        return Observable.of<any>(result);
-      }).catch((error: any) => {
-        return Observable.of<any>(error);
-      });
-  }
-
-  public getGroup(id: string): Observable<any> {
-    return this.get(this.getRequesturl(id))
+    return this.post(this.getRequesturl(''), requestBody)
       .map((response: Response) => {
         return response.json();
       }).catch((error: any) => {
         return Observable.throw(new Error(error.json().error));
       });
   }
+
+  public getGroup(id: string): Observable<any> {
+    return this.get(this.getRequesturl(`/${id}`))
+      .map((response: Response) => {
+        return response.json();
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
+  public deleteGroup(id: string): Observable<boolean> {
+    return this.delete(this.getRequesturl(`/${id}`))
+      .map(() => {
+        return true;
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
+
 
   private getRequesturl(endpoint: string): string {
     return `${this.apiUrl}${endpoint}`;
