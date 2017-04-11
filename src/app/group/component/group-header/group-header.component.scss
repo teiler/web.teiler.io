@@ -3,3 +3,15 @@
     height: 60px;
   }
 }
+
+nav {
+  ul {
+    li {
+      display: inline;
+    }
+
+    li + li:before {
+      content: " | ";
+    }
+  }
+}
