@@ -37,7 +37,7 @@ input {
 
 button, input {
   border-radius: rem-calc(5);
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: $tylr-shadow;
 
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -45,12 +45,74 @@ button, input {
   padding-bottom: 1.1em;
 }
 
+.dots:after {
+  content: '\2807';
+  font-size: 2em;
+  line-height: 1em;
+  vertical-align: top;
+}
 
-
-div.person {
+.card {
   width: 100%;
-  border-color: black;
+  color: $tylr-secondary-color-light;
+  border-color: $tylr-secondary-color-light;
   border-width: 1px;
   border-style: solid;
   background-color: $tylr-light-color;
+  border-radius: rem-calc(5);
+  padding: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  box-shadow: $tylr-shadow;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: none;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  &.add {
+    padding: 0.5em;
+
+    .symbol, .description {
+      width: 100%;
+      text-align: center;
+    }
+
+    .symbol {
+      font-size: 4em;
+      font-weight: bold;
+      padding: 0.4em;
+      padding-top: 0.3em;
+      line-height: 0.4em;
+    }
+  }
+
+  &.person {
+    color: $tylr-secondary-color;
+
+    &.negative {
+      border-color: $tylr-error-color;
+    }
+
+    &.active {
+      background: $tylr-primary-gradient;
+      color: $tylr-light-color;
+    }
+
+    .name {
+      font-size: 1.5em;
+    }
+
+    .currency {
+      vertical-align: top;
+    }
+
+    .value {
+      font-size: 4em;
+      text-align: right;
+      font-weight: bold;
+    }
+  }
 }
+
