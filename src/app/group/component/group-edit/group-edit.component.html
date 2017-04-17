@@ -17,24 +17,33 @@
 
     </div>
     <div class="row">
-      <div class="small-12 medium-6 columns" *ngFor="let p of group.people">
+      <div class="small-12 medium-6 large-4 columns" *ngFor="let p of group.people">
         <input type="text" placeholder="person" value="{{p.name}}">
       </div>
     </div>
 
-    <div class="row form-button-holder">
-      <button type="button" class="secondary small-12 medium-6 large-6 columns"
-              (click)="delete()">
-        Delete
-      </button>
-      <button type="button" class="secondary small-12 medium-6 large-6 columns"
-              (click)="onCancel()">
-        Cancel
-      </button>
-      <button type="submit" class="small-12 medium-6 large-6 columns"
-              [disabled]="!groupEditForm.form.valid">
-        Save
-      </button>
+    <div class="row">
+      <div class="small-12 medium-6 large-4 columns">
+        <button type="button" class="secondary"
+                (click)="delete()">
+          Delete
+        </button>
+      </div>
+
+      <div class="small-12 medium-6 large-4 columns">
+        <button type="button" class="secondary"
+                (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+
+      <div class="small-12 medium-6 large-4 columns">
+        <button type="submit"
+                [disabled]="!groupEditForm.form.valid">
+          Save
+        </button>
+      </div>
+
     </div>
   </form>
 
