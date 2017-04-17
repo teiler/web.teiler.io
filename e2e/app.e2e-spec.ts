@@ -7,8 +7,8 @@ describe('tylr-web App', () => {
     page = new TylrWebPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display title saying teiler.io', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Angular4 works!');
+    expect(page.getParagraphText()).toEqual('teiler.io');
   });
 });
