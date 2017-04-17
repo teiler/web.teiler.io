@@ -35,7 +35,7 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
     this.groupStorageService.removeRecentGroup(this.groupStorageService.getCurrentGroup().id);
     this.navigationService.goHome();
   }
-
+  
   ngOnDestroy() {
     this.recentGroupsSubscription.unsubscribe();
   }
