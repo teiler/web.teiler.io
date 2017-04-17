@@ -2,13 +2,12 @@
 button {
   background: $tylr-primary-gradient;
   color: $tylr-light-color;
-  padding: rem-calc(10);
+
+  max-width: none;
 
   &.secondary {
     background: $tylr-secondary-gradient;
   }
-
-  width: 100%;
 
   &:hover{
     cursor: pointer;
@@ -17,10 +16,7 @@ button {
 
 input {
   background-color: $tylr-light-color;
-  border: 0;
   color: $tylr-secondary-color;
-
-  padding-left: 0.5em;
 
   &.error {
     border-color: $tylr-success-color;
@@ -31,16 +27,16 @@ input {
   &.success {
     border-color: $tylr-success-color;
   }
-
-  width: 100%;
 }
 
 button, input {
   border-radius: rem-calc(5);
+  border: 0;
   box-shadow: $tylr-shadow;
 
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  width: 100%;
+  margin: 0.5em;
+  padding: 0.5em;
   padding-top: 1.1em;
   padding-bottom: 1.1em;
 }
