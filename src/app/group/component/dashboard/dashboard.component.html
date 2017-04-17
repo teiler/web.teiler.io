@@ -8,23 +8,15 @@
     </ng-template>
 
     <div *ngIf="group.people.length; else emptyPeopleBlock">
-      <div name="person" *ngFor="let p of group.people">
-        <h3 class="name">{{p.name}}</h3>
-        <span class="currency">CHF</span>
-        <span class="value">- 8.00</span>
+      <div name="person" *ngFor="let p of group.people" class="card person negative row">
+        <h3 class="name small-12">{{p.name}}</h3>
+        <span class="currency small-2">CHF</span>
+        <span class="value small-10">- 8.00</span>
       </div>
     </div>
 
-    <div name="person" class="card person negative row">
-      <h3 class="name small-11">John</h3>
-      <span class="dots small-1"></span>
-      <span class="currency small-2">CHF</span>
-      <span class="value small-10">- 8.00</span>
-    </div>
-
     <div name="person" class="card person active row">
-      <h3 class="name small-11">Demian</h3>
-      <span class="dots small-1"></span>
+      <h3 class="name small-12">Demian</h3>
       <span class="currency small-2">CHF</span>
       <span class="value small-10">+ 15.00</span>
     </div>
