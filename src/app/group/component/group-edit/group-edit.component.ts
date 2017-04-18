@@ -38,7 +38,13 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   public editGroup(groupEditForm: NgForm): boolean {
     if (groupEditForm.form.valid) {
-      return false;
+      this.groupService.updateGroup(this.group)
+        .subscribe(
+          (group: Group) => {
+            this.navigationService.goToDashboard(group.id);
+          },
+          (error: Error) => this.logService.error(error)
+        );
     }
     return false;
   }
