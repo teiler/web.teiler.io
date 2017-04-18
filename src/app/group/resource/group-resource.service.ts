@@ -35,6 +35,20 @@ export class GroupResourceService extends ResourceBase {
       });
   }
 
+  public updateGroup(id: string, name: string, currency: string): Observable<any> {
+    const requestBody = {
+      name,
+      currency
+    };
+
+    return this.put(this.getRequesturl(`/${id}`), requestBody)
+      .map((response: Response) => {
+        return response.json();
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
   public deleteGroup(id: string): Observable<boolean> {
     return this.delete(this.getRequesturl(`/${id}`))
       .map(() => {
