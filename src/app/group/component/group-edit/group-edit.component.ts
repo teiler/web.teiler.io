@@ -14,6 +14,7 @@ import {GroupStorageService} from '../../service/group-storage.service';
   styleUrls: ['./group-edit.component.scss']
 })
 export class GroupEditComponent implements OnInit, OnDestroy {
+  private readonly NAME = 'GroupEditComponent';
   public group: Group;
   private groupSubscription: Subscription;
 
