@@ -5,19 +5,45 @@ import {Observable} from 'rxjs/Rx';
 import * as assert from 'assert';
 import {Group} from '../model/group';
 
+const groupDto = {
+  'id': '4h43pgmi',
+  'name': 'Alpha',
+  'currency': 'chf',
+  'people': [
+    {
+      'id': 3,
+      'name': 'Person A',
+      'update-time': '2017-04-06T20:07:01.128Z',
+      'create-time': '2017-04-06T20:07:01.128Z'
+    },
+    {
+      'id': 4,
+      'name': 'Person B',
+      'update-time': '2017-04-06T20:10:14.232Z',
+      'create-time': '2017-04-06T20:10:14.232Z'
+    }
+  ],
+  'update-time': '2017-04-06T20:00:41.504Z',
+  'create-time': '2017-04-06T20:00:41.504Z'
+};
+
 describe('GroupService', () => {
   beforeEach(() => {
     const spy = jasmine.createSpyObj('groupResourceService',
-      ['createGroup', 'getGroup']);
+      ['createGroup', 'getGroup', 'deleteGroup']);
 
     spy.createGroup.and.callFake((name) => {
-      return Observable.of<any>({'group-uuid': 1234, name});
+      return Observable.of<any>({id: '1234', name});
     });
 
     // DAL should return a Group DTO
     spy.getGroup.and.callFake((id) => {
-      return Observable.of<any>({id, name: 'test'});
+      const group = JSON.parse(JSON.stringify(groupDto));
+      group.id = id;
+      return Observable.of<any>(group);
     });
+
+    spy.deleteGroup.and.callFake((id) => Observable.of<boolean>(true));
 
     TestBed.configureTestingModule({
       providers: [
@@ -43,6 +69,7 @@ describe('GroupService', () => {
     service.getGroup('1234').subscribe(
       (group) => {
         expect(group.id).toEqual('1234');
+        expect(group.people.length).toEqual(2);
       }
     );
   }));
@@ -52,7 +79,19 @@ describe('GroupService', () => {
 
     service.getGroup(null).subscribe(
       (group) => {
-        console.log(group);
+        assert(false, 'exception expected');
+      },
+      (error) => {
+        expect(error.message).toEqual('Group ID is empty');
+      }
+    );
+  }));
+
+  it('should not delete a group', inject([GroupService], (service: GroupService) => {
+    expect(service).toBeTruthy();
+
+    service.deleteGroup(null).subscribe(
+      (group) => {
         assert(false, 'exception expected');
       },
       (error) => {
@@ -61,3 +100,5 @@ describe('GroupService', () => {
     );
   }));
 });
+
+
