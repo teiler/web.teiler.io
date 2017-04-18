@@ -1,19 +1,34 @@
 <section class="overview">
-  <h2>{{group?.name}} Overview</h2>
+  <h2 class="small-12">{{group?.name}} Overview</h2>
 
   <div *ngIf="group; else nullGroupBlock">
 
+    <ng-template #emptyPeopleBlock>
+      <p>
+        Sad! You don't have any group members. Let's add some:
+      </p>
+    </ng-template>
+
     <div *ngIf="group.people.length; else emptyPeopleBlock">
-      <div name="person" *ngFor="let p of group.people">
-        <h3 class="name">{{p.name}}</h3>
-        <span class="currency">CHF</span>
-        <span class="value">- 8.00</span>
+      <div name="person" *ngFor="let p of group.people" class="card person negative medium-3 large-3 row">
+        <h3 class="name small-12">{{p.name}}</h3>
+        <span class="currency small-2">CHF</span>
+        <span class="value small-10">- 8.00</span>
       </div>
     </div>
 
-    <ng-template #emptyPeopleBlock>
-      Oh no! You don't have any group members. Let's add some <a routerLink="edit">here</a>
-    </ng-template>
+    <div name="person" class="card person active medium-3 large-3 row">
+      <h3 class="name small-12">Demian</h3>
+      <span class="currency small-2">CHF</span>
+      <span class="value small-10">+ 15.00</span>
+    </div>
+
+    <a routerLink="edit">
+      <div class="card add medium-3 large-3 row">
+        <span class="symbol small-12">+</span>
+        <span class="description small-12">Add Person</span>
+      </div>
+    </a>
   </div>
 
   <ng-template #nullGroupBlock>
@@ -25,6 +40,6 @@
   <button class="secondary">Suggest Payments</button>
 </section>
 
-<p>
+<section class="last-payments">
   Last payments component comes here
-</p>
+</section>

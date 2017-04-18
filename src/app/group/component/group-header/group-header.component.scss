@@ -1,5 +1,17 @@
-:host{
+header {
   .logo{
-    height: 60px;
+    width: 80%;
+    height: 3em;
+  }
+
+  nav {
+    ul {
+      margin: 0;
+
+      li {
+        display: inline;
+      }
+    }
   }
 }
+
