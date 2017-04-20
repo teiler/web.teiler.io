@@ -49,6 +49,25 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  delete() {
+    const currentGroupId = this.groupStorageService.getCurrentGroup().id;
+    const deleteConfirmation = prompt(
+      'Are you sure that you want to delete the group?\nIf so, please enter the first 4 characters of the group id.');
+
+    if (deleteConfirmation === currentGroupId.substr(0, 4)) {
+      this.groupService.deleteGroup(currentGroupId)
+        .subscribe(
+          (isDeleted: boolean) => {
+            this.groupStorageService.removeRecentGroup(currentGroupId);
+            this.navigationService.goHome();
+          },
+          (error: Error) => {
+            this.logService.error(error, this.NAME);
+          }
+        );
+    }
+  }
+
   public onCancel() {
     this.navigationService.goBack();
   }
