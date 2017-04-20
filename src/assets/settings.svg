@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
-  <g fill="none" fill-rule="evenodd" stroke="#303B42" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M25.7178,15 C25.7178,14.37 25.6528,13.757 25.5478,13.157 L29.0078,10.261 L26.1078,5.238 L21.8768,6.784 C20.9358,5.995 19.8538,5.374 18.6778,4.944 L17.9008,0.5 L12.0998,0.5 L11.3218,4.944 C10.1468,5.374 9.0648,5.995 8.1228,6.784 L3.8928,5.238 L0.9918,10.261 L4.4518,13.157 C4.3478,13.757 4.2818,14.37 4.2818,15 C4.2818,15.63 4.3478,16.243 4.4518,16.843 L0.9918,19.738 L3.8928,24.762 L8.1228,23.216 C9.0648,24.005 10.1468,24.626 11.3218,25.056 L12.0998,29.5 L17.9008,29.5 L18.6778,25.056 C19.8538,24.626 20.9358,24.005 21.8768,23.216 L26.1078,24.762 L29.0078,19.738 L25.5478,16.843 C25.6528,16.243 25.7178,15.63 25.7178,15 Z"/>
-    <path d="M20.5,15 C20.5,18.038 18.037,20.5 15,20.5 C11.962,20.5 9.5,18.038 9.5,15 C9.5,11.962 11.962,9.5 15,9.5 C18.037,9.5 20.5,11.962 20.5,15 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g fill="none" fill-rule="evenodd" stroke="#848C97" stroke-width="2" transform="translate(1 1)">
+    <circle cx="10" cy="10" r="3"/>
+    <circle cx="10" cy="10" r="8"/>
+    <path d="M10 2L10 0M10 20L10 18" stroke-linecap="round"/>
+    <path d="M3.48959236,4.28248558 L3.48959236,2.28248558" stroke-linecap="round" transform="rotate(-45 3.99 3.282)"/>
+    <path d="M16.2175144,17.0104076 L16.2175144,15.0104076" stroke-linecap="round" transform="rotate(-45 16.718 16.01)"/>
+    <path d="M0.5,10.5 L0.5,8.5" stroke-linecap="round" transform="rotate(-90 1 9.5)"/>
+    <path d="M18.5,10.5 L18.5,8.5" stroke-linecap="round" transform="rotate(-90 19 9.5)"/>
+    <path d="M2.78248558,17.0104076 L2.78248558,15.0104076" stroke-linecap="round" transform="rotate(-135 3.282 16.01)"/>
+    <path d="M15.5104076,4.28248558 L15.5104076,2.28248558" stroke-linecap="round" transform="rotate(-135 16.01 3.282)"/>
   </g>
 </svg>

@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="30" viewBox="0 0 22 30">
-  <g fill="none" fill-rule="evenodd" stroke="#303B42" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9.5,20.5 C9.5,19.396 8.604,18.5 7.5,18.5 C6.396,18.5 5.5,19.396 5.5,20.5 C5.5,21.27 5.939,21.931 6.577,22.265 L6.167,25.5 L8.833,25.5 L8.423,22.265 C9.061,21.931 9.5,21.27 9.5,20.5 Z"/>
-    <path d="M14.5,7.5 L14.5,2 C14.5,1.172 13.828,0.5 13,0.5 L2,0.5 C1.172,0.5 0.5,1.172 0.5,2 L0.5,28 C0.5,28.828 1.172,29.5 2,29.5 L13,29.5 C13.828,29.5 14.5,28.828 14.5,28 L14.5,12.5"/>
-    <path d="M21.5,7.5 L9.444,7.5 C8.813,6.883 7.952,6.5 7,6.5 C5.067,6.5 3.5,8.067 3.5,10 C3.5,11.933 5.067,13.5 7,13.5 C7.952,13.5 8.813,13.117 9.444,12.5 L21.5,12.5 L21.5,7.5 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g fill="none" fill-rule="evenodd" stroke="#848C97" stroke-width="2" transform="translate(1 1)">
+    <circle cx="10" cy="10" r="10"/>
+    <path d="M5,10 L15,10" stroke-linecap="round"/>
   </g>
 </svg>
