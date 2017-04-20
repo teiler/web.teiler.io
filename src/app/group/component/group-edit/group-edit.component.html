@@ -16,34 +16,52 @@
       </div>
 
     </div>
-    <div class="row">
-      <div class="small-12 medium-6 large-4 columns" *ngFor="let p of group.people">
+    <div class="row" *ngFor="let p of group.people">
+      <div class="small-2 column align-self-middle">
+        <div class="checkbox">
+          <input type="checkbox" id="{{p.id}}" name="cb" />
+          <label for="{{p.id}}"></label>
+        </div>
+      </div>
+
+      <div class="small-10 medium-6 large-4 column">
         <input type="text" placeholder="person" value="{{p.name}}">
       </div>
     </div>
 
-    <div class="row">
-      <div class="small-12 medium-6 large-4 column">
-        <button type="button" class="secondary"
-                (click)="delete()">
-          Delete
-        </button>
-      </div>
+    <div class="small-12 medium-6 large-4 column">
+      <button type="submit"
+              [disabled]="!groupEditForm.form.valid">
+        Add Person
+      </button>
+    </div>
 
-      <div class="small-12 medium-6 large-4 column">
-        <button type="button" class="secondary"
-                (click)="onCancel()">
-          Cancel
-        </button>
-      </div>
+    <div class="small-12 medium-6 large-4 column">
+      <button type="submit"
+              [disabled]="!groupEditForm.form.valid">
+        Save
+      </button>
+    </div>
 
-      <div class="small-12 medium-6 large-4 column">
-        <button type="submit"
-                [disabled]="!groupEditForm.form.valid">
-          Save
-        </button>
-      </div>
+    <div class="small-12 medium-6 large-4 column">
+      <button type="button" class="secondary"
+              (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
 
+    <div class="small-12 medium-6 large-4 column">
+      <button type="button" class="secondary"
+              (click)="delete()">
+        Delete Persons
+      </button>
+    </div>
+
+    <div class="small-12 medium-6 large-4 column">
+      <button type="button" class="secondary"
+              (click)="delete()">
+        Delete Group
+      </button>
     </div>
   </form>
 
