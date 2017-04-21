@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 
 import {LogService, NavigationService} from 'app/core';
 
-import {Group} from '../../model';
+import {Group, Person} from '../../model';
 import {GroupService} from '../../service';
 import {Subscription} from 'rxjs/Subscription';
 import {GroupStorageService} from '../../service/group-storage.service';
@@ -16,6 +16,7 @@ import {GroupStorageService} from '../../service/group-storage.service';
 export class GroupEditComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupEditComponent';
   public group: Group;
+  private groupOriginal: Group;
   private groupSubscription: Subscription;
 
   constructor(private groupService: GroupService,
@@ -31,6 +32,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (group: Group) => {
           this.group = group;
+          this.groupOriginal = group;
         },
         (error: Error) => this.logService.error(error)
       );
@@ -66,6 +68,10 @@ export class GroupEditComponent implements OnInit, OnDestroy {
           }
         );
     }
+  }
+
+  addPerson() {
+    this.group.people.push(new Person());
   }
 
   public onCancel() {

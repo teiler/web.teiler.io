@@ -23,13 +23,16 @@
 
     <div class="row">
       <div class="medium-12 column">
-        <label>People</label>
+        <label>People</label><span style="background:#1779ba; color: white;" (click)="addPerson()">Add</span>
       </div>
 
     </div>
     <div class="row">
       <div class="small-12 medium-6 large-4 columns" *ngFor="let p of group.people">
-        <input type="text" placeholder="person" value="{{p.name}}">
+        <div class="input-group">
+          <input class="input-group-field" type="text" placeholder="person" value="{{p.name}}">
+          <span class="input-group-label" (click)="deletePerson()" style="background:#cc4b37; color: white;">X</span>
+        </div>
       </div>
     </div>
 
