@@ -2,6 +2,10 @@ section {
   margin-bottom: 1.5em;
 }
 
+fieldset {
+  border: none;
+}
+
 button {
   background: $tylr-primary-gradient;
   color: $tylr-light-color;
@@ -116,4 +120,3 @@ button, input {
     }
   }
 }
-

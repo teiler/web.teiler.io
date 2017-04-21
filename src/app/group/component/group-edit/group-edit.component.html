@@ -2,7 +2,7 @@
   <h2>Group {{group?.name}} - Edit</h2>
 
   <form *ngIf="group" (ngSubmit)="editGroup(groupEditForm)" #groupEditForm="ngForm">
-    <div class="row">
+    <div class="row align-bottom">
       <div class="small-12 column">
         <label>Group name
           <input type="text" placeholder="group name" name="group-name" [(ngModel)]="group.name">
@@ -21,43 +21,48 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="medium-12 column">
-        <label>People</label><span style="background:#1779ba; color: white;" (click)="addPerson()">Add</span>
-      </div>
+    <fieldset>
+      <legend>People</legend>
+      <div class="row" *ngFor="let p of group.people">
+        <div class="small-10 medium-11 column">
+          <input type="text" placeholder="person" value="{{p.name}}">
+        </div>
 
-    </div>
-    <div class="row">
-      <div class="small-12 medium-6 large-4 columns" *ngFor="let p of group.people">
-        <div class="input-group">
-          <input class="input-group-field" type="text" placeholder="person" value="{{p.name}}">
-          <span class="input-group-label" (click)="deletePerson()" style="background:#cc4b37; color: white;">X</span>
+        <div class="shrink column align-self-middle">
+          <img src="assets/cancel.svg" (click)="deletePerson()">
         </div>
       </div>
+    </fieldset>
+
+    <div class="small-12 medium-4 column">
+      <button type="submit" (click)="addPerson()"
+              [disabled]="!groupEditForm.form.valid">
+        Add Person
+      </button>
     </div>
 
-    <div class="row">
-      <div class="small-12 medium-6 large-4 column">
+    <div class="small-12 medium-4 column">
+      <button type="submit"
+              [disabled]="!groupEditForm.form.valid">
+        Save
+      </button>
+    </div>
+
+    <div class="small-12 medium-4 column">
+      <button type="button" class="secondary"
+              (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+
+
+    <div class="small-12 column">
+      <label>Very Danger
         <button type="button" class="secondary"
                 (click)="delete()">
-          Delete
+          Delete Group
         </button>
-      </div>
-
-      <div class="small-12 medium-6 large-4 column">
-        <button type="button" class="secondary"
-                (click)="onCancel()">
-          Cancel
-        </button>
-      </div>
-
-      <div class="small-12 medium-6 large-4 column">
-        <button type="submit"
-                [disabled]="!groupEditForm.form.valid">
-          Save
-        </button>
-      </div>
-
+      </label>
     </div>
   </form>
 

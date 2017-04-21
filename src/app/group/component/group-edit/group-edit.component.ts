@@ -74,6 +74,10 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     this.group.people.push(new Person());
   }
 
+  deletePerson() {
+
+  }
+
   public onCancel() {
     this.navigationService.goBack();
   }
