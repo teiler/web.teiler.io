@@ -22,24 +22,17 @@
     </div>
 
     <fieldset>
-      <legend>People</legend>
-      <div class="row" *ngFor="let p of group.people">
+      <legend>Members<span class="label add" (click)="addPerson()">+</span></legend>
+      <div class="row" *ngFor="let p of group.people; let i = index;">
         <div class="small-10 medium-11 column">
           <input type="text" placeholder="person" value="{{p.name}}">
         </div>
 
         <div class="shrink column align-self-middle">
-          <img src="assets/cancel.svg" (click)="deletePerson()">
+          <img src="assets/cancel.svg" (click)="deletePerson(i)">
         </div>
       </div>
     </fieldset>
-
-    <div class="small-12 medium-4 column">
-      <button type="submit" (click)="addPerson()"
-              [disabled]="!groupEditForm.form.valid">
-        Add Person
-      </button>
-    </div>
 
     <div class="small-12 medium-4 column">
       <button type="submit"
@@ -55,16 +48,17 @@
       </button>
     </div>
 
-
-    <div class="small-12 column">
-      <label>Very Danger
-        <button type="button" class="secondary"
-                (click)="delete()">
-          Delete Group
-        </button>
-      </label>
-    </div>
   </form>
+
+  <div class="small-12 column">
+    <label>Very Danger
+      <button type="button" class="secondary"
+              (click)="delete()">
+        Delete Group
+      </button>
+    </label>
+  </div>
+
 
   <ng-template #elseBlock>
     Group loading...

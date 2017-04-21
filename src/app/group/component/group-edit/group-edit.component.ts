@@ -74,8 +74,8 @@ export class GroupEditComponent implements OnInit, OnDestroy {
     this.group.people.push(new Person());
   }
 
-  deletePerson() {
-
+  deletePerson(i: number) {
+    this.group.people.splice(i, 1);
   }
 
   public onCancel() {
