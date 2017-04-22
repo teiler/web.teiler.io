@@ -1,6 +1,6 @@
 import {GroupService} from './group.service';
 import {inject, TestBed} from '@angular/core/testing';
-import {GroupResourceService} from '../resource/group-resource.service';
+import {GroupResourceService, PersonResourceService} from '../resource/';
 import {Observable} from 'rxjs/Rx';
 import * as assert from 'assert';
 import {Group} from '../model/group';
@@ -29,26 +29,30 @@ const groupDto = {
 
 describe('GroupService', () => {
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('groupResourceService',
+    const groupSpy = jasmine.createSpyObj('groupResourceService',
       ['createGroup', 'getGroup', 'deleteGroup']);
 
-    spy.createGroup.and.callFake((name) => {
+    const personSpy = jasmine.createSpyObj('personGroupService',
+      ['createPerson', 'updatePerson', 'deletePerson']);
+
+    groupSpy.createGroup.and.callFake((name) => {
       return Observable.of<any>({id: '1234', name});
     });
 
     // DAL should return a Group DTO
-    spy.getGroup.and.callFake((id) => {
+    groupSpy.getGroup.and.callFake((id) => {
       const group = JSON.parse(JSON.stringify(groupDto));
       group.id = id;
       return Observable.of<any>(group);
     });
 
-    spy.deleteGroup.and.callFake((id) => Observable.of<boolean>(true));
+    groupSpy.deleteGroup.and.callFake((id) => Observable.of<boolean>(true));
 
     TestBed.configureTestingModule({
       providers: [
         GroupService,
-        {provide: GroupResourceService, useValue: spy}
+        {provide: GroupResourceService, useValue: groupSpy},
+        {provide: PersonResourceService, useValue: personSpy}
       ]
     });
   });
