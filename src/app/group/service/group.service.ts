@@ -42,7 +42,7 @@ export class GroupService {
       group.id, group.name, group.currency);
     const newPersonObs: Observable<any>[] = [];
     const updatePersonObs: Observable<any>[] = [];
-    const deletePersonObs: Observable<any>[] = [];
+    const deletePersonObs: Observable<boolean>[] = [];
 
     const peopleOriginal: Map<number, Person> = this.getPeopleAsMap(groupOriginal.people);
 
@@ -71,8 +71,8 @@ export class GroupService {
       newPersonObs.length ? Observable.forkJoin(...newPersonObs) : Observable.of([]),
       updatePersonObs.length ? Observable.forkJoin(...updatePersonObs) : Observable.of([]),
       deletePersonObs.length ? Observable.forkJoin(...deletePersonObs) : Observable.of([]),
-      function (dto: any, createResult, updateResult, deleteResult) {
-        return dto;
+      (dto: any) => {
+        return Group.fromDto(dto);
       }
     );
   }

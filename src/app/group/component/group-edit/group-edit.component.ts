@@ -16,6 +16,7 @@ import {GroupStorageService} from '../../service/group-storage.service';
 export class GroupEditComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupEditComponent';
   public group: Group;
+  public response: string;
   private groupSubscription: Subscription;
 
   constructor(private groupService: GroupService,
@@ -46,6 +47,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
             this.navigationService.goToDashboard(group.id);
           },
           (error: Error) => {
+            this.response = error.message;
             this.logService.error(error);
           }
         );
