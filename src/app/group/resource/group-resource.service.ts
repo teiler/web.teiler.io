@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {ResourceBase} from 'app/shared';
-import {Group} from '../model/group';
 
 @Injectable()
 export class GroupResourceService extends ResourceBase {
@@ -57,7 +56,6 @@ export class GroupResourceService extends ResourceBase {
         return Observable.throw(new Error(error.json().error));
       });
   }
-
 
   private getRequesturl(endpoint: string): string {
     return `${this.apiUrl}${endpoint}`;

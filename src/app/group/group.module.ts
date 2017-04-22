@@ -10,9 +10,9 @@ import {
   GroupLoginComponent
 } from './component';
 import {GroupService, GroupStorageService} from './service';
-import {GroupResourceService} from './resource';
-import { GroupEditComponent } from './component/group-edit/group-edit.component';
-import { GroupHeaderComponent } from './component/group-header/group-header.component';
+import {GroupResourceService, PersonResourceService} from './resource';
+import {GroupEditComponent} from './component/group-edit/group-edit.component';
+import {GroupHeaderComponent} from './component/group-header/group-header.component';
 
 
 @NgModule({
@@ -37,6 +37,7 @@ export class GroupModule {
       providers: [
         GroupService,
         GroupResourceService,
+        PersonResourceService,
         GroupStorageService
       ]
     };
