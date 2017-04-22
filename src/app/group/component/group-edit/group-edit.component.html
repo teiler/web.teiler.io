@@ -1,6 +1,8 @@
 <section class="overview">
   <h2>Group {{group?.name}} - Edit</h2>
 
+  <p class="error">{{response}}</p>
+
   <form *ngIf="group" (ngSubmit)="saveGroup(groupEditForm)" #groupEditForm="ngForm">
     <div class="row align-bottom">
       <div class="small-12 column">
