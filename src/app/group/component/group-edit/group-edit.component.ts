@@ -18,6 +18,7 @@ export class GroupEditComponent implements OnInit, OnDestroy {
   public group: Group;
   public response: string;
   private groupSubscription: Subscription;
+  private readonly MAX_CACHE_TIME = 1000;
 
   constructor(private groupService: GroupService,
               private groupStorageService: GroupStorageService,
@@ -27,11 +28,11 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // initialize components (probably a loading icon)
-    this.group = JSON.parse(JSON.stringify(this.groupStorageService.getCurrentGroup()));
+    this.setGroup(this.groupStorageService.getCurrentGroup());
     this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
       .subscribe(
         (group: Group) => {
-          this.group = Object.assign(group);
+          this.setGroup(group);
         },
         (error: Error) => this.logService.error(error)
       );
@@ -39,7 +40,6 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   public saveGroup(groupEditForm: NgForm): boolean {
     if (groupEditForm.form.valid) {
-
       const groupOriginal: Group = this.groupStorageService.getCurrentGroup();
       this.groupService.updateGroup(this.group, groupOriginal)
         .subscribe(
@@ -84,6 +84,21 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   public onCancel() {
     this.navigationService.goBack();
+  }
+
+  private setGroup(updatedGroup: Group) {
+    if (updatedGroup) {
+      if ((new Date().getTime() - updatedGroup.fetchedTime.getTime()) < this.MAX_CACHE_TIME) {
+        this.group = updatedGroup.clone();
+      } else {
+        this.group = null;
+        this.groupStorageService.removeCurrentGroup();
+        this.groupService.getGroup(updatedGroup.id)
+          .subscribe(
+            (group: Group) => this.groupStorageService.storeGroup(group)
+          );
+      }
+    }
   }
 
   ngOnDestroy(): void {
