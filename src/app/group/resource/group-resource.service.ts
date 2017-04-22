@@ -59,7 +59,6 @@ export class GroupResourceService extends ResourceBase {
   }
 
 
-
   private getRequesturl(endpoint: string): string {
     return `${this.apiUrl}${endpoint}`;
   }
