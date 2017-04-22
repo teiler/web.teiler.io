@@ -5,37 +5,35 @@ import {LogService, NavigationService} from 'app/core';
 
 import {Group, Person} from '../../model';
 import {GroupService} from '../../service';
-import {Subscription} from 'rxjs/Subscription';
 import {GroupStorageService} from '../../service/group-storage.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'tylr-group-edit',
   templateUrl: './group-edit.component.html',
   styleUrls: ['./group-edit.component.scss']
 })
-export class GroupEditComponent implements OnInit, OnDestroy {
+export class GroupEditComponent implements OnInit {
   private readonly NAME = 'GroupEditComponent';
   public group: Group;
   public response: string;
-  private groupSubscription: Subscription;
-  private readonly MAX_CACHE_TIME = 1000;
 
   constructor(private groupService: GroupService,
               private groupStorageService: GroupStorageService,
               private logService: LogService,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    // initialize components (probably a loading icon)
-    this.setGroup(this.groupStorageService.getCurrentGroup());
-    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
-      .subscribe(
-        (group: Group) => {
-          this.setGroup(group);
-        },
-        (error: Error) => this.logService.error(error)
-      );
+    // the group should be cloned in order to compare with the original group later
+    const currentGroup = this.route.snapshot.data['group'];
+
+    if (!currentGroup) {
+      this.navigationService.goHome();
+    } else {
+      this.group = currentGroup.clone();
+    }
   }
 
   public saveGroup(groupEditForm: NgForm): boolean {
@@ -84,24 +82,5 @@ export class GroupEditComponent implements OnInit, OnDestroy {
 
   public onCancel() {
     this.navigationService.goBack();
-  }
-
-  private setGroup(updatedGroup: Group) {
-    if (updatedGroup) {
-      if ((new Date().getTime() - updatedGroup.fetchedTime.getTime()) < this.MAX_CACHE_TIME) {
-        this.group = updatedGroup.clone();
-      } else {
-        this.group = null;
-        this.groupStorageService.removeCurrentGroup();
-        this.groupService.getGroup(updatedGroup.id)
-          .subscribe(
-            (group: Group) => this.groupStorageService.storeGroup(group)
-          );
-      }
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.groupSubscription.unsubscribe();
   }
 }

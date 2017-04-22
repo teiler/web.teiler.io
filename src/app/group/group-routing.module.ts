@@ -2,20 +2,24 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GroupComponent, DashboardComponent} from './component';
 import {GroupEditComponent} from './component/group-edit/group-edit.component';
+import {GroupResolverService} from './service/group-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'groups/:id', component: GroupComponent,
+    path: 'groups', component: GroupComponent,
     children: [
-      {path: '', component: DashboardComponent},
-      {path: 'edit', component: GroupEditComponent}
+      {path: ':id', component: DashboardComponent, resolve: { group: GroupResolverService }},
+      {path: ':id/edit', component: GroupEditComponent, resolve: { group: GroupResolverService }}
     ]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    GroupResolverService
+  ]
 })
 export class GroupRoutingModule {
 }

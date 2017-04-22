@@ -1,56 +1,25 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Group} from '../../model/group';
-import {LogService} from '../../../core/service/log.service';
-import {Subscription} from 'rxjs/Subscription';
-import {GroupStorageService} from '../../service/group-storage.service';
-import {current} from 'codelyzer/util/syntaxKind';
-import {GroupService} from '../../service/group.service';
+import {ActivatedRoute} from '@angular/router';
+import {NavigationService} from '../../../core/service/navigation.service';
 
 @Component({
   selector: 'tylr-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   public group: Group;
-  private readonly MAX_CACHE_TIME = 1000;
 
-  private groupSubscription: Subscription;
-
-  constructor(private groupStorageService: GroupStorageService,
-              private groupService: GroupService,
-              private logService: LogService) {
+  constructor(private route: ActivatedRoute,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
     // initialize components (probably a loading icon)
-    const currentGroup = this.groupStorageService.getCurrentGroup();
-    this.setGroup(currentGroup);
-    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
-      .subscribe(
-        (group: Group) => {
-          this.setGroup(group);
-        },
-        (error: Error) => this.logService.error(error)
-      );
-  }
-
-  private setGroup(updatedGroup: Group) {
-    if (updatedGroup) {
-      if ((new Date().getTime() - updatedGroup.fetchedTime.getTime()) < this.MAX_CACHE_TIME) {
-        this.group = updatedGroup;
-      } else {
-        this.group = null;
-        this.groupStorageService.removeCurrentGroup();
-        this.groupService.getGroup(updatedGroup.id)
-          .subscribe(
-            (group: Group) => this.groupStorageService.storeGroup(group)
-          );
-      }
+    this.group = this.route.snapshot.data['group'];
+    if (!this.group) {
+      this.navigationService.goHome();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.groupSubscription.unsubscribe();
   }
 }
