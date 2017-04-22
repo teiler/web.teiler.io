@@ -71,7 +71,7 @@ export class GroupService {
       newPersonObs.length ? Observable.forkJoin(...newPersonObs) : Observable.of([]),
       updatePersonObs.length ? Observable.forkJoin(...updatePersonObs) : Observable.of([]),
       deletePersonObs.length ? Observable.forkJoin(...deletePersonObs) : Observable.of([]),
-      (dto: any, addedResult) => {
+      (dto: any) => {
         return Group.fromDto(dto);
       }
     );

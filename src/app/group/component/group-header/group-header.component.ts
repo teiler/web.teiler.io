@@ -39,5 +39,4 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.recentGroupsSubscription.unsubscribe();
   }
-
 }
