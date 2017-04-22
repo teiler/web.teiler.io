@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {GroupResourceService} from '../resource/group-resource.service';
+import {GroupResourceService, PersonResourceService} from '../resource';
 import {Group} from '../model/group';
 
 @Injectable()
@@ -32,17 +32,32 @@ export class GroupService {
       });
   }
 
-  public updateGroup(group: Group): Observable<Group> {
+  public updateGroup(group: Group, groupOriginal: Group): Observable<Group> {
     if (!group || !group.id) {
       return Observable.throw(new Error('Invalid group'));
     }
 
-    return this.groupResourceService.updateGroup(group.id, group.name, group.currency)
-      .map((dto: any) => {
-        return Group.fromDto(dto);
-      }).catch((error: Error) => {
-        return Observable.throw(error);
-      });
+    const groupObs: Observable<any> = this.groupResourceService.updateGroup(group.id, group.name, group.currency);
+
+    return Observable.zip(
+      groupObs,
+      function (dto: any) {
+        // debugger;
+        console.log(dto);
+        return dto;
+      },
+      // function(error: Error){
+      //   debugger;
+      //   Observable.throw(error);
+      // }
+    );
+    //
+    // return this.groupResourceService.updateGroup(group.id, group.name, group.currency)
+    //   .map((dto: any) => {
+    //     return Group.fromDto(dto);
+    //   }).catch((error: Error) => {
+    //     return Observable.throw(error);
+    //   });
   }
 
   public deleteGroup(id: string): Observable<boolean> {

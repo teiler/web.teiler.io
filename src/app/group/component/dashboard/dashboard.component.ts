@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // initialize components (probably a loading icon)
+
     this.group = this.groupStorageService.getCurrentGroup();
     this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
       .subscribe(

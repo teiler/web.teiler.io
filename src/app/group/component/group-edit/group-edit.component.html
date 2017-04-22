@@ -1,11 +1,12 @@
 <section class="overview">
   <h2>Group {{group?.name}} - Edit</h2>
 
-  <form *ngIf="group" (ngSubmit)="editGroup(groupEditForm)" #groupEditForm="ngForm">
+  <form *ngIf="group" (ngSubmit)="saveGroup(groupEditForm)" #groupEditForm="ngForm">
     <div class="row align-bottom">
       <div class="small-12 column">
         <label>Group name
-          <input type="text" placeholder="group name" name="group-name" [(ngModel)]="group.name">
+          <input type="text" placeholder="group name" name="group-name" #groupName="ngModel"
+                 [(ngModel)]="group.name" required [ngClass]="{'error': groupName.errors?.required}">
         </label>
       </div>
     </div>
@@ -25,7 +26,8 @@
       <legend>Members<span class="label add" (click)="addPerson()">+</span></legend>
       <div class="row" *ngFor="let p of group.people; let i = index;">
         <div class="small-10 medium-11 column">
-          <input type="text" placeholder="person" value="{{p.name}}">
+          <input type="text" placeholder="person" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
+                 required [ngClass]="{'error': person.errors?.required}">
         </div>
 
         <div class="shrink column align-self-middle">
@@ -36,7 +38,7 @@
 
     <div class="small-12 medium-4 column">
       <button type="submit"
-              [disabled]="!groupEditForm.form.valid">
+              [disabled]="groupEditForm.invalid">
         Save
       </button>
     </div>
