@@ -7,7 +7,7 @@
     <div class="row align-bottom">
       <div class="small-12 column">
         <label>Group name
-          <input type="text" placeholder="group name" name="group-name" #groupName="ngModel"
+          <input class="big" type="text" placeholder="group name" name="group-name" #groupName="ngModel"
                  [(ngModel)]="group.name" required [ngClass]="{'error': groupName.errors?.required}">
         </label>
       </div>
@@ -25,43 +25,62 @@
     </div>
 
     <fieldset>
-      <legend>Members<span class="label add" (click)="addPerson()">+</span></legend>
-      <div class="row" *ngFor="let p of group.people; let i = index;">
-        <div class="small-10 medium-11 column">
-          <input type="text" placeholder="person" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
-                 required [ngClass]="{'error': person.errors?.required}">
-        </div>
+      <legend>People</legend>
 
-        <div class="shrink column align-self-middle">
-          <img src="assets/cancel.svg" (click)="deletePerson(i)">
+      <ng-template #emptyPeopleBlock>
+        <p>
+          Sad! You don't have any group members. Let's add some!
+        </p>
+      </ng-template>
+
+      <div *ngIf="group.people.length; else emptyPeopleBlock">
+        <div class="row" *ngFor="let p of group.people; let i = index;">
+          <div class="small-10 medium-11 column">
+            <input type="text" placeholder="Name" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
+                   required [ngClass]="{'error': person.errors?.required}">
+          </div>
+
+          <div class="shrink column align-self-middle">
+            <img src="assets/cancel.svg" (click)="deletePerson(i)">
+          </div>
         </div>
       </div>
     </fieldset>
 
-    <div class="small-12 medium-4 column">
-      <button type="submit"
-              [disabled]="groupEditForm.invalid">
-        Save
-      </button>
-    </div>
+    <div class="row">
+      <div class="small-12 medium-4 column">
+        <button class="add" (click)="addPerson()">
+          Add Person
+        </button>
+      </div>
 
-    <div class="small-12 medium-4 column">
-      <button type="button" class="secondary"
-              (click)="onCancel()">
-        Cancel
-      </button>
-    </div>
+      <div class="small-12 medium-4 column">
+        <button type="submit"
+                [disabled]="groupEditForm.invalid">
+          Save
+        </button>
+      </div>
 
+      <div class="small-12 medium-4 column">
+        <button type="button" class="secondary"
+                (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
   </form>
 
-  <div class="small-12 column">
-    <label>Very Danger
-      <button type="button" class="secondary"
-              (click)="delete()">
-        Delete Group
-      </button>
-    </label>
+  <div class="row">
+    <div class="small-12 column">
+      <label>Very Danger
+        <button type="button" class="error"
+                (click)="delete()">
+          Delete Group
+        </button>
+      </label>
+    </div>
   </div>
+
 
 
   <ng-template #elseBlock>
