@@ -1,3 +1,10 @@
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+
 section {
   margin-bottom: 1.5em;
 }
@@ -17,8 +24,7 @@ button {
   }
 
   &.add {
-    background-color: $tylr-light-color;
-    background: transparent;
+    background: $tylr-light-color;
     border-style: solid;
     border-width: 1px;
     border-color: $tylr-secondary-color-light;
@@ -28,6 +34,10 @@ button {
   &:hover{
     cursor: pointer;
   }
+}
+
+@include placeholder {
+  color: $tylr-secondary-color-light;
 }
 
 input {
@@ -40,6 +50,7 @@ input {
   &.success {
     border-color: $tylr-success-color;
   }
+
 }
 
 select {
