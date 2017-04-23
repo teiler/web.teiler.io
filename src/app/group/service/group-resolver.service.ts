@@ -18,8 +18,9 @@ export class GroupResolverService implements Resolve<Group> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Group> | Group {
+    const selectedGroupId = route.paramMap.get('id');
     const currentGroup = this.groupStorageService.getCurrentGroup();
-    if (currentGroup) {
+    if (currentGroup && currentGroup.id === selectedGroupId) {
       if ((new Date().getTime() - currentGroup.fetchedTime.getTime()) < this.MAX_CACHE_TIME) {
         return currentGroup;
       } else {
@@ -27,7 +28,8 @@ export class GroupResolverService implements Resolve<Group> {
         return this.getGroup(currentGroup.id);
       }
     } else {
-      return this.getGroup(route.paramMap.get('id'));
+      this.groupStorageService.removeCurrentGroup();
+      return this.getGroup(selectedGroupId);
     }
   }
 
