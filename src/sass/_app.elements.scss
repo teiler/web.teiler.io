@@ -22,9 +22,6 @@ button {
 }
 
 input {
-  background-color: $tylr-light-color;
-  color: $tylr-secondary-color;
-
   &.error {
     border-color: $tylr-error-color;
     border-style: solid;
@@ -36,25 +33,31 @@ input {
   }
 }
 
-button, input {
+select {
+  text-transform: uppercase;
+  font-family: $tylr-font-family;
+}
+
+input, select {
+  background-color: $tylr-light-color;
+  color: $tylr-secondary-color;
+
+}
+
+button, input, select {
+  appearance: none; // disables browser styles
+
   border-radius: rem-calc(5);
   border: 0;
   box-shadow: $tylr-shadow;
 
   width: 100%;
-  //margin: 0.5em;
+
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   padding: 0.5em;
   padding-top: 1.1em;
   padding-bottom: 1.1em;
-}
-
-.dots:after {
-  content: '\2807';
-  font-size: 2em;
-  line-height: 1em;
-  vertical-align: top;
 }
 
 .card {
