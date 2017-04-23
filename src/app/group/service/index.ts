@@ -3,3 +3,4 @@
  */
 export * from './group.service';
 export * from './group-storage.service';
+export * from './group-resolver.service';

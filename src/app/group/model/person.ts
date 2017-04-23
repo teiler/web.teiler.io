@@ -3,8 +3,8 @@ export class Person {
     return new Person(parseInt(dto.id, 10), dto.name);
   }
 
-  constructor(public id: number,
-              public name: string) {
+  constructor(public id?: number,
+              public name?: string) {
   }
 
   public toDto(): any {

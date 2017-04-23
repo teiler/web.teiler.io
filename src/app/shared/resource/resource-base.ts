@@ -22,6 +22,13 @@ export abstract class ResourceBase {
       this.requestOptions.merge(options));
   }
 
+  protected put<T>(path: string, dto: any, options?: any): Observable<Response> {
+    return this.http.put(
+      environment.serverBaseUrl + path,
+      JSON.stringify(dto),
+      this.requestOptions.merge(options));
+  }
+
   protected delete<T>(path: string): Observable<Response> {
     return this.http.delete(environment.serverBaseUrl + path);
   }
