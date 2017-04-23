@@ -25,7 +25,6 @@
     </div>
 
     <fieldset>
-      <legend>Members<span class="label add" (click)="addPerson()">+</span></legend>
       <div class="row" *ngFor="let p of group.people; let i = index;">
         <div class="small-10 medium-11 column">
           <input type="text" placeholder="person" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
@@ -37,6 +36,12 @@
         </div>
       </div>
     </fieldset>
+
+    <div class="small-12 medium-4 column">
+      <button class="add" (click)="addPerson()">
+        Add Person
+      </button>
+    </div>
 
     <div class="small-12 medium-4 column">
       <button type="submit"

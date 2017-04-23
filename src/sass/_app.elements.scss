@@ -16,6 +16,15 @@ button {
     background: $tylr-secondary-gradient;
   }
 
+  &.add {
+    background-color: $tylr-light-color;
+    background: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $tylr-secondary-color-light;
+    color: $tylr-secondary-color;
+  }
+
   &:hover{
     cursor: pointer;
   }
