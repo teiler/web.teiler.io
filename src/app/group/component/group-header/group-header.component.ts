@@ -23,12 +23,22 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.recentGroups = this.groupStorageService.getRecentGroups();
+    this.setRecentGroups(this.groupStorageService.getRecentGroups());
     this.recentGroupsSubscription = this.groupStorageService.onRecentGroupsChanged
       .subscribe(
-        (groups: GroupStorageAdapter[]) => this.recentGroups = groups,
+        (groups: GroupStorageAdapter[]) => this.setRecentGroups(groups),
         (error: Error) => this.logService.error(error, this.NAME)
       );
+  }
+
+  private setRecentGroups(recentGroups: GroupStorageAdapter[]) {
+    this.recentGroups = recentGroups.sort((group1, group2) => {
+      return group1.name.localeCompare(group2.name);
+    });
+  }
+
+  edit() {
+    this.navigationService.goToGroupEdit(this.groupStorageService.getCurrentGroup().id);
   }
 
   logout() {
@@ -39,5 +49,4 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.recentGroupsSubscription.unsubscribe();
   }
-
 }

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {ResourceBase} from 'app/shared';
-import {Group} from '../model/group';
 
 @Injectable()
 export class GroupResourceService extends ResourceBase {
@@ -35,6 +34,20 @@ export class GroupResourceService extends ResourceBase {
       });
   }
 
+  public updateGroup(id: string, name: string, currency: string): Observable<any> {
+    const requestBody = {
+      name,
+      currency
+    };
+
+    return this.put(this.getRequesturl(`/${id}`), requestBody)
+      .map((response: Response) => {
+        return response.json();
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
   public deleteGroup(id: string): Observable<boolean> {
     return this.delete(this.getRequesturl(`/${id}`))
       .map(() => {
@@ -43,8 +56,6 @@ export class GroupResourceService extends ResourceBase {
         return Observable.throw(new Error(error.json().error));
       });
   }
-
-
 
   private getRequesturl(endpoint: string): string {
     return `${this.apiUrl}${endpoint}`;

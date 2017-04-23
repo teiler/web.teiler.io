@@ -1,36 +1,36 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Group} from '../../model/group';
-import {LogService} from '../../../core/service/log.service';
-import {Subscription} from 'rxjs/Subscription';
+import {ActivatedRoute} from '@angular/router';
+import {NavigationService} from '../../../core/service/navigation.service';
 import {GroupStorageService} from '../../service/group-storage.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'tylr-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   public group: Group;
-
   private groupSubscription: Subscription;
 
-  constructor(private groupStorageService: GroupStorageService,
-              private logService: LogService) {
+  constructor(private route: ActivatedRoute,
+              private navigationService: NavigationService,
+              private groupStorageService: GroupStorageService) {
   }
 
   ngOnInit() {
+    console.log('t');
     // initialize components (probably a loading icon)
     this.group = this.groupStorageService.getCurrentGroup();
-    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
-      .subscribe(
-        (group: Group) => {
-          this.group = group;
-        },
-        (error: Error) => this.logService.error(error)
-      );
-  }
+    if (!this.group) {
+      this.navigationService.goHome();
+      return;
+    }
 
-  ngOnDestroy(): void {
-    this.groupSubscription.unsubscribe();
+    this.groupStorageService.onCurrentGroupChanged
+      .subscribe(
+        (group: Group) => this.group = group
+      );
   }
 }
