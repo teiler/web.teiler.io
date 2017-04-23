@@ -25,14 +25,24 @@
     </div>
 
     <fieldset>
-      <div class="row" *ngFor="let p of group.people; let i = index;">
-        <div class="small-10 medium-11 column">
-          <input type="text" placeholder="person" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
-                 required [ngClass]="{'error': person.errors?.required}">
-        </div>
+      <legend>Members</legend>
 
-        <div class="shrink column align-self-middle">
-          <img src="assets/cancel.svg" (click)="deletePerson(i)">
+      <ng-template #emptyPeopleBlock>
+        <p>
+          Sad! You don't have any group members. Let's add some!
+        </p>
+      </ng-template>
+
+      <div *ngIf="group.people.length; else emptyPeopleBlock">
+        <div class="row" *ngFor="let p of group.people; let i = index;">
+          <div class="small-10 medium-11 column">
+            <input type="text" placeholder="Name" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
+                   required [ngClass]="{'error': person.errors?.required}">
+          </div>
+
+          <div class="shrink column align-self-middle">
+            <img src="assets/cancel.svg" (click)="deletePerson(i)">
+          </div>
         </div>
       </div>
     </fieldset>
