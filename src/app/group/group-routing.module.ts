@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {GroupComponent, DashboardComponent} from './component';
+import {GroupComponent, DashboardComponent, ExpenseComponent} from './component';
 import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupResolverService} from './service/group-resolver.service';
 
@@ -8,8 +8,18 @@ const routes: Routes = [
   {
     path: 'groups', component: GroupComponent,
     children: [
-      {path: ':id', component: DashboardComponent, resolve: { group: GroupResolverService }},
-      {path: ':id/edit', component: GroupEditComponent, resolve: { group: GroupResolverService }}
+      {path: ':id', component: DashboardComponent, resolve: {group: GroupResolverService}},
+      {path: ':id/edit', component: GroupEditComponent, resolve: {group: GroupResolverService}},
+      {
+        path: ':id/expenses/create',
+        component: ExpenseComponent,
+        resolve: {group: GroupResolverService}
+      },
+      {
+        path: ':id/expenses/:expenseId/edit',
+        component: ExpenseComponent,
+        resolve: {group: GroupResolverService}
+      }
     ]
   }
 ];

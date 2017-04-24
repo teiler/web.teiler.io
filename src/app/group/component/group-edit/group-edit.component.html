@@ -7,8 +7,10 @@
     <div class="row align-bottom">
       <div class="small-12 column">
         <label>Group name
-          <input class="big" type="text" placeholder="group name" name="group-name" #groupName="ngModel"
-                 [(ngModel)]="group.name" required [ngClass]="{'error': groupName.errors?.required}">
+          <input class="big" type="text" placeholder="group name" name="group-name"
+                 #groupName="ngModel"
+                 [(ngModel)]="group.name" required
+                 [ngClass]="{'error': groupName.errors?.required}">
         </label>
       </div>
     </div>
@@ -36,7 +38,8 @@
       <div *ngIf="group.people.length; else emptyPeopleBlock">
         <div class="row" *ngFor="let p of group.people; let i = index;">
           <div class="small-10 medium-11 column">
-            <input type="text" placeholder="Name" [(ngModel)]="p.name" name="person{{i}}" #person="ngModel"
+            <input type="text" placeholder="Name" [(ngModel)]="p.name" name="person{{i}}"
+                   #person="ngModel"
                    required [ngClass]="{'error': person.errors?.required}">
           </div>
 
@@ -80,7 +83,6 @@
       </label>
     </div>
   </div>
-
 
 
   <ng-template #elseBlock>

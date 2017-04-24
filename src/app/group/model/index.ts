@@ -4,3 +4,4 @@
 export {Group} from './group';
 export {GroupStorageAdapter} from './group-storage-adapter';
 export {Person} from './person';
+export {CrudOperation} from './crud-operation';
