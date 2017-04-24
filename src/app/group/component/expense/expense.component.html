@@ -27,7 +27,7 @@
     <div class="small-12 medium-2 column" *ngFor="let p of group.people">
       <div name="person" class="card person row">
         <h3 class="name small-12">{{p.name}}</h3>
-        <span class="currency small-12">{{group.currency | uppercase }}</span>
+        <span class="currency small-12">{{group.currency }}</span>
         <input class="value small-12" type="number" value="3.34">
         <span class="description"><input value="33">% of payment</span>
       </div>
