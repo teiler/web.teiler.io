@@ -27,7 +27,7 @@ import {ExpenseComponent} from './component/expense/expense.component';
     GroupEditComponent, GroupHeaderComponent, ExpenseComponent
   ],
   exports: [
-    GroupCreateComponent, GroupLoginComponent, GroupComponent, ExpenseComponent
+    GroupCreateComponent, GroupLoginComponent, GroupComponent
   ],
   providers: []
 
