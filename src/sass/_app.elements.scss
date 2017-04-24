@@ -46,10 +46,14 @@ button {
 }
 
 input {
-  &.big {
-    font-size: 1.3em;
-    padding-top: 1.3em;
-    padding-bottom: 1.3em;
+  &[type=number] {
+    -moz-appearance:textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 
   &.error {
@@ -65,7 +69,6 @@ input {
 }
 
 select {
-  text-transform: uppercase;
   font-family: $tylr-font-family;
 }
 
@@ -89,6 +92,12 @@ button, input, select {
   padding: 0.5em;
   padding-top: 1.1em;
   padding-bottom: 1.1em;
+
+  &.big {
+    font-size: 1.3em;
+    padding-top: 1.3em;
+    padding-bottom: 1.3em;
+  }
 }
 
 .card {
@@ -104,6 +113,8 @@ button, input, select {
   margin-bottom: 1.5em;
   box-shadow: $tylr-shadow;
   transition: box-shadow 0.3s ease-in-out;
+
+  cursor: pointer;
 
   &:hover {
     box-shadow: none;
@@ -129,6 +140,7 @@ button, input, select {
 
   &.person {
     color: $tylr-secondary-color;
+    border-color: $tylr-active-color;
 
     &.negative {
       border-color: $tylr-error-color;
@@ -137,6 +149,17 @@ button, input, select {
     &.active {
       background: $tylr-primary-gradient;
       color: $tylr-light-color;
+      border: none;
+    }
+
+    &.disabled {
+      box-shadow: none;
+      border-color: $tylr-secondary-color-light;
+      color: $tylr-secondary-color-light;
+
+      input {
+        color: $tylr-secondary-color-light;
+      }
     }
 
     .name {
@@ -148,9 +171,23 @@ button, input, select {
     }
 
     .value {
-      font-size: 4em;
+      font-size: 3.5em;
       text-align: right;
       font-weight: bold;
+    }
+
+    .description {
+      input {
+        width: rem-calc(18);
+        padding-right: rem-calc(2);
+      }
+    }
+
+    input {
+      box-shadow: none;
+      padding: 0;
+      margin-top: 0;
+      text-align: right;
     }
   }
 }
