@@ -13,6 +13,7 @@ import {GroupService, GroupStorageService} from './service';
 import {GroupResourceService, PersonResourceService} from './resource';
 import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
+import {ExpenseComponent} from './component/expense/expense.component';
 
 
 @NgModule({
@@ -22,10 +23,11 @@ import {GroupHeaderComponent} from './component/group-header/group-header.compon
     GroupRoutingModule
   ],
   declarations: [
-    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent, GroupEditComponent, GroupHeaderComponent
+    GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent
   ],
   exports: [
-    GroupCreateComponent, GroupLoginComponent, GroupComponent
+    GroupCreateComponent, GroupLoginComponent, GroupComponent, ExpenseComponent
   ],
   providers: []
 
