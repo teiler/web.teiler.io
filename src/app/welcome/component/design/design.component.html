@@ -1,54 +1,69 @@
-<header class="row">
-  <img class="logo small-2" src="assets/logo.svg" alt="Logo Teiler.io">
-  <h1 class="title small-9">Dashboard</h1>
-  <nav class="main small-10">
-    <ul>
-      <li>Ferien</li>
-      <li>WG</li>
-      <li>Studium</li>
-    </ul>
-  </nav>
-</header>
+<form class="payment">
+  <section class="row align-center">
+    <div class="small-12 medium-2 column">
+      <label>CHF
+      <input type="number" placeholder="0.00" required></label>
+    </div>
 
-<section class="overview">
-  <h2>Overview</h2>
-  <div name="person">
-    <h3 class="name">Patrick</h3>
-    <span class="currency">CHF</span>
-    <span class="value">- 8.00</span>
-  </div>
+    <div class="small-12 medium-3 column">
+      <label>from
+        <select>
+          <option value="1">Demian</option>
+          <option value="2">Patrick</option>
+        </select>
+      </label>
+    </div>
 
-  <div name="person">
-    <h3 class="name">Kirthi</h3>
-    <span class="currency">CHF</span>
-    <span class="value">+ 12.00</span>
-  </div>
+    <div class="small-12 medium-3 column">
+      <label>for
+        <input type="text" placeholder="e.g. Bananas" required>
+      </label>
+    </div>
+  </section>
 
-  <div name="person">
-    <h3 class="name">Lukas</h3>
-    <span class="currency">CHF</span>
-    <span class="value">- 4.00</span>
-  </div>
+  <section class="row align-center">
+    <div class="small-12 medium-2 column">
+      <div name="person" class="card person row">
+        <h3 class="name small-12">Demian</h3>
+        <span class="currency small-12">CHF</span>
+        <input class="value small-12" type="number" value="3.34">
+        <span class="description"><input value="33">% of payment</span>
+      </div>
+    </div>
 
-  <div name="person" class="current">
-    <h3 class="name">Demian</h3>
-    <span class="currency">CHF</span>
-    <span class="value">0.00</span>
-  </div>
+    <div class="small-12 medium-2 column">
+      <div name="person" class="card person row">
+        <h3 class="name small-12">Kirthi</h3>
+        <span class="currency small-12">CHF</span>
+        <input class="value small-12" type="number" value="3.33">
+        <span class="description"><input value="33">% of payment</span>
+      </div>
+    </div>
 
-  <button>Add Expense</button>
-  <button>Add Compensation</button>
-  <button class="secondary">Suggest Payments</button>
-</section>
+    <div class="small-12 medium-2 column">
+      <div name="person" class="card person row">
+        <h3 class="name small-12">Patrick</h3>
+        <span class="currency small-12">CHF</span>
+        <input class="value small-12" type="number" value="3.33">
+        <span class="description"><input value="33">% of payment</span>
+      </div>
+    </div>
 
-<section class="payments">
-  <h2>Last Payments</h2>
-</section>
+    <div class="small-12 medium-2 column">
+      <div name="person" class="card person disabled row">
+        <h3 class="name small-12">Lukas</h3>
+        <span class="currency small-12">CHF</span>
+        <input class="value small-12" type="number" value="0.00">
+        <span class="description"><input value="0">% of payment</span>
+      </div>
+    </div>
+  </section>
 
-<p>
-  Test
-</p>
+  <section class="row align-center">
+    <div class="small-12 medium-4 column">
+      <button class="big">Add Expense</button>
+    </div>
+  </section>
+</form>
 
-<footer>
-  <p>Footer</p>
-</footer>
+<tylr-footer></tylr-footer>

@@ -1,0 +1,27 @@
+header {
+  .logo{
+    width: 80%;
+    height: 3em;
+  }
+
+  nav {
+    ul {
+      margin: 0;
+
+      li {
+        display: inline;
+      }
+    }
+  }
+}
+
+label {
+  white-space: nowrap;
+  display: block;
+  padding-right: 0.2em;
+  padding-left: 1em;
+
+  input, select {
+    margin-left: 0.5em;
+  }
+}
