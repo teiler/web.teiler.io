@@ -1,6 +1,7 @@
 import {Person} from './person';
 export class Group {
   private _fetchedTime: Date;
+
   public static fromDto(dto: any): Group {
     return new Group(
       dto.id,
@@ -16,7 +17,7 @@ export class Group {
     this._fetchedTime = new Date();
   }
 
-  get fetchedTime(): Date{
+  get fetchedTime(): Date {
     return this._fetchedTime;
   }
 
@@ -25,5 +26,9 @@ export class Group {
       id: this.id,
       name: this.name
     };
+  }
+
+  public clone(): Group {
+    return JSON.parse(JSON.stringify(this));
   }
 }
