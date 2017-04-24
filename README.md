@@ -1,5 +1,7 @@
 # TylrWeb
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/thde/tylr-web.svg?token=870f14a6ce537b4bc771e09860d0167040213d6bdaa0f5ad2984273fb3000f83)](https://greenkeeper.io/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Development server
