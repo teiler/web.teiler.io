@@ -12,7 +12,7 @@
     <div *ngIf="group.people.length; else emptyPeopleBlock">
       <div name="person" *ngFor="let p of group.people" class="card person negative medium-3 large-3 row">
         <h3 class="name small-12">{{p.name}}</h3>
-        <span class="currency small-2">CHF</span>
+        <span class="currency small-2">{{group.currency}}</span>
         <span class="value small-10">- 8.00</span>
       </div>
     </div>
@@ -35,7 +35,7 @@
     Group Loading
   </ng-template>
 
-  <button>Add Expense</button>
+  <button routerLink="expenses/create">Add Expense</button>
   <button>Add Compensation</button>
   <button class="secondary">Suggest Payments</button>
 </section>
