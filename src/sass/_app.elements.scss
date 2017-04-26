@@ -15,9 +15,22 @@ fieldset {
 }
 
 table {
+  width: 100%;
+
   thead {
     font-weight: bold;
   }
+
+  tbody tr {
+    transition: 0.6s;
+
+    &:hover {
+      font-size: 105%;
+      transition: 0.6s;
+    }
+  }
+
+
 }
 
 button {
@@ -115,8 +128,8 @@ button, input, select {
   background-color: $tylr-light-color;
   border-radius: rem-calc(5);
   padding: 1em;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   box-shadow: $tylr-shadow;
   transition: box-shadow 0.3s ease-in-out;
 
@@ -153,6 +166,8 @@ button, input, select {
   &.person {
     color: $tylr-secondary-color;
     border-color: $tylr-active-color;
+
+    padding-bottom: 0;
 
     &.negative {
       border-color: $tylr-error-color;
