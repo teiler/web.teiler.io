@@ -1,13 +1,16 @@
-<header class="row">
-  <img class="logo column small-3" src="assets/logo.svg" alt="Logo Teiler.io">
-  <div class="content column small-9">
-    <div class="row align-spaced">
-      <h1 class="title column small-12">Dashboard</h1>
-      <nav class="main column small-9">
+<header class="row align-bottom">
+  <img class="logo column small-3 large-1 column" src="assets/logo.svg" alt="Logo Teiler.io">
+  <h1 class="title column small-9 large-3 column">Teiler.io</h1>
+  <div class="content small-12 large-8 column">
+    <div class="row">
+      <nav class="main small-12 medium-10 column">
         <div>
-          <ul class="row">
-            <li class="small-4" *ngFor="let g of recentGroups">
+          <ul>
+            <li *ngFor="let g of recentGroups">
               <a routerLink="/groups/{{g.id}}">{{g.name}}</a>
+            </li>
+            <li class="active">
+              <a>Test</a>
             </li>
           </ul>
         </div>
@@ -19,5 +22,6 @@
         <img src="assets/logout.svg">
       </a>
     </div>
+
   </div>
 </header>

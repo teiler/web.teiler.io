@@ -1,15 +1,42 @@
+$tylr-secondary-color: #848C97;
+$tylr-secondary-color-light: #BCBCBC;
+
 header {
+  margin-top: 2em;
+  margin-bottom: 2em;
+
   .logo{
     width: 80%;
     height: 3em;
   }
 
+  .title {
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
   nav {
+    text-align: right;
+
+
     ul {
       margin: 0;
 
       li {
         display: inline;
+        margin-right: 1.5em;
+
+
+
+        a {
+          color: $tylr-secondary-color-light;
+        }
+
+        &.active {
+          a {
+            color: $tylr-secondary-color;
+          }
+        }
       }
     }
   }
