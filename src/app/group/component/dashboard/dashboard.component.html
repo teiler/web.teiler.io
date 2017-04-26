@@ -9,13 +9,13 @@
       </p>
     </ng-template>
 
-    <div *ngIf="group.people.length; else emptyPeopleBlock">
+    <section *ngIf="group.people.length; else emptyPeopleBlock">
       <div name="person" *ngFor="let p of group.people" class="card person negative medium-3 large-3 row">
         <h3 class="name small-12">{{p.name}}</h3>
         <span class="currency small-2">CHF</span>
-        <span class="value small-10">- 8.00</span>
+        <span class="value small-10">0.00</span>
       </div>
-    </div>
+    </section>
 
     <div name="person" class="card person active medium-3 large-3 row">
       <h3 class="name small-12">Demian</h3>
