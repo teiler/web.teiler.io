@@ -76,7 +76,7 @@ $global-padding: 1rem !default;
 
 /// Global font weight used for normal type.
 /// @type Keyword | Number
-$global-weight-normal: normal !default;
+$global-weight-normal: $tylr-font-weight !default;
 
 /// Global font weight used for bold type.
 /// @type Keyword | Number
