@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('t');
     // initialize components (probably a loading icon)
     this.group = this.groupStorageService.getCurrentGroup();
     if (!this.group) {
