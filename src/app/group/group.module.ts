@@ -7,14 +7,13 @@ import {
   GroupComponent,
   DashboardComponent,
   GroupCreateComponent,
-  GroupLoginComponent
+  GroupLoginComponent,
+  GroupEditComponent,
+  GroupHeaderComponent,
+  ExpenseComponent
 } from './component';
-import {GroupService, GroupStorageService} from './service';
-import {GroupResourceService, PersonResourceService} from './resource';
-import {GroupEditComponent} from './component/group-edit/group-edit.component';
-import {GroupHeaderComponent} from './component/group-header/group-header.component';
-import {ExpenseComponent} from './component/expense/expense.component';
-
+import {GroupService, GroupStorageService, ExpenseService} from './service';
+import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
 
 @NgModule({
   imports: [
@@ -40,7 +39,9 @@ export class GroupModule {
         GroupService,
         GroupResourceService,
         PersonResourceService,
-        GroupStorageService
+        GroupStorageService,
+        ExpenseResourceService,
+        ExpenseService
       ]
     };
   }

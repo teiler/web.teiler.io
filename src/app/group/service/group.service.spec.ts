@@ -3,7 +3,6 @@ import {inject, TestBed} from '@angular/core/testing';
 import {GroupResourceService, PersonResourceService} from '../resource/';
 import {Observable} from 'rxjs/Rx';
 import * as assert from 'assert';
-import {Group} from '../model/group';
 
 const groupDto = {
   'id': '4h43pgmi',
