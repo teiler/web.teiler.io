@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {CrudOperation} from '../../model/crud-operation';
+import {CrudOperation} from '../../../shared/model/crud-operation';
 import {Group} from '../../model/group';
 
 @Component({
