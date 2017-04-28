@@ -5,6 +5,19 @@
   :-ms-input-placeholder      {@content}
 }
 
+h1, h2, h3, h4, h5 {
+  font-weight: $tylr-font-weight;
+  text-space: 1px;
+
+  &.title {
+    font-weight: 300;
+  }
+}
+
+h2 {
+  font-size: 130%;
+}
+
 section {
   margin-bottom: 1.5em;
 }
@@ -201,7 +214,7 @@ button, input, select {
     .value {
       font-size: 3.5em;
       text-align: right;
-      font-weight: bold;
+      font-weight: 300;
     }
 
     .description {

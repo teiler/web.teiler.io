@@ -3,14 +3,16 @@ $tylr-secondary-color-light: #BCBCBC;
 
 header {
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 
   .logo{
-    width: 80%;
     height: 3em;
   }
 
   .title {
+    display: inline-block;
+    vertical-align: bottom;
+
     line-height: 1;
     margin-bottom: 0;
   }
