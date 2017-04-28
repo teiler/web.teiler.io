@@ -15,14 +15,14 @@ export class ExpenseComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
     this.MODE = this.route.snapshot.paramMap.has('expenseId') ?
       CrudOperation.EDIT : CrudOperation.CREATE;
-  }
-
-  ngOnInit() {
     this.group = this.route.snapshot.data['group'];
   }
 
-  test() {
-    console.log('changed');
+  ngOnInit() {
+
+    if (this.MODE === CrudOperation.EDIT) {
+
+    }
   }
 
 }
