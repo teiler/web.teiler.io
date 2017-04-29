@@ -15,39 +15,35 @@ export class ExpenseResourceService extends ResourceBase {
     super(http);
   }
 
+  public getExpenses(groupId: string): Observable<any> {
+    return this.handleResponse(this.get(this.getRequestUrl(groupId, '')));
+  }
+
   public getExpense(groupId: string, expenseId: number): Observable<any> {
-    return this.get(this.getRequestUrl(groupId, `/${expenseId}`))
-      .map((response: Response) => {
-        return response.json();
-      }).catch((error: any) => {
-        return Observable.throw(new Error(error.json().error));
-      });
+    return this.handleResponse(this.get(this.getRequestUrl(groupId, `/${expenseId}`)));
   }
 
   public createExpense(groupId: string, expense: Expense): Observable<any> {
     const expenseDto = this.buildSaveExpenseDto(expense, CrudOperation.CREATE);
-
-    return this.post(this.getRequestUrl(groupId, ''), expenseDto)
-      .map((response: Response) => {
-        return response.json();
-      }).catch((error: any) => {
-        return Observable.throw(new Error(error.json().error));
-      });
+    return this.handleResponse(this.post(this.getRequestUrl(groupId, ''), expenseDto));
   }
 
   public updateExpense(groupId: string, expense: Expense): Observable<any> {
     const expenseDto = this.buildSaveExpenseDto(expense, CrudOperation.EDIT);
 
-    return this.put(this.getRequestUrl(groupId, `/${expense.id}`), expenseDto)
-      .map((response: Response) => {
-        return response.json();
-      }).catch((error: any) => {
-        return Observable.throw(new Error(error.json().error));
-      });
+    return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${expense.id}`), expenseDto));
   }
 
   private getRequestUrl(groupId: string, endpoint?: string) {
     return this.apiUrl.replace(':groupId', groupId) + endpoint;
+  }
+
+  private handleResponse(responseObs: Observable<Response>): Observable<any> {
+    return responseObs.map((response: Response) => {
+      return response.json();
+    }).catch((error: any) => {
+      return Observable.throw(new Error(error.json().error));
+    });
   }
 
   private buildSaveExpenseDto(expense: Expense, mode: CrudOperation): any {
