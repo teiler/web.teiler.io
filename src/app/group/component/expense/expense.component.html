@@ -2,13 +2,13 @@
   <section class="row align-center">
     <div class="small-12 medium-2 column">
       <label>CHF
-        <input type="number" placeholder="0.00" required></label>
+        <input type="number" placeholder="0.00" required value="{{expense?.amount}}"></label>
     </div>
 
     <div class="small-12 medium-3 column">
       <label>from
         <select>
-          <option *ngFor="let p of group.people" value="{{p.id}}">
+          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == expense?.payer.id">
             {{p.name}}
           </option>
         </select>
@@ -17,30 +17,21 @@
 
     <div class="small-12 medium-3 column">
       <label>for
-        <input type="text" placeholder="e.g. Bananas" required>
+        <input type="text" placeholder="e.g. Bananas" required value="{{expense?.title}}">
       </label>
     </div>
   </section>
 
   <section class="row align-center">
 
-    <div class="small-12 medium-2 column" *ngFor="let p of group.people">
-      <div name="person" class="card person row">
-        <h3 class="name small-12">{{p.name}}</h3>
+    <div class="small-12 medium-2 column" *ngFor="let p of expense?.profiteers">
+      <div name="person" class="card person row" [ngClass]="{'disabled': !p.isActive}">
+        <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="3.34">
-        <span class="description"><input value="33">% of payment</span>
+        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isActive">
+        <span class="description"><input value="33" [disabled]="!p.isActive">% of payment</span>
       </div>
     </div>
-
-    <!--<div class="small-12 medium-2 column">-->
-      <!--<div name="person" class="card person disabled row">-->
-        <!--<h3 class="name small-12">Lukas</h3>-->
-        <!--<span class="currency small-12">CHF</span>-->
-        <!--<input class="value small-12" type="number" value="0.00">-->
-        <!--<span class="description"><input value="0">% of payment</span>-->
-      <!--</div>-->
-    <!--</div>-->
   </section>
 
   <section class="row align-center">
