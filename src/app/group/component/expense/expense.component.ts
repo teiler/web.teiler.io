@@ -18,19 +18,18 @@ export class ExpenseComponent implements OnInit {
               private expenseService: ExpenseService) {
     this.MODE = this.route.snapshot.paramMap.has('expenseId') ?
       CrudOperation.EDIT : CrudOperation.CREATE;
-    // this.group = this.route.snapshot.data['group'];
+    this.group = this.route.snapshot.data['group'];
   }
 
   ngOnInit() {
-
     if (this.MODE === CrudOperation.EDIT) {
       const expenseId = this.route.snapshot.paramMap.get('expenseId');
-      // this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
-      //   .subscribe(
-      //     (expense: Expense) => {
-      //       console.log(expense);
-      //     }
-      //   )
+      this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
+        .subscribe(
+          (expense: Expense) => {
+            console.log(expense);
+          }
+        );
     }
   }
 

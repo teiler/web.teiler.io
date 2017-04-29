@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Group} from '../../model/group';
 import {GroupStorageService} from 'app/group';
 import {Subscription} from 'rxjs/Subscription';
 import {LogService, NavigationService} from 'app/core';
-import {GroupService} from '../../service/group.service';
 import {GroupStorageAdapter} from '../../model/group-storage-adapter';
 
 @Component({

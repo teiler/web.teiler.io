@@ -1,15 +1,22 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { ExpenseService } from './expense.service';
+import {ExpenseService} from './expense.service';
+import {ExpenseResourceService} from '../resource/expense-resource.service';
 
 describe('ExpenseService', () => {
   beforeEach(() => {
+    const expenseSpy = jasmine.createSpyObj('expenseResourceService',
+      ['getExpense']);
+
     TestBed.configureTestingModule({
-      providers: [ExpenseService]
+      providers: [
+        ExpenseService,
+        {provide: ExpenseResourceService, useValue: expenseSpy}
+      ]
     });
   });
 
-  it('should ...', inject([ExpenseService], (service: ExpenseService) => {
+  it('should be initialized', inject([ExpenseService], (service: ExpenseService) => {
     expect(service).toBeTruthy();
   }));
 });
