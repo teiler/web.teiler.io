@@ -21,4 +21,10 @@ export class Expense extends Transaction {
               public profiteers: Profiteer[]) {
     super(id, payer, amount);
   }
+
+  public getTotalActiveProfiteers(): number {
+    return this.profiteers.reduce((total: number, profiteer: Profiteer) => {
+      return profiteer.isActive ? total + 1 : total;
+    }, 0);
+  }
 }
