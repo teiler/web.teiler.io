@@ -56,7 +56,7 @@ export class ExpenseComponent implements OnInit {
     const totalActive = this.expense.getTotalActiveProfiteers();
     const share = this.expense.amount / totalActive;
     this.expense.profiteers.forEach((profiteer: Profiteer) => {
-      if (profiteer.isActive) {
+      if (profiteer.isInvolved) {
         profiteer.share = share;
       }
     });
@@ -66,9 +66,9 @@ export class ExpenseComponent implements OnInit {
     this.expense.payer = this.group.getPeopleAsMap().get(parseInt(payerId, 10));
   }
 
-  public toggleActive(event: Event, p: Profiteer) {
+  public toggleIsInvolved(event: Event, p: Profiteer) {
     event.stopPropagation();
-    p.isActive = !p.isActive;
+    p.isInvolved = !p.isInvolved;
 
     this.onTotalAmountChanged();
   }
@@ -91,14 +91,14 @@ export class ExpenseComponent implements OnInit {
   }
 
 
-  private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, isActive: boolean) {
+  private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, isInvolved: boolean) {
     expenseToUpdate.profiteers.forEach((profiteer: Profiteer) => {
       people.delete(profiteer.person.id);
     });
 
     people.forEach((person: Person) => {
       expenseToUpdate.profiteers.push(
-        new Profiteer(person, 0, isActive)
+        new Profiteer(person, 0, isInvolved)
       );
     });
   }

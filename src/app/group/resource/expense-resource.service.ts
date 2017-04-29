@@ -65,7 +65,7 @@ export class ExpenseResourceService extends ResourceBase {
     }
 
     expense.profiteers.forEach((profiteer: Profiteer) => {
-      if (profiteer.isActive) {
+      if (profiteer.isInvolved) {
         expenseDto.profiteers.push({
           person: {
             id: profiteer.person.id

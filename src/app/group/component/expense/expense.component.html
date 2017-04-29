@@ -27,13 +27,13 @@
 
   <section class="row align-center">
 
-    <div class="small-12 medium-2 column" *ngFor="let p of expense?.profiteers" (click)="toggleActive($event, p)">
-      <div name="person" class="card person row" [ngClass]="{'disabled': !p.isActive}">
+    <div class="small-12 medium-2 column" *ngFor="let p of expense?.profiteers" (click)="toggleIsInvolved($event, p)">
+      <div name="person" class="card person row" [ngClass]="{'disabled': !p.isInvolved}">
         <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isActive"
+        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isInvolved"
                (click)="$event.stopPropagation()">
-        <span class="description"><input value="33" [disabled]="!p.isActive" (click)="$event.stopPropagation()">
+        <span class="description"><input value="33" [disabled]="!p.isInvolved" (click)="$event.stopPropagation()">
           % of payment
         </span>
       </div>
