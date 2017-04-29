@@ -24,7 +24,7 @@ export class Expense extends Transaction {
 
   public getTotalActiveProfiteers(): number {
     return this.profiteers.reduce((total: number, profiteer: Profiteer) => {
-      return profiteer.isActive ? total + 1 : total;
+      return profiteer.isInvolved ? total + 1 : total;
     }, 0);
   }
 }
