@@ -2,7 +2,7 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 
 import {SharedModule} from 'app/shared';
 import {GroupRoutingModule} from './group-routing.module';
-
+import {GroupService, GroupStorageService, ExpenseService} from './service';
 import {
   GroupComponent,
   DashboardComponent,
@@ -12,13 +12,12 @@ import {
   GroupHeaderComponent,
   ExpenseComponent
 } from './component';
-import {GroupService, GroupStorageService, ExpenseService} from './service';
+
 import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
 
 @NgModule({
   imports: [
     SharedModule,
-
     GroupRoutingModule
   ],
   declarations: [

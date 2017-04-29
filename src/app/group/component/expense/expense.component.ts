@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CrudOperation} from '../../../shared/model/crud-operation';
 import {Group} from '../../model/group';
+import {ExpenseService} from '../../service/expense.service';
+import {Expense} from '../../model/expense';
 
 @Component({
   selector: 'tylr-expense',
@@ -12,16 +14,23 @@ export class ExpenseComponent implements OnInit {
   private MODE: CrudOperation;
   public group: Group;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private expenseService: ExpenseService) {
     this.MODE = this.route.snapshot.paramMap.has('expenseId') ?
       CrudOperation.EDIT : CrudOperation.CREATE;
-    this.group = this.route.snapshot.data['group'];
+    // this.group = this.route.snapshot.data['group'];
   }
 
   ngOnInit() {
 
     if (this.MODE === CrudOperation.EDIT) {
-
+      const expenseId = this.route.snapshot.paramMap.get('expenseId');
+      // this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
+      //   .subscribe(
+      //     (expense: Expense) => {
+      //       console.log(expense);
+      //     }
+      //   )
     }
   }
 
