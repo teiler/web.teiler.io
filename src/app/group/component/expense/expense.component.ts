@@ -6,6 +6,8 @@ import {ExpenseService} from '../../service/expense.service';
 import {Expense} from '../../model/expense';
 import {Person} from '../../model/person';
 import {Profiteer} from '../../model/profiteer';
+import {NgForm} from '@angular/forms';
+import {NavigationService} from '../../../core/service/navigation.service';
 
 @Component({
   selector: 'tylr-expense',
@@ -18,7 +20,8 @@ export class ExpenseComponent implements OnInit {
   public expense: Expense;
 
   constructor(private route: ActivatedRoute,
-              private expenseService: ExpenseService) {
+              private expenseService: ExpenseService,
+              private navigationService: NavigationService) {
     this.MODE = this.route.snapshot.paramMap.has('expenseId') ?
       CrudOperation.EDIT : CrudOperation.CREATE;
   }
@@ -28,7 +31,7 @@ export class ExpenseComponent implements OnInit {
     switch (this.MODE) {
       case CrudOperation.CREATE: {
         const expense = new Expense(null, this.group.people[0], 0, '', []);
-        this.fillProfiteers(expense, this.group.getPeopleAsMap(), CrudOperation.CREATE);
+        this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
         this.expense = expense;
         break;
       }
@@ -37,8 +40,7 @@ export class ExpenseComponent implements OnInit {
         this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
           .subscribe(
             (expense: Expense) => {
-              console.log(expense);
-              this.fillProfiteers(expense, this.group.getPeopleAsMap(), CrudOperation.EDIT);
+              this.fillProfiteers(expense, this.group.getPeopleAsMap(), false);
               this.expense = expense;
             }
           );
@@ -50,14 +52,53 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, mode: CrudOperation) {
+  public onTotalAmountChanged() {
+    const totalActive = this.expense.getTotalActiveProfiteers();
+    const share = this.expense.amount / totalActive;
+    this.expense.profiteers.forEach((profiteer: Profiteer) => {
+      if (profiteer.isActive) {
+        profiteer.share = share;
+      }
+    });
+  }
+
+  public onPayerChanged(payerId: string) {
+    this.expense.payer = this.group.getPeopleAsMap().get(parseInt(payerId, 10));
+  }
+
+  public toggleActive(event: Event, p: Profiteer) {
+    event.stopPropagation();
+    p.isActive = !p.isActive;
+
+    this.onTotalAmountChanged();
+  }
+
+  public saveExpense(expenseForm: NgForm): boolean {
+    if (expenseForm.form.valid) {
+      this.expenseService.saveExpense(this.group.id, this.expense, this.MODE)
+        .subscribe(
+          (expense: Expense) => {
+            this.navigationService.goToDashboard(this.group.id);
+          },
+          (error: Error) => {
+            console.error(error);
+          }
+        );
+    } else {
+      console.log(expenseForm.errors);
+    }
+    return false;
+  }
+
+
+  private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, isActive: boolean) {
     expenseToUpdate.profiteers.forEach((profiteer: Profiteer) => {
       people.delete(profiteer.person.id);
     });
 
     people.forEach((person: Person) => {
       expenseToUpdate.profiteers.push(
-        new Profiteer(person, 0, mode === CrudOperation.CREATE)
+        new Profiteer(person, 0, isActive)
       );
     });
   }

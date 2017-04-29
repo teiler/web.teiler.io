@@ -1,14 +1,17 @@
-<form class="payment">
+<form class="payment" *ngIf="expense" (ngSubmit)="saveExpense(expenseForm)" #expenseForm="ngForm">
   <section class="row align-center">
     <div class="small-12 medium-2 column">
-      <label>CHF
-        <input type="number" placeholder="0.00" required value="{{expense?.amount}}"></label>
+      <label>
+        <span class="currency">{{group.currency}}</span>
+        <input type="number" placeholder="0.00" name="amount" required
+               [(ngModel)]="expense.amount" (keyup)="onTotalAmountChanged($event)">
+      </label>
     </div>
 
     <div class="small-12 medium-3 column">
       <label>from
-        <select>
-          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == expense?.payer.id">
+        <select (change)="onPayerChanged($event.target.value)">
+          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == expense.payer.id">
             {{p.name}}
           </option>
         </select>
@@ -17,26 +20,29 @@
 
     <div class="small-12 medium-3 column">
       <label>for
-        <input type="text" placeholder="e.g. Bananas" required value="{{expense?.title}}">
+        <input type="text" placeholder="e.g. Bananas" required name="title" [(ngModel)]="expense.title">
       </label>
     </div>
   </section>
 
   <section class="row align-center">
 
-    <div class="small-12 medium-2 column" *ngFor="let p of expense?.profiteers">
+    <div class="small-12 medium-2 column" *ngFor="let p of expense?.profiteers" (click)="toggleActive($event, p)">
       <div name="person" class="card person row" [ngClass]="{'disabled': !p.isActive}">
         <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isActive">
-        <span class="description"><input value="33" [disabled]="!p.isActive">% of payment</span>
+        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isActive"
+               (click)="$event.stopPropagation()">
+        <span class="description"><input value="33" [disabled]="!p.isActive" (click)="$event.stopPropagation()">
+          % of payment
+        </span>
       </div>
     </div>
   </section>
 
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big">Add Expense</button>
+      <button class="big">Save Expense</button>
     </div>
   </section>
 </form>
