@@ -16,10 +16,9 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   public recentGroups: GroupStorageAdapter[] = [];
   private recentGroupsSubscription: Subscription;
 
-  constructor(private groupService: GroupService,
-              private groupStorageService: GroupStorageService,
-              private navigationService: NavigationService,
-              private logService: LogService) {
+  constructor(private navigationService: NavigationService,
+              private logService: LogService,
+              private groupStorageService: GroupStorageService) {
   }
 
   ngOnInit() {
