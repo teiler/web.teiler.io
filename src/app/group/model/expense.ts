@@ -10,7 +10,9 @@ export class Expense extends Transaction {
       Person.fromDto(dto.payer),
       parseInt(dto.amount, 10),
       dto.title,
-      dto.profiteers.map((profiteer: any) => Profiteer.fromDto(profiteer))
+      dto.profiteers.map((profiteer: any) => Profiteer.fromDto(profiteer)),
+      new Date(dto['create-time']),
+      new Date(dto['update-time'])
     );
   }
 
@@ -18,8 +20,10 @@ export class Expense extends Transaction {
               payer: Person,
               amount: number,
               public title: string,
-              public profiteers: Profiteer[]) {
-    super(id, payer, amount);
+              public profiteers: Profiteer[],
+              public createdTime?: Date,
+              public modifiedTime?: Date) {
+    super(id, payer, amount, createdTime, modifiedTime);
   }
 
   public getTotalActiveProfiteers(): number {

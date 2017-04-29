@@ -10,6 +10,23 @@ export class ExpenseService {
   constructor(private expenseResource: ExpenseResourceService) {
   }
 
+  public getExpenses(groupId: string): Observable<Expense[]> {
+    if (!groupId) {
+      return Observable.throw(new Error('Group ID is empty'));
+    }
+
+    return this.expenseResource.getExpenses(groupId)
+      .map((dto: any) => {
+        const expenses: Expense[] = [];
+        dto.forEach((expense: any) => {
+          expenses.push(Expense.fromDto(expense));
+        });
+        return expenses;
+      }).catch((error: Error) => {
+        return Observable.throw(error);
+      });
+  }
+
   public getExpense(groupId: string, expenseId: number): Observable<Expense> {
     if (!groupId) {
       return Observable.throw(new Error('Group ID is empty'));

@@ -90,7 +90,6 @@ export class ExpenseComponent implements OnInit {
     return false;
   }
 
-
   private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, isInvolved: boolean) {
     expenseToUpdate.profiteers.forEach((profiteer: Profiteer) => {
       people.delete(profiteer.person.id);
