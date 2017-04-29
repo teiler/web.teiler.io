@@ -3,17 +3,16 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import {SharedModule} from 'app/shared';
 import {GroupRoutingModule} from './group-routing.module';
 import {GroupService, GroupStorageService, ExpenseService} from './service';
+import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
 import {
   GroupComponent,
   DashboardComponent,
   GroupCreateComponent,
   GroupLoginComponent,
   GroupEditComponent,
-  GroupHeaderComponent,
   ExpenseComponent
 } from './component';
-
-import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
+import {GroupHeaderComponent} from './component/group-header/group-header.component';
 
 @NgModule({
   imports: [
