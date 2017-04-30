@@ -4,10 +4,9 @@
       <label>
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required
-               [(ngModel)]="expense.amount" (keyup)="onTotalAmountChanged($event)">
+               value="{{expense.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
-
     <div class="small-12 medium-3 column">
       <label>from
         <select (change)="onPayerChanged($event.target.value)">
@@ -20,7 +19,9 @@
 
     <div class="small-12 medium-3 column">
       <label>for
-        <input type="text" placeholder="e.g. Bananas" required name="title" [(ngModel)]="expense.title">
+        <input type="text" placeholder="e.g. Bananas" required name="title"
+               [(ngModel)]="expense.title" #title="ngModel"
+               [ngClass]="{'error': title.errors?.required}">
       </label>
     </div>
   </section>
@@ -31,8 +32,8 @@
       <div name="person" class="card person row" [ngClass]="{'disabled': !p.isInvolved}">
         <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{p.share}}" [disabled]="!p.isInvolved"
-               (click)="$event.stopPropagation()">
+        <input class="value small-12" type="number" value="{{p.shareDecimal|amountFormat}}" [disabled]="!p.isInvolved"
+               (click)="$event.stopPropagation()" (keyup)="onSharedAmountChanged($event.target.value, p)">
         <span class="description"><input value="33" [disabled]="!p.isInvolved" (click)="$event.stopPropagation()">
           % of payment
         </span>
