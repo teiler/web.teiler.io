@@ -44,7 +44,7 @@ export class GroupService {
     const updatePersonObs: Observable<any>[] = [];
     const deletePersonObs: Observable<boolean>[] = [];
 
-    const peopleOriginal: Map<number, Person> = this.getPeopleAsMap(groupOriginal.people);
+    const peopleOriginal: Map<number, Person> = groupOriginal.getPeopleAsMap();
 
     // find out new and edited people
     group.people.forEach((person: Person) => {
@@ -82,13 +82,5 @@ export class GroupService {
       return Observable.throw(new Error('Group ID is empty'));
     }
     return this.groupResourceService.deleteGroup(id);
-  }
-
-  private getPeopleAsMap(people: Person[]): Map<number, Person> {
-    const peopleMap = new Map<number, Person>();
-    people.forEach((person: Person) => {
-      peopleMap.set(person.id, person);
-    });
-    return peopleMap;
   }
 }

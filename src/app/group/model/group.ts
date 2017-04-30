@@ -31,4 +31,12 @@ export class Group {
   public clone(): Group {
     return JSON.parse(JSON.stringify(this));
   }
+
+  public getPeopleAsMap(): Map<number, Person> {
+    const peopleMap = new Map<number, Person>();
+    this.people.forEach((person: Person) => {
+      peopleMap.set(person.id, person);
+    });
+    return peopleMap;
+  }
 }

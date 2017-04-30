@@ -2,24 +2,21 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 
 import {SharedModule} from 'app/shared';
 import {GroupRoutingModule} from './group-routing.module';
-
+import {GroupService, GroupStorageService, ExpenseService} from './service';
+import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
 import {
   GroupComponent,
   DashboardComponent,
   GroupCreateComponent,
-  GroupLoginComponent
+  GroupLoginComponent,
+  GroupEditComponent,
+  ExpenseComponent
 } from './component';
-import {GroupService, GroupStorageService} from './service';
-import {GroupResourceService, PersonResourceService} from './resource';
-import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
-import {ExpenseComponent} from './component/expense/expense.component';
-
 
 @NgModule({
   imports: [
     SharedModule,
-
     GroupRoutingModule
   ],
   declarations: [
@@ -40,7 +37,9 @@ export class GroupModule {
         GroupService,
         GroupResourceService,
         PersonResourceService,
-        GroupStorageService
+        GroupStorageService,
+        ExpenseResourceService,
+        ExpenseService
       ]
     };
   }
