@@ -13,7 +13,9 @@ import {
   ExpenseComponent
 } from './component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
-import { CompensationComponent } from './component/compensation/compensation.component';
+import {CompensationComponent} from './component/compensation/compensation.component';
+import {CompensationResourceService} from './resource/compensation-resource.service';
+import {CompensationService} from './service/compensation.service';
 
 @NgModule({
   imports: [
@@ -40,7 +42,9 @@ export class GroupModule {
         PersonResourceService,
         GroupStorageService,
         ExpenseResourceService,
-        ExpenseService
+        ExpenseService,
+        CompensationResourceService,
+        CompensationService
       ]
     };
   }

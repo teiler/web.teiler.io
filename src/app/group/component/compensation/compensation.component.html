@@ -1,3 +1,51 @@
-<p>
-  compensation works!
-</p>
+<form class="payment" *ngIf="compensation" #compensationForm="ngForm">
+  <section class="row align-center">
+    <div class="small-12 medium-2 column">
+      <label>
+        <span class="currency">{{group.currency}}</span>
+        <input type="number" placeholder="0.00" name="amount" required
+               value="{{compensation.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
+      </label>
+    </div>
+    <div class="small-12 medium-3 column">
+      <label>from
+        <select (change)="onPayerChanged($event.target.value)">
+          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == compensation.payer.id">
+            {{p.name}}
+          </option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="row align-center">
+
+    <div class="small-12 medium-2 column" *ngFor="let p of group.people" (click)="toggleIsInvolved($event, p)">
+      <div name="person" class="card person row" *ngIf="p.id == compensation.profiteer.id; else deselectedPersonBlock">
+        <h3 class="name small-12">{{p.name}}</h3>
+        <span class="currency small-12">{{group.currency }}</span>
+        <input class="value small-12" type="number" value="{{compensation.amountDecimal|amountFormat}}" disabled>
+        <span class="description"><input value="100" disabled>
+          % of payment
+        </span>
+      </div>
+
+      <ng-template #deselectedPersonBlock>
+        <div name="person" class="card person row disabled">
+          <h3 class="name small-12">{{p.name}}</h3>
+          <span class="currency small-12">{{group.currency }}</span>
+          <input class="value small-12" type="number" value="0" disabled>
+          <span class="description"><input value="0" disabled>
+          % of payment
+        </span>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="row align-center">
+    <div class="small-12 medium-4 column">
+      <button class="big">Save Compensation</button>
+    </div>
+  </section>
+</form>
