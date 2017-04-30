@@ -3,6 +3,7 @@ import {Person} from './person';
 import {Profiteer} from './profiteer';
 
 export class Expense extends Transaction {
+  private _amountDecimal: number;
 
   public static fromDto(dto: any): Expense {
     return new Expense(
@@ -24,6 +25,26 @@ export class Expense extends Transaction {
               public createdTime?: Date,
               public modifiedTime?: Date) {
     super(id, payer, amount, createdTime, modifiedTime);
+    this._amountDecimal = amount / 100;
+  }
+
+  public set amountDecimal(value) {
+    this._amountDecimal = value;
+    this.amount = value * 100;
+  }
+
+  public get amountDecimal() {
+    return this._amountDecimal;
+  }
+
+  public split() {
+    const totalActive = this.getTotalActiveProfiteers();
+    const sharedValue = this.amountDecimal / totalActive;
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      if (profiteer.isInvolved) {
+        profiteer.shareDecimal = sharedValue;
+      }
+    });
   }
 
   public getTotalActiveProfiteers(): number {

@@ -52,14 +52,15 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  public onTotalAmountChanged() {
-    const totalActive = this.expense.getTotalActiveProfiteers();
-    const share = this.expense.amount / totalActive;
-    this.expense.profiteers.forEach((profiteer: Profiteer) => {
-      if (profiteer.isInvolved) {
-        profiteer.share = share;
-      }
-    });
+  public onTotalAmountChanged(value: number) {
+    const totalValue = value ? value : 0;
+    this.expense.amountDecimal = totalValue;
+    this.expense.split();
+  }
+
+  public onSharedAmountChanged(value: number, profiteer: Profiteer) {
+    const sharedValue = value ? value : 0;
+    profiteer.shareDecimal = sharedValue;
   }
 
   public onPayerChanged(payerId: string) {
@@ -70,7 +71,10 @@ export class ExpenseComponent implements OnInit {
     event.stopPropagation();
     p.isInvolved = !p.isInvolved;
 
-    this.onTotalAmountChanged();
+    if (!p.isInvolved) {
+      p.shareDecimal = 0;
+    }
+    this.onTotalAmountChanged(this.expense.amountDecimal);
   }
 
   public saveExpense(expenseForm: NgForm): boolean {
