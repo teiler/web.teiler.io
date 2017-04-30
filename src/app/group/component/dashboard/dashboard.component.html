@@ -31,7 +31,7 @@
     </div>
 
     <div class="row">
-      <div class="small-12 medium-4 large-3 column">
+      <div class="small-12 medium-4 large-3 column" routerLink="expenses/create">
         <button>Add Expense</button>
       </div>
       <div class="small-12 medium-4 large-3 column">
@@ -60,25 +60,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>14:00</td>
-          <td>CHF 5.00</td>
-          <td>Pizza</td>
-        </tr>
-        <tr>
-          <td>12:54</td>
-          <td>CHF 132.00</td>
-          <td>Spielsachen</td>
-        </tr>
-        <tr>
-          <td>10:45</td>
-          <td>CHF 10.80</td>
-          <td>Compensation</td>
-        </tr>
-        <tr>
-          <td>8:12</td>
-          <td>CHF 8.60</td>
-          <td>Zmorge</td>
+
+        <tr *ngFor="let e of expenses" routerLink="expenses/{{e.id}}/edit">
+          <td>{{e.modifiedTime | date:'H:m'}}</td>
+          <td>
+            <span class="currency">{{group.currency}}</span>
+            {{e.amountDecimal | number:'2.2-2'}}
+          </td>
+          <td>{{e.title}}</td>
         </tr>
         </tbody>
       </table>

@@ -3,3 +3,4 @@
  */
 export {TylrError} from './tylr-error';
 export {ApiRequestOptions} from './api-request-options';
+export {CrudOperation} from './crud-operation';
