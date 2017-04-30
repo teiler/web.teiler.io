@@ -13,6 +13,7 @@ import {
   ExpenseComponent
 } from './component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
+import { CompensationComponent } from './component/compensation/compensation.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {GroupHeaderComponent} from './component/group-header/group-header.compon
   ],
   declarations: [
     GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
-    GroupEditComponent, GroupHeaderComponent, ExpenseComponent
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
