@@ -1,6 +1,6 @@
 import {Person} from './person';
 export class Transaction {
-  private _amountDecimal: number;
+  protected _amountDecimal: number;
   constructor(public id: number,
               public payer: Person,
               public amount: number,

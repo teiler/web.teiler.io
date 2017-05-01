@@ -22,12 +22,12 @@ const routes: Routes = [
         resolve: {group: GroupResolverService}
       },
       {
-        path: ':id/compensation/create',
+        path: ':id/compensations/create',
         component: CompensationComponent,
         resolve: {group: GroupResolverService}
       },
       {
-        path: ':id/compensation/:compensationId/edit',
+        path: ':id/compensations/:compensationId/edit',
         component: CompensationComponent,
         resolve: {group: GroupResolverService}
       }
