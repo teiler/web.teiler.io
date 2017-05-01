@@ -28,14 +28,14 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.route.snapshot.data['group'];
-    if (this.group.people.length < 2) {
-      this.navigationService.goToDashboard(this.group.id);
-    }
     switch (this.MODE) {
       case CrudOperation.CREATE: {
         const expense = new Expense(null, this.group.people[0], 0, '', []);
         this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
         this.expense = expense;
+        if (this.group.people.length < 2) {
+          this.navigationService.goToDashboard(this.group.id);
+        }
         break;
       }
       case CrudOperation.EDIT: {
