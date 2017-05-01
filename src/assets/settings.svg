@@ -1,13 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
   <g fill="none" fill-rule="evenodd" stroke="#848C97" stroke-width="2" transform="translate(1 1)">
-    <circle cx="10" cy="10" r="3"/>
-    <circle cx="10" cy="10" r="8"/>
-    <path d="M10 2L10 0M10 20L10 18" stroke-linecap="round"/>
-    <path d="M3.48959236,4.28248558 L3.48959236,2.28248558" stroke-linecap="round" transform="rotate(-45 3.99 3.282)"/>
-    <path d="M16.2175144,17.0104076 L16.2175144,15.0104076" stroke-linecap="round" transform="rotate(-45 16.718 16.01)"/>
-    <path d="M0.5,10.5 L0.5,8.5" stroke-linecap="round" transform="rotate(-90 1 9.5)"/>
-    <path d="M18.5,10.5 L18.5,8.5" stroke-linecap="round" transform="rotate(-90 19 9.5)"/>
-    <path d="M2.78248558,17.0104076 L2.78248558,15.0104076" stroke-linecap="round" transform="rotate(-135 3.282 16.01)"/>
-    <path d="M15.5104076,4.28248558 L15.5104076,2.28248558" stroke-linecap="round" transform="rotate(-135 16.01 3.282)"/>
+    <path d="M0 9L18 9M0 16L18 16M0 2L18 2" stroke-linecap="round"/>
+    <circle cx="5" cy="2" r="2" fill="#848C97"/>
+    <circle cx="5" cy="16" r="2" fill="#848C97"/>
+    <circle cx="13" cy="9" r="2" fill="#848C97"/>
   </g>
 </svg>

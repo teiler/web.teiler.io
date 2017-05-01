@@ -33,6 +33,9 @@ export class ExpenseComponent implements OnInit {
         const expense = new Expense(null, this.group.people[0], 0, '', []);
         this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
         this.expense = expense;
+        if (this.group.people.length < 2) {
+          this.navigationService.goToDashboard(this.group.id);
+        }
         break;
       }
       case CrudOperation.EDIT: {
