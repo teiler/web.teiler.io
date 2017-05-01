@@ -34,14 +34,13 @@
       <div class="small-12 medium-4 large-3 column" routerLink="expenses/create">
         <button>Add Expense</button>
       </div>
-      <div class="small-12 medium-4 large-3 column">
+      <div class="small-12 medium-4 large-3 column" routerLink="compensations/create">
         <button>Add Compensation</button>
       </div>
       <div class="small-12 medium-4 large-3 column" routerLink="suggest-payments">
         <button class="secondary">Suggest Payments</button>
       </div>
     </div>
-
 
     <ng-template #nullGroupBlock>
       Group Loading
@@ -61,17 +60,16 @@
         </thead>
         <tbody>
 
-        <tr *ngFor="let e of expenses" routerLink="expenses/{{e.id}}/edit">
-          <td>{{e.modifiedTime | date:'H:m'}}</td>
+        <tr *ngFor="let t of transactions" [routerLink]="getTransactionEditLink(t)">
+          <td>{{t.modifiedTime | date:'H:mm'}}</td>
           <td>
             <span class="currency">{{group.currency}}</span>
-            {{e.amountDecimal | number:'2.2-2'}}
+            {{t.amountDecimal | number:'2.2-2'}}
           </td>
-          <td>{{e.title}}</td>
+          <td>{{t.title ? t.title : "Compensation"}}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </section>
 </div>
-

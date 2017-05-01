@@ -3,8 +3,6 @@ import {Person} from './person';
 import {Profiteer} from './profiteer';
 
 export class Expense extends Transaction {
-  private _amountDecimal: number;
-
   public static fromDto(dto: any): Expense {
     return new Expense(
       parseInt(dto.id, 10),
@@ -25,16 +23,6 @@ export class Expense extends Transaction {
               public createdTime?: Date,
               public modifiedTime?: Date) {
     super(id, payer, amount, createdTime, modifiedTime);
-    this._amountDecimal = amount / 100;
-  }
-
-  public set amountDecimal(value) {
-    this._amountDecimal = value;
-    this.amount = value * 100;
-  }
-
-  public get amountDecimal() {
-    return this._amountDecimal;
   }
 
   public split() {

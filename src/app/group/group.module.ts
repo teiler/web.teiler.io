@@ -13,7 +13,10 @@ import {
   ExpenseComponent
 } from './component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
-import { SuggestPaymentsComponent } from './component/suggest-payments/suggest-payments.component';
+import {CompensationComponent} from './component/compensation/compensation.component';
+import {CompensationResourceService} from './resource/compensation-resource.service';
+import {CompensationService} from './service/compensation.service';
+import {SuggestPaymentsComponent } from './component/suggest-payments/suggest-payments.component';
 
 @NgModule({
   imports: [
@@ -22,7 +25,7 @@ import { SuggestPaymentsComponent } from './component/suggest-payments/suggest-p
   ],
   declarations: [
     GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
-    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, SuggestPaymentsComponent
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent, SuggestPaymentsComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
@@ -40,7 +43,9 @@ export class GroupModule {
         PersonResourceService,
         GroupStorageService,
         ExpenseResourceService,
-        ExpenseService
+        ExpenseService,
+        CompensationResourceService,
+        CompensationService
       ]
     };
   }
