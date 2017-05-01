@@ -13,6 +13,9 @@ import {
   ExpenseComponent
 } from './component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
+import {CompensationComponent} from './component/compensation/compensation.component';
+import {CompensationResourceService} from './resource/compensation-resource.service';
+import {CompensationService} from './service/compensation.service';
 
 @NgModule({
   imports: [
@@ -21,7 +24,7 @@ import {GroupHeaderComponent} from './component/group-header/group-header.compon
   ],
   declarations: [
     GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
-    GroupEditComponent, GroupHeaderComponent, ExpenseComponent
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
@@ -39,7 +42,9 @@ export class GroupModule {
         PersonResourceService,
         GroupStorageService,
         ExpenseResourceService,
-        ExpenseService
+        ExpenseService,
+        CompensationResourceService,
+        CompensationService
       ]
     };
   }
