@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {NavigationService} from '../../../core/service/navigation.service';
 
 @Component({
   selector: 'tylr-group',

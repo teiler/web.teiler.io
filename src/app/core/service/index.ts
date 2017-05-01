@@ -3,3 +3,4 @@
  */
 export {NavigationService} from './navigation.service';
 export {LogService} from './log.service';
+export {TylrErrorService} from './tylr-error.service';
