@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {GroupComponent, DashboardComponent, ExpenseComponent} from './component';
 import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupResolverService} from './service/group-resolver.service';
+import {CompensationComponent} from './component/compensation/compensation.component';
 import {SuggestPaymentsComponent} from './component/suggest-payments/suggest-payments.component';
 
 const routes: Routes = [
@@ -19,6 +20,16 @@ const routes: Routes = [
       {
         path: ':id/expenses/:expenseId/edit',
         component: ExpenseComponent,
+        resolve: {group: GroupResolverService}
+      },
+      {
+        path: ':id/compensations/create',
+        component: CompensationComponent,
+        resolve: {group: GroupResolverService}
+      },
+      {
+        path: ':id/compensations/:compensationId/edit',
+        component: CompensationComponent,
         resolve: {group: GroupResolverService}
       },
       {path: ':id/suggest-payments', component: SuggestPaymentsComponent, resolve: {group: GroupResolverService}},

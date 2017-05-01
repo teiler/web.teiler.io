@@ -4,3 +4,4 @@
 export * from './group-resource.service';
 export * from './person-resource.service';
 export * from './expense-resource.service';
+export * from './compensation-resource.service';
