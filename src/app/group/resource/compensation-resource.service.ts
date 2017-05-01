@@ -31,6 +31,15 @@ export class CompensationResourceService extends ResourceBase {
     return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${compensation.id}`), compensationDto));
   }
 
+  public deleteCompensation(groupId: string, compensationId: number): Observable<boolean> {
+    return this.delete(this.getRequestUrl(groupId, `/${compensationId}`))
+      .map(() => {
+        return true;
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
   private getRequestUrl(groupId: string, endpoint?: string) {
     return this.apiUrl.replace(':groupId', groupId) + endpoint;
   }

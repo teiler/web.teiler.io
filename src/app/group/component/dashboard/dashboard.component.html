@@ -22,7 +22,7 @@
           <div name="person" class="card person negative">
             <div class="row">
               <h3 class="name small-12 column">{{p.name}}</h3>
-              <span class="currency small-2 column">CHF</span>
+              <span class="currency small-2 column">{{group.currency}}</span>
               <span class="value small-10 column">0.00</span>
             </div>
           </div>
@@ -56,17 +56,29 @@
           <td>Time</td>
           <td>Amount</td>
           <td>Description</td>
+          <td></td>
+          <td></td>
         </tr>
         </thead>
         <tbody>
 
-        <tr *ngFor="let t of transactions" [routerLink]="getTransactionEditLink(t)">
+        <tr *ngFor="let t of transactions">
           <td>{{t.modifiedTime | date:'H:mm'}}</td>
           <td>
             <span class="currency">{{group.currency}}</span>
             {{t.amountDecimal | number:'2.2-2'}}
           </td>
           <td>{{t.title ? t.title : "Compensation"}}</td>
+          <td>
+            <a class="small-1" [routerLink]="getTransactionEditLink(t)">
+              <img src="assets/settings.svg">
+            </a>
+          </td>
+          <td>
+            <a class="small-1" (click)="deleteTransaction(t)">
+              <img src="assets/cancel.svg">
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
