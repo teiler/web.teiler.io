@@ -50,10 +50,19 @@ button {
   background: $tylr-primary-gradient;
   color: $tylr-light-color;
 
+  &[disabled] {
+    background: $tylr-primary-disabled;
+    box-shadow: none;
+  }
+
   max-width: none;
 
   &.secondary {
     background: $tylr-secondary-gradient;
+    &[disabled] {
+      background: $tylr-secondary-disabled;
+      box-shadow: none;
+    }
   }
 
   &.error {
