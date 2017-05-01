@@ -29,6 +29,9 @@ export class CompensationComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.route.snapshot.data['group'];
+    if (this.group.people.length < 2) {
+      this.navigationService.goToDashboard(this.group.id);
+    }
     switch (this.MODE) {
       case CrudOperation.CREATE: {
         this.compensation = new Compensation(null, this.group.people[0], 0, this.group.people[1]);
