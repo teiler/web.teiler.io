@@ -16,6 +16,7 @@ import {GroupHeaderComponent} from './component/group-header/group-header.compon
 import {CompensationComponent} from './component/compensation/compensation.component';
 import {CompensationResourceService} from './resource/compensation-resource.service';
 import {CompensationService} from './service/compensation.service';
+import {SuggestPaymentsComponent } from './component/suggest-payments/suggest-payments.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import {CompensationService} from './service/compensation.service';
   ],
   declarations: [
     GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
-    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent, SuggestPaymentsComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
