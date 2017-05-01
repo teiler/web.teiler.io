@@ -217,7 +217,6 @@ button, input, select {
 
     .currency {
       vertical-align: top;
-      text-transform: uppercase;
     }
 
     .value {
@@ -240,6 +239,10 @@ button, input, select {
       text-align: right;
     }
   }
+}
+
+.currency {
+  text-transform: uppercase;
 }
 
 .payment {
