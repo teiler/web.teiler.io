@@ -2,29 +2,29 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 
 import {SharedModule} from 'app/shared';
 import {GroupRoutingModule} from './group-routing.module';
-
+import {GroupService, GroupStorageService, ExpenseService} from './service';
+import {GroupResourceService, PersonResourceService, ExpenseResourceService} from './resource';
 import {
   GroupComponent,
   DashboardComponent,
   GroupCreateComponent,
-  GroupLoginComponent
+  GroupLoginComponent,
+  GroupEditComponent,
+  ExpenseComponent
 } from './component';
-import {GroupService, GroupStorageService} from './service';
-import {GroupResourceService, PersonResourceService} from './resource';
-import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupHeaderComponent} from './component/group-header/group-header.component';
-import {ExpenseComponent} from './component/expense/expense.component';
-
+import {CompensationComponent} from './component/compensation/compensation.component';
+import {CompensationResourceService} from './resource/compensation-resource.service';
+import {CompensationService} from './service/compensation.service';
 
 @NgModule({
   imports: [
     SharedModule,
-
     GroupRoutingModule
   ],
   declarations: [
     GroupCreateComponent, GroupLoginComponent, DashboardComponent, GroupComponent,
-    GroupEditComponent, GroupHeaderComponent, ExpenseComponent
+    GroupEditComponent, GroupHeaderComponent, ExpenseComponent, CompensationComponent
   ],
   exports: [
     GroupCreateComponent, GroupLoginComponent, GroupComponent
@@ -40,7 +40,11 @@ export class GroupModule {
         GroupService,
         GroupResourceService,
         PersonResourceService,
-        GroupStorageService
+        GroupStorageService,
+        ExpenseResourceService,
+        ExpenseService,
+        CompensationResourceService,
+        CompensationService
       ]
     };
   }

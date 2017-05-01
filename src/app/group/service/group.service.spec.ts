@@ -2,30 +2,8 @@ import {GroupService} from './group.service';
 import {inject, TestBed} from '@angular/core/testing';
 import {GroupResourceService, PersonResourceService} from '../resource/';
 import {Observable} from 'rxjs/Rx';
+import {GroupTestData} from '../../../test/index';
 import * as assert from 'assert';
-import {Group} from '../model/group';
-
-const groupDto = {
-  'id': '4h43pgmi',
-  'name': 'Alpha',
-  'currency': 'chf',
-  'people': [
-    {
-      'id': 3,
-      'name': 'Person A',
-      'update-time': '2017-04-06T20:07:01.128Z',
-      'create-time': '2017-04-06T20:07:01.128Z'
-    },
-    {
-      'id': 4,
-      'name': 'Person B',
-      'update-time': '2017-04-06T20:10:14.232Z',
-      'create-time': '2017-04-06T20:10:14.232Z'
-    }
-  ],
-  'update-time': '2017-04-06T20:00:41.504Z',
-  'create-time': '2017-04-06T20:00:41.504Z'
-};
 
 describe('GroupService', () => {
   beforeEach(() => {
@@ -41,7 +19,7 @@ describe('GroupService', () => {
 
     // DAL should return a Group DTO
     groupSpy.getGroup.and.callFake((id) => {
-      const group = JSON.parse(JSON.stringify(groupDto));
+      const group = GroupTestData.group;
       group.id = id;
       return Observable.of<any>(group);
     });
