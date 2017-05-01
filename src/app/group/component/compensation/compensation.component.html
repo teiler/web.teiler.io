@@ -1,4 +1,4 @@
-<form class="payment" *ngIf="compensation" #compensationForm="ngForm">
+<form class="payment" *ngIf="compensation" (ngSubmit)="saveCompensation(compensationForm)" #compensationForm="ngForm">
   <section class="row align-center">
     <div class="small-12 medium-2 column">
       <label>
