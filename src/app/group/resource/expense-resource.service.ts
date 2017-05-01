@@ -34,6 +34,15 @@ export class ExpenseResourceService extends ResourceBase {
     return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${expense.id}`), expenseDto));
   }
 
+  public deleteExpense(groupId: string, expenseId: number): Observable<boolean> {
+    return this.delete(this.getRequestUrl(groupId, `/${expenseId}`))
+      .map(() => {
+        return true;
+      }).catch((error: any) => {
+        return Observable.throw(new Error(error.json().error));
+      });
+  }
+
   private getRequestUrl(groupId: string, endpoint?: string) {
     return this.apiUrl.replace(':groupId', groupId) + endpoint;
   }
