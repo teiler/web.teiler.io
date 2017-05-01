@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {CompensationResourceService} from '../resource/compensation-resource.service';
 import {Observable} from 'rxjs/Observable';
 import {Compensation} from '../model/compensation';
+import {CrudOperation} from '../../shared/model/crud-operation';
 
 @Injectable()
 export class CompensationService {
@@ -39,6 +40,29 @@ export class CompensationService {
       }).catch((error: Error) => {
         return Observable.throw(error);
       });
+  }
+
+  public saveCompensation(groupId: string, compenssation: Compensation, mode: CrudOperation): Observable<Compensation> {
+    if (!groupId) {
+      return Observable.throw(new Error('Group ID is empty'));
+    } else if (mode === CrudOperation.EDIT && !compenssation.id) {
+      return Observable.throw(new Error('Compensation ID is empty'));
+    }
+
+    let saveObs: Observable<any>;
+    if (mode === CrudOperation.CREATE) {
+      saveObs = this.compensationResource.createCompensation(groupId, compenssation);
+    } else if (mode === CrudOperation.EDIT) {
+      saveObs = this.compensationResource.updateExpense(groupId, compenssation);
+    } else {
+      return Observable.throw(new Error('Unsupported operation'));
+    }
+
+    return saveObs.map((dto: any) => {
+      return Compensation.fromDto(dto);
+    }).catch((error: Error) => {
+      return Observable.throw(error);
+    });
   }
 
 }
