@@ -3,7 +3,8 @@
     <div class="small-12 medium-2 column">
       <label>
         <span class="currency">{{group.currency}}</span>
-        <input type="number" placeholder="0.00" name="amount" required
+        <input type="number" placeholder="0.00" name="amount" required min="0"
+               [ngClass]="{'error': expense.amountDecimal <= 0}"
                value="{{expense.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
@@ -41,9 +42,13 @@
     </div>
   </section>
 
+  <section class="row align-center" *ngIf="response">
+    <span class="error align-center">{{response}}</span>
+  </section>
+
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big">Save Expense</button>
+      <button class="big" [disabled]="expenseForm.invalid || !expense.isValid()">Save Expense</button>
     </div>
   </section>
 </form>
