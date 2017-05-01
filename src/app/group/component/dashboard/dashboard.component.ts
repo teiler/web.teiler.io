@@ -34,6 +34,35 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
+    this.loadTransactions();
+  }
+
+  getTransactionEditLink(transaction: Transaction) {
+    const endpoint = (transaction instanceof Expense) ? 'expenses' : 'compensations';
+    return `${endpoint}/${transaction.id}/edit`;
+  }
+
+  deleteTransaction(transaction: Transaction) {
+    let deleteObs: Observable<boolean>;
+    if (transaction instanceof Expense) {
+      deleteObs = this.expenseService.deleteExpense(this.group.id, transaction.id);
+    } else if (transaction instanceof Compensation) {
+      deleteObs = this.compensationService.deleteCompensation(this.group.id, transaction.id);
+    } else {
+      console.error('Unsupported Transaction Type');
+      return;
+    }
+    deleteObs.subscribe(
+      (isDeleted: boolean) => {
+        this.loadTransactions();
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  loadTransactions() {
     Observable.zip(
       this.expenseService.getExpenses(this.group.id),
       this.compensationService.getCompensations(this.group.id),
@@ -55,10 +84,5 @@ export class DashboardComponent implements OnInit {
       (transactions: Transaction[]) => {
         this.transactions = transactions;
       });
-  }
-
-  getTransactionEditLink(transaction: Transaction) {
-    const endpoint = (transaction instanceof Expense) ? 'expenses' : 'compensations';
-    return `${endpoint}/${transaction.id}/edit`;
   }
 }
