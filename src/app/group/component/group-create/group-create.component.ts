@@ -24,7 +24,6 @@ export class GroupCreateComponent implements OnInit {
 
   public createGroup(createGroupForm: NgForm): boolean {
     if (createGroupForm.form.valid) {
-      console.log(`component: submit create form - ${this.groupName}`);
       this.groupService.createGroup(this.groupName)
         .subscribe((group: Group) => {
             this.groupStorageService.storeGroup(group);

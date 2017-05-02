@@ -1,6 +1,5 @@
 import {Transaction} from './transaction';
 import {Person} from './person';
-import {Profiteer} from './profiteer';
 
 export class Compensation extends Transaction {
   public static fromDto(dto: any): Compensation {
@@ -21,5 +20,11 @@ export class Compensation extends Transaction {
               public createdTime?: Date,
               public modifiedTime?: Date) {
     super(id, payer, amount, createdTime, modifiedTime);
+  }
+
+  public isValid(): boolean {
+    return this.amount > 0
+    && this.payer !== null
+    && this.profiteer !== null;
   }
 }

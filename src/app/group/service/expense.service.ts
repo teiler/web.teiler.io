@@ -64,4 +64,14 @@ export class ExpenseService {
       return Observable.throw(error);
     });
   }
+
+  public deleteExpense(groupId: string, expenseId: number): Observable<boolean> {
+    if (!groupId) {
+      return Observable.throw(new Error('Group ID is empty'));
+    } else if (!expenseId) {
+      return Observable.throw(new Error('Expense ID is empty'));
+    }
+
+    return this.expenseResource.deleteExpense(groupId, expenseId);
+  }
 }

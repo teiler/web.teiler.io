@@ -4,6 +4,7 @@
       <label>
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required
+               [ngClass]="{'error': compensation.amountDecimal <= 0}"
                value="{{compensation.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
@@ -25,9 +26,6 @@
         <h3 class="name small-12">{{p.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
         <input class="value small-12" type="number" value="{{compensation.amountDecimal|amountFormat}}" disabled>
-        <span class="description"><input value="100" disabled>
-          % of payment
-        </span>
       </div>
 
       <ng-template #deselectedPersonBlock>
@@ -35,9 +33,6 @@
           <h3 class="name small-12">{{p.name}}</h3>
           <span class="currency small-12">{{group.currency }}</span>
           <input class="value small-12" type="number" value="0" disabled>
-          <span class="description"><input value="0" disabled>
-          % of payment
-        </span>
         </div>
       </ng-template>
     </div>
@@ -45,7 +40,7 @@
 
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big">Save Compensation</button>
+      <button class="big" [disabled]="compensationForm.invalid || !compensation.isValid()">Save Compensation</button>
     </div>
   </section>
 </form>

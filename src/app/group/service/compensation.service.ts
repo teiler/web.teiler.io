@@ -65,4 +65,13 @@ export class CompensationService {
     });
   }
 
+  public deleteCompensation(groupId: string, compensationId: number): Observable<boolean> {
+    if (!groupId) {
+      return Observable.throw(new Error('Group ID is empty'));
+    } else if (!compensationId) {
+      return Observable.throw(new Error('Expense ID is empty'));
+    }
+
+    return this.compensationResource.deleteCompensation(groupId, compensationId);
+  }
 }
