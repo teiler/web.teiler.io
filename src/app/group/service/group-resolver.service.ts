@@ -41,6 +41,7 @@ export class GroupResolverService implements Resolve<Group> {
       }).catch((error: Error) => {
         this.groupStorageService.removeRecentGroup(id);
         this.logService.error(error);
+        this.navigationService.goHome();
         return Observable.of<Group>(null);
       });
   }

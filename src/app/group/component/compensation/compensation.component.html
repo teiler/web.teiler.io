@@ -4,6 +4,7 @@
       <label>
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required
+               [ngClass]="{'error': compensation.amountDecimal <= 0}"
                value="{{compensation.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
@@ -39,7 +40,7 @@
 
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big">Save Compensation</button>
+      <button class="big" [disabled]="compensationForm.invalid || !compensation.isValid()">Save Compensation</button>
     </div>
   </section>
 </form>

@@ -3,12 +3,14 @@ import {Observable} from 'rxjs/Rx';
 
 import {environment} from '../../../environments/environment';
 import {ApiRequestOptions} from '../model';
+import {TylrErrorService} from '../../core/service/tylr-error.service';
 
 export abstract class ResourceBase {
   static JSON_HEADERS: RequestOptionsArgs = {headers: new Headers({'content-type': 'application/json'})};
   private readonly requestOptions: ApiRequestOptions = new ApiRequestOptions(ResourceBase.JSON_HEADERS);
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private tylrErrorService: TylrErrorService) {
   }
 
   protected get<T>(path: string): Observable<Response> {
@@ -31,5 +33,11 @@ export abstract class ResourceBase {
 
   protected delete<T>(path: string): Observable<Response> {
     return this.http.delete(environment.serverBaseUrl + path);
+  }
+
+  // caller should bind `this` to the function
+  protected handleApiError(error: any) {
+    const message = this.tylrErrorService.getApiErrorMessage(error.json().error);
+    return Observable.throw(new Error(message));
   }
 }
