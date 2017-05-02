@@ -1,5 +1,5 @@
 import {Person} from './person';
-export class Transaction {
+export abstract class Transaction {
   protected _amountDecimal: number;
   constructor(public id: number,
               public payer: Person,
@@ -17,4 +17,6 @@ export class Transaction {
   public get amountDecimal() {
     return this._amountDecimal;
   }
+
+  public abstract isValid(): boolean;
 }

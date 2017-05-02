@@ -40,4 +40,11 @@ export class Expense extends Transaction {
       return profiteer.isInvolved ? total + 1 : total;
     }, 0);
   }
+
+  public isValid(): boolean {
+    return this.title
+      && this.payer
+      && this.amount > 0
+      && this.getTotalActiveProfiteers() > 0;
+  }
 }

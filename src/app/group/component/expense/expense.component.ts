@@ -18,6 +18,7 @@ export class ExpenseComponent implements OnInit {
   private MODE: CrudOperation;
   public group: Group;
   public expense: Expense;
+  public response: string;
 
   constructor(private route: ActivatedRoute,
               private expenseService: ExpenseService,
@@ -33,6 +34,9 @@ export class ExpenseComponent implements OnInit {
         const expense = new Expense(null, this.group.people[0], 0, '', []);
         this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
         this.expense = expense;
+        if (this.group.people.length < 2) {
+          this.navigationService.goToDashboard(this.group.id);
+        }
         break;
       }
       case CrudOperation.EDIT: {
@@ -85,7 +89,7 @@ export class ExpenseComponent implements OnInit {
             this.navigationService.goToDashboard(this.group.id);
           },
           (error: Error) => {
-            console.error(error);
+            this.response = error.message;
           }
         );
     } else {

@@ -5,14 +5,16 @@ import {Observable} from 'rxjs/Observable';
 import {Expense} from '../model/expense';
 import {Profiteer} from '../model/profiteer';
 import {CrudOperation} from '../../shared/model/crud-operation';
+import {TylrErrorService} from '../../core/service/tylr-error.service';
 
 @Injectable()
 export class ExpenseResourceService extends ResourceBase {
 
   private readonly apiUrl = 'groups/:groupId/expenses';
 
-  constructor(http: Http) {
-    super(http);
+  constructor(http: Http,
+              tylrErrorService: TylrErrorService) {
+    super(http, tylrErrorService);
   }
 
   public getExpenses(groupId: string): Observable<any> {
@@ -34,6 +36,13 @@ export class ExpenseResourceService extends ResourceBase {
     return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${expense.id}`), expenseDto));
   }
 
+  public deleteExpense(groupId: string, expenseId: number): Observable<boolean> {
+    return this.delete(this.getRequestUrl(groupId, `/${expenseId}`))
+      .map(() => {
+        return true;
+      }).catch(this.handleApiError.bind(this));
+  }
+
   private getRequestUrl(groupId: string, endpoint?: string) {
     return this.apiUrl.replace(':groupId', groupId) + endpoint;
   }
@@ -41,9 +50,7 @@ export class ExpenseResourceService extends ResourceBase {
   private handleResponse(responseObs: Observable<Response>): Observable<any> {
     return responseObs.map((response: Response) => {
       return response.json();
-    }).catch((error: any) => {
-      return Observable.throw(new Error(error.json().error));
-    });
+    }).catch(this.handleApiError.bind(this));
   }
 
   private buildSaveExpenseDto(expense: Expense, mode: CrudOperation): any {
