@@ -26,7 +26,7 @@
 
     <ng-container *ngFor="let p of group.people">
       <div class="small-12 medium-2 column"
-           (click)="toggleIsInvolved($event, p)" *ngIf="p.id != compensation.payer.id;">
+           (click)="toggleIsInvolved(p)" *ngIf="p.id != compensation.payer.id;">
         <div name="person" class="card person row"
              [ngClass]="{'disabled': p.id != compensation.profiteer.id}">
           <h3 class="name small-12">{{p.name}}</h3>

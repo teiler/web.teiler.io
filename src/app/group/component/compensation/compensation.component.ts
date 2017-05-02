@@ -32,10 +32,10 @@ export class CompensationComponent implements OnInit {
     this.group = this.route.snapshot.data['group'];
     switch (this.MODE) {
       case CrudOperation.CREATE: {
-        this.compensation = new Compensation(null, this.group.people[0], 0, this.group.people[1]);
         if (this.group.people.length < 2) {
           this.navigationService.goToDashboard(this.group.id);
         }
+        this.compensation = new Compensation(null, this.group.people[0], 0, this.group.people[1]);
         break;
       }
       case CrudOperation.EDIT: {
@@ -60,13 +60,19 @@ export class CompensationComponent implements OnInit {
     this.compensation.amountDecimal = totalValue;
   }
 
-  public toggleIsInvolved(event: Event, person: Person) {
-    event.stopPropagation();
+  public toggleIsInvolved(person: Person) {
     this.compensation.profiteer = person;
   }
 
   public onPayerChanged(payerId: string) {
-    this.compensation.payer = this.group.getPeopleAsMap().get(parseInt(payerId, 10));
+    const selectedPayerId = parseInt(payerId, 10);
+    this.compensation.payer = this.group.getPeopleAsMap().get(selectedPayerId);
+
+    // select another profiteer automatically
+    if (this.compensation.profiteer.id === selectedPayerId) {
+      this.compensation.profiteer = this.group.people[0].id === selectedPayerId ?
+        this.group.people[1] : this.group.people[0];
+    }
   }
 
   public saveCompensation(compensationForm: NgForm): boolean {
