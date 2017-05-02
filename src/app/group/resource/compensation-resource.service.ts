@@ -4,13 +4,15 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Compensation} from '../model/compensation';
 import {CrudOperation} from '../../shared/model/crud-operation';
+import {TylrErrorService} from '../../core/service/tylr-error.service';
 
 @Injectable()
 export class CompensationResourceService extends ResourceBase {
   private readonly apiUrl = 'groups/:groupId/compensations';
 
-  constructor(http: Http) {
-    super(http);
+  constructor(http: Http,
+              tylrErrorService: TylrErrorService) {
+    super(http, tylrErrorService);
   }
 
   public getCompensations(groupId: string): Observable<any> {
@@ -31,6 +33,13 @@ export class CompensationResourceService extends ResourceBase {
     return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${compensation.id}`), compensationDto));
   }
 
+  public deleteCompensation(groupId: string, compensationId: number): Observable<boolean> {
+    return this.delete(this.getRequestUrl(groupId, `/${compensationId}`))
+      .map(() => {
+        return true;
+      }).catch(this.handleApiError.bind(this));
+  }
+
   private getRequestUrl(groupId: string, endpoint?: string) {
     return this.apiUrl.replace(':groupId', groupId) + endpoint;
   }
@@ -38,9 +47,7 @@ export class CompensationResourceService extends ResourceBase {
   private handleResponse(responseObs: Observable<Response>): Observable<any> {
     return responseObs.map((response: Response) => {
       return response.json();
-    }).catch((error: any) => {
-      return Observable.throw(new Error(error.json().error));
-    });
+    }).catch(this.handleApiError.bind(this));
   }
 
   private buildSaveCompensationDto(compensation: Compensation, mode: CrudOperation): any {

@@ -18,6 +18,7 @@ export class CompensationComponent implements OnInit {
   private MODE: CrudOperation;
   public group: Group;
   public compensation: Compensation;
+  public response: string;
 
   constructor(private route: ActivatedRoute,
               private compensationService: CompensationService,
@@ -32,6 +33,9 @@ export class CompensationComponent implements OnInit {
     switch (this.MODE) {
       case CrudOperation.CREATE: {
         this.compensation = new Compensation(null, this.group.people[0], 0, this.group.people[1]);
+        if (this.group.people.length < 2) {
+          this.navigationService.goToDashboard(this.group.id);
+        }
         break;
       }
       case CrudOperation.EDIT: {
@@ -41,7 +45,7 @@ export class CompensationComponent implements OnInit {
             (compensation: Compensation) => {
               this.compensation = compensation;
             },
-            (error: any) => console.log(error)
+            (error: any) => this.response = error.message
           );
         break;
       }
@@ -73,7 +77,7 @@ export class CompensationComponent implements OnInit {
             this.navigationService.goToDashboard(this.group.id);
           },
           (error: Error) => {
-            console.error(error);
+            this.response = error.message;
           }
         );
     } else {
