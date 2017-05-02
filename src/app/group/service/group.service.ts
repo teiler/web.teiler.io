@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {GroupResourceService, PersonResourceService} from '../resource';
 import {Group, Person} from '../model';
+import {TylrErrorService} from '../../core/service/tylr-error.service';
 
 @Injectable()
 export class GroupService {
@@ -11,7 +12,7 @@ export class GroupService {
   }
 
   public createGroup(name: string): Observable<Group> {
-    if (!name) {
+    if (!name || !name.trim()) {
       return Observable.throw(new Error('Group name is empty'));
     }
     return this.groupResourceService.createGroup(name).map((dto: any) => {
@@ -36,6 +37,10 @@ export class GroupService {
   public updateGroup(group: Group, groupOriginal: Group): Observable<Group> {
     if (!group || !group.id) {
       return Observable.throw(new Error('Invalid group'));
+    }
+
+    if (!group.name || !group.name.trim()) {
+      return Observable.throw(new Error('Group name is empty'));
     }
 
     const groupObs: Observable<any> = this.groupResourceService.updateGroup(
