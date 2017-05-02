@@ -50,10 +50,19 @@ button {
   background: $tylr-primary-gradient;
   color: $tylr-light-color;
 
+  &[disabled] {
+    background: $tylr-primary-disabled;
+    box-shadow: none;
+  }
+
   max-width: none;
 
   &.secondary {
     background: $tylr-secondary-gradient;
+    &[disabled] {
+      background: $tylr-secondary-disabled;
+      box-shadow: none;
+    }
   }
 
   &.error {
@@ -208,7 +217,6 @@ button, input, select {
 
     .currency {
       vertical-align: top;
-      text-transform: uppercase;
     }
 
     .value {
@@ -231,4 +239,25 @@ button, input, select {
       text-align: right;
     }
   }
+}
+
+.currency {
+  text-transform: uppercase;
+}
+
+.payment {
+  label {
+    white-space: nowrap;
+    display: block;
+    padding-right: 0.2em;
+    padding-left: 1em;
+
+    input, select {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+span.error, p.error {
+  color: $tylr-error-color;
 }

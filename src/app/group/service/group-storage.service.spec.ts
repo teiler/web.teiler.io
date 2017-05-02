@@ -17,5 +17,4 @@ describe('GroupStorageService', () => {
     expect(service).toBeTruthy();
   }));
 
-
 });
