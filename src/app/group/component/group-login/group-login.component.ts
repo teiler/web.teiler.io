@@ -32,7 +32,7 @@ export class GroupLoginComponent implements OnInit {
             this.groupStorageService.storeGroup(group);
             this.navigationService.goToDashboard(group.id);
           },
-          (error: any) => {
+          (error: Error) => {
             this.logService.error(error);
             this.response = error.message;
           }

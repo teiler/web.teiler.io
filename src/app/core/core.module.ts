@@ -1,10 +1,13 @@
 import {NgModule, ModuleWithProviders, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NavigationService, LogService} from './service';
+import {TylrErrorService} from './service/tylr-error.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   declarations: []
 })
@@ -16,7 +19,8 @@ export class CoreModule {
       providers: [
         // DI Providers (Services, Tokens, Factories...) to be used globally and instantiated only once
         NavigationService,
-        LogService
+        LogService,
+        TylrErrorService
       ]
     };
   }

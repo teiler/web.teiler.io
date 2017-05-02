@@ -257,3 +257,7 @@ button, input, select {
     }
   }
 }
+
+span.error, p.error {
+  color: $tylr-error-color;
+}
