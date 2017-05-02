@@ -1,17 +1,20 @@
-<form class="payment" *ngIf="compensation" (ngSubmit)="saveCompensation(compensationForm)" #compensationForm="ngForm">
+<form class="payment" *ngIf="compensation" (ngSubmit)="saveCompensation(compensationForm)"
+      #compensationForm="ngForm">
   <section class="row align-center">
     <div class="small-12 medium-2 column">
       <label>
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required
                [ngClass]="{'error': compensation.amountDecimal <= 0}"
-               value="{{compensation.amountDecimal|amountFormat}}" (keyup)="onTotalAmountChanged($event.target.value)">
+               value="{{compensation.amountDecimal|amountFormat}}"
+               (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
     <div class="small-12 medium-3 column">
       <label>from
         <select (change)="onPayerChanged($event.target.value)">
-          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == compensation.payer.id">
+          <option *ngFor="let p of group.people" value="{{p.id}}"
+                  [selected]="p.id == compensation.payer.id">
             {{p.name}}
           </option>
         </select>
@@ -21,26 +24,30 @@
 
   <section class="row align-center">
 
-    <div class="small-12 medium-2 column" *ngFor="let p of group.people" (click)="toggleIsInvolved($event, p)">
-      <div name="person" class="card person row" *ngIf="p.id == compensation.profiteer.id; else deselectedPersonBlock">
-        <h3 class="name small-12">{{p.name}}</h3>
-        <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{compensation.amountDecimal|amountFormat}}" disabled>
-      </div>
-
-      <ng-template #deselectedPersonBlock>
-        <div name="person" class="card person row disabled">
+    <ng-container *ngFor="let p of group.people">
+      <div class="small-12 medium-2 column"
+           (click)="toggleIsInvolved($event, p)" *ngIf="p.id != compensation.payer.id;">
+        <div name="person" class="card person row"
+             [ngClass]="{'disabled': p.id != compensation.profiteer.id}">
           <h3 class="name small-12">{{p.name}}</h3>
           <span class="currency small-12">{{group.currency }}</span>
-          <input class="value small-12" type="number" value="0" disabled>
+          <input class="value small-12" type="number"
+                 value="{{p.id == compensation.profiteer.id ?
+                 (compensation.amountDecimal|amountFormat) : 0}}" disabled>
         </div>
-      </ng-template>
-    </div>
+      </div>
+    </ng-container>
+  </section>
+
+  <section class="row align-center" *ngIf="response">
+    <span class="error align-center">{{response}}</span>
   </section>
 
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big" [disabled]="compensationForm.invalid || !compensation.isValid()">Save Compensation</button>
+      <button class="big" [disabled]="compensationForm.invalid || !compensation.isValid()">Save
+        Compensation
+      </button>
     </div>
   </section>
 </form>
