@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Group} from '../../model/group';
 import {GroupStorageService} from 'app/group';
 import {Subscription} from 'rxjs/Subscription';
 import {LogService, NavigationService} from 'app/core';
-import {GroupService} from '../../service/group.service';
 import {GroupStorageAdapter} from '../../model/group-storage-adapter';
+import {Group} from '../../model/group';
 
 @Component({
   selector: 'tylr-group-header',
@@ -15,11 +14,11 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupHeaderComponent';
   public recentGroups: GroupStorageAdapter[] = [];
   private recentGroupsSubscription: Subscription;
+  public currentGroup: Group;
 
-  constructor(private groupService: GroupService,
-              private groupStorageService: GroupStorageService,
-              private navigationService: NavigationService,
-              private logService: LogService) {
+  constructor(private navigationService: NavigationService,
+              private logService: LogService,
+              private groupStorageService: GroupStorageService) {
   }
 
   ngOnInit() {
@@ -29,6 +28,7 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
         (groups: GroupStorageAdapter[]) => this.setRecentGroups(groups),
         (error: Error) => this.logService.error(error, this.NAME)
       );
+    this.currentGroup = this.groupStorageService.getCurrentGroup();
   }
 
   private setRecentGroups(recentGroups: GroupStorageAdapter[]) {
