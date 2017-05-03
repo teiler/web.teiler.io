@@ -41,10 +41,20 @@ export class Expense extends Transaction {
     }, 0);
   }
 
+  public checkSumOfSharedAmount(): boolean {
+    let sum = 0;
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      sum += profiteer.share;
+    });
+    console.log(sum);
+    return sum === this.amount;
+  }
+
   public isValid(): boolean {
     return this.title
       && this.payer
       && this.amount > 0
-      && this.getTotalActiveProfiteers() > 0;
+      && this.getTotalActiveProfiteers() > 0
+      && this.checkSumOfSharedAmount();
   }
 }

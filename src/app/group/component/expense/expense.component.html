@@ -33,8 +33,8 @@
       <div name="person" class="card person row" [ngClass]="{'disabled': !p.isInvolved}">
         <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{p.shareDecimal|amountFormat}}" [disabled]="!p.isInvolved"
-               (click)="$event.stopPropagation()" (keyup)="onSharedAmountChanged($event.target.value, p)">
+        <input class="value small-12" type="number" value="{{p.shareDecimal}}" [disabled]="!p.isInvolved"
+               (click)="$event.stopPropagation()" (change)="onSharedAmountChanged($event.target.value, p)">
         <span class="description"><input value="33" [disabled]="!p.isInvolved" (click)="$event.stopPropagation()">
           % of payment
         </span>
