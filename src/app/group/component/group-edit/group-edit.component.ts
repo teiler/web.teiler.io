@@ -30,10 +30,16 @@ export class GroupEditComponent implements OnInit {
     // the group should be cloned in order to compare with the original group later
     const currentGroup = this.route.snapshot.data['group'];
 
+    const action = this.route.snapshot.queryParamMap.get('action');
+
     if (!currentGroup) {
       this.navigationService.goHome();
     } else {
       this.group = currentGroup.clone();
+    }
+
+    if (action === 'add') {
+      this.addPerson();
     }
   }
 
