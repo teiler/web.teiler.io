@@ -27,10 +27,10 @@ export class Expense extends Transaction {
 
   public split() {
     const totalActive = this.getTotalActiveProfiteers();
-    const sharedValue = this.amountDecimal / totalActive;
+    const sharedValue = this.amount / totalActive;
     this.profiteers.forEach((profiteer: Profiteer) => {
       if (profiteer.isInvolved) {
-        profiteer.shareDecimal = sharedValue;
+        profiteer.updateShare(sharedValue);
       }
     });
   }
