@@ -8,11 +8,8 @@
       <nav class="main small-12 medium-10 column">
         <div>
           <ul>
-            <li *ngFor="let g of recentGroups">
+            <li *ngFor="let g of recentGroups" [ngClass]="{'active': g.id === currentGroup.id}">
               <a routerLink="/groups/{{g.id}}">{{g.name}}</a>
-            </li>
-            <li class="active">
-              <a>Test</a>
             </li>
           </ul>
         </div>
