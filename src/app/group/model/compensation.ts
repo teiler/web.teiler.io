@@ -17,8 +17,8 @@ export class Compensation extends Transaction {
               payer: Person,
               amount: number,
               public profiteer: Person,
-              public createdTime?: Date,
-              public modifiedTime?: Date) {
+              createdTime?: Date,
+              modifiedTime?: Date) {
     super(id, payer, amount, createdTime, modifiedTime);
   }
 

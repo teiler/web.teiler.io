@@ -20,8 +20,8 @@ export class Expense extends Transaction {
               amount: number,
               public title: string,
               public profiteers: Profiteer[],
-              public createdTime?: Date,
-              public modifiedTime?: Date) {
+              createdTime?: Date,
+              modifiedTime?: Date) {
     super(id, payer, amount, createdTime, modifiedTime);
   }
 

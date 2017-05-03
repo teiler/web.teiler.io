@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Group} from '../../model/group';
 import {ActivatedRoute} from '@angular/router';
 import {NavigationService} from '../../../core/service/navigation.service';
@@ -16,11 +16,13 @@ import {Transaction} from '../../model/transaction';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   public group: Group;
+  public groupSubscription: Subscription;
   public transactions: Transaction[] = [];
 
   constructor(private route: ActivatedRoute,
+              private groupStorageService: GroupStorageService,
               private navigationService: NavigationService,
               private expenseService: ExpenseService,
               private compensationService: CompensationService) {
@@ -33,6 +35,15 @@ export class DashboardComponent implements OnInit {
       this.navigationService.goHome();
       return;
     }
+
+    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
+      .subscribe(
+        (currentGroup: Group) => {
+          if (currentGroup) {
+            this.group = currentGroup;
+          }
+        }
+      );
 
     this.loadTransactions();
   }
@@ -84,5 +95,11 @@ export class DashboardComponent implements OnInit {
       (transactions: Transaction[]) => {
         this.transactions = transactions;
       });
+  }
+
+  ngOnDestroy() {
+    if (this.groupSubscription) {
+      this.groupSubscription.unsubscribe();
+    }
   }
 }
