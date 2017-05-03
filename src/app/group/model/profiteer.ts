@@ -15,7 +15,7 @@ export class Profiteer {
 
   public set shareDecimal(value: number) {
     this._shareDecimal = value;
-    this.share = value * 100;
+    this.share = Math.floor(value * 100);
   }
 
   public get shareDecimal() {
