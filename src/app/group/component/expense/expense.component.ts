@@ -56,15 +56,14 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
-  public onTotalAmountChanged(value: number) {
-    const totalValue = value ? value : 0;
-    this.expense.amountDecimal = totalValue;
+  public onTotalAmountChanged(value: string) {
+    this.expense.amountDecimal = this.convertStringToNumber(value);
     this.expense.split();
   }
 
-  public onSharedAmountChanged(value: number, profiteer: Profiteer) {
-    const sharedValue = value ? value : 0;
-    profiteer.shareDecimal = sharedValue;
+  public onSharedAmountChanged(value: string, profiteer: Profiteer) {
+    const sharedValue = this.convertStringToNumber(value);
+    profiteer.updateShare(sharedValue * 100);
   }
 
   public onPayerChanged(payerId: string) {
@@ -76,9 +75,9 @@ export class ExpenseComponent implements OnInit {
     p.isInvolved = !p.isInvolved;
 
     if (!p.isInvolved) {
-      p.shareDecimal = 0;
+      p.updateShare(0);
     }
-    this.onTotalAmountChanged(this.expense.amountDecimal);
+    this.expense.split();
   }
 
   public saveExpense(expenseForm: NgForm): boolean {
@@ -108,6 +107,11 @@ export class ExpenseComponent implements OnInit {
         new Profiteer(person, 0, isInvolved)
       );
     });
+  }
+
+  private convertStringToNumber(value: string) {
+    const parsedNumber = parseFloat(value);
+    return isNaN(parsedNumber) ? 0 : parsedNumber;
   }
 
 }

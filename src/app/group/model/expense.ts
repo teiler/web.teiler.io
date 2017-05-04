@@ -27,10 +27,10 @@ export class Expense extends Transaction {
 
   public split() {
     const totalActive = this.getTotalActiveProfiteers();
-    const sharedValue = this.amountDecimal / totalActive;
+    const sharedValue = this.amount / totalActive;
     this.profiteers.forEach((profiteer: Profiteer) => {
       if (profiteer.isInvolved) {
-        profiteer.shareDecimal = sharedValue;
+        profiteer.updateShare(sharedValue);
       }
     });
   }
@@ -41,10 +41,19 @@ export class Expense extends Transaction {
     }, 0);
   }
 
+  public checkSumOfSharedAmount(): boolean {
+    let sum = 0;
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      sum += profiteer.share;
+    });
+    return sum === this.amount;
+  }
+
   public isValid(): boolean {
     return this.title
       && this.payer
       && this.amount > 0
-      && this.getTotalActiveProfiteers() > 0;
+      && this.getTotalActiveProfiteers() > 0
+      && this.checkSumOfSharedAmount();
   }
 }
