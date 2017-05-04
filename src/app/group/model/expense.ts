@@ -46,7 +46,6 @@ export class Expense extends Transaction {
     this.profiteers.forEach((profiteer: Profiteer) => {
       sum += profiteer.share;
     });
-    console.log(sum);
     return sum === this.amount;
   }
 
