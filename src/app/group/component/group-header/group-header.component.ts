@@ -14,6 +14,7 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupHeaderComponent';
   public recentGroups: GroupStorageAdapter[] = [];
   private recentGroupsSubscription: Subscription;
+  public groupSubscription: Subscription;
   public currentGroup: Group;
 
   constructor(private navigationService: NavigationService,
@@ -29,6 +30,14 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
         (error: Error) => this.logService.error(error, this.NAME)
       );
     this.currentGroup = this.groupStorageService.getCurrentGroup();
+    this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
+      .subscribe(
+        (currentGroup: Group) => {
+          if (currentGroup) {
+            this.currentGroup = currentGroup;
+          }
+        }
+      );
   }
 
   private setRecentGroups(recentGroups: GroupStorageAdapter[]) {
