@@ -1,6 +1,7 @@
 import {Person} from './person';
+
 export class Profiteer {
-  private _shareDecimal: number;
+  private _shareFormatted: string;
   private _percentage: number;
 
   static fromDto(dto: any): Profiteer {
@@ -10,16 +11,20 @@ export class Profiteer {
   constructor(public person: Person,
               public share: number,
               public isInvolved = true) {
-    this._shareDecimal = share / 100;
+    this.setShareFormatted(share);
   }
 
-  public set shareDecimal(value: number) {
-    this._shareDecimal = value;
-    this.share = value * 100;
+  public updateShare(value: number) {
+    this.share = Math.floor(value);
+    this.setShareFormatted(value);
   }
 
-  public get shareDecimal() {
-    return this._shareDecimal;
+  private setShareFormatted(value: number) {
+    this._shareFormatted = (value / 100).toFixed(2);
+  }
+
+  public get shareFormatted(): string {
+    return this._shareFormatted;
   }
 
   public get percentage() {
