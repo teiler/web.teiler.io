@@ -27,15 +27,21 @@ export class CompensationComponent implements OnInit {
       CrudOperation.EDIT : CrudOperation.CREATE;
   }
 
-
   ngOnInit() {
     this.group = this.route.snapshot.data['group'];
+
     switch (this.MODE) {
       case CrudOperation.CREATE: {
         if (this.group.people.length < 2) {
           this.navigationService.goToDashboard(this.group.id);
         }
-        this.compensation = new Compensation(null, this.group.people[0], 0, this.group.people[1]);
+        const selectedPayerId: number = parseInt(this.route.snapshot.queryParamMap.get('payerId'), 10);
+        let selectedPayer: Person = this.group.getPeopleAsMap().get(selectedPayerId);
+        if (!selectedPayer) {
+          selectedPayer = this.group.people[0];
+        }
+
+        this.compensation = new Compensation(null, selectedPayer, 0, this.getPossibleProfiteer(selectedPayerId));
         break;
       }
       case CrudOperation.EDIT: {
@@ -68,10 +74,8 @@ export class CompensationComponent implements OnInit {
     const selectedPayerId = parseInt(payerId, 10);
     this.compensation.payer = this.group.getPeopleAsMap().get(selectedPayerId);
 
-    // select another profiteer automatically
     if (this.compensation.profiteer.id === selectedPayerId) {
-      this.compensation.profiteer = this.group.people[0].id === selectedPayerId ?
-        this.group.people[1] : this.group.people[0];
+      this.compensation.profiteer = this.getPossibleProfiteer(selectedPayerId);
     }
   }
 
@@ -90,5 +94,11 @@ export class CompensationComponent implements OnInit {
       console.log(compensationForm.errors);
     }
     return false;
+  }
+
+  // select another profiteer automatically
+  private getPossibleProfiteer(payerId: number): Person {
+    return this.group.people[0].id === payerId ?
+      this.group.people[1] : this.group.people[0];
   }
 }

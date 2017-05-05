@@ -31,12 +31,20 @@ export class ExpenseComponent implements OnInit {
     this.group = this.route.snapshot.data['group'];
     switch (this.MODE) {
       case CrudOperation.CREATE: {
-        const expense = new Expense(null, this.group.people[0], 0, '', []);
-        this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
-        this.expense = expense;
         if (this.group.people.length < 2) {
           this.navigationService.goToDashboard(this.group.id);
         }
+
+        const selectedPayerId: number = parseInt(this.route.snapshot.queryParamMap.get('payerId'), 10);
+        let selectedPayer: Person = this.group.getPeopleAsMap().get(selectedPayerId);
+        if (!selectedPayer) {
+          selectedPayer = this.group.people[0];
+        }
+
+        const expense = new Expense(null, selectedPayer, 0, '', []);
+        this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
+        this.expense = expense;
+
         break;
       }
       case CrudOperation.EDIT: {
