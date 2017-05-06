@@ -1,7 +1,6 @@
 import {Transaction} from './transaction';
 import {Person} from './person';
 import {Profiteer} from './profiteer';
-import {del} from 'selenium-webdriver/http';
 
 export class Expense extends Transaction {
   public static fromDto(dto: any): Expense {
@@ -98,8 +97,8 @@ export class Expense extends Transaction {
   }
 
   public updateProfiteer(profiteer: Profiteer, share?: number) {
-    if (share) {
-      profiteer.updateShare(share);
+    if (typeof share !== 'undefined') {
+      profiteer.share = share;
     }
     if (this.amount) {
       profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);
@@ -122,5 +121,19 @@ export class Expense extends Transaction {
       && this.amount > 0
       && this.getTotalActiveProfiteers() > 0
       && this.checkSumOfSharedAmount();
+  }
+
+  public fillProfiteers(people: Map<number, Person>, isInvolved: boolean) {
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      people.delete(profiteer.person.id);
+    });
+
+    people.forEach((person: Person) => {
+      this.profiteers.push(
+        new Profiteer(person, 0, isInvolved)
+      );
+    });
+
+    this.updatePercentage();
   }
 }

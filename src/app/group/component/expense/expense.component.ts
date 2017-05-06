@@ -20,6 +20,9 @@ export class ExpenseComponent implements OnInit {
   public expense: Expense;
   public response: string;
 
+  // for ui costomized properties
+  public totalAmount: string;
+
   constructor(private route: ActivatedRoute,
               private expenseService: ExpenseService,
               private navigationService: NavigationService) {
@@ -42,9 +45,7 @@ export class ExpenseComponent implements OnInit {
         }
 
         const expense = new Expense(null, selectedPayer, 0, '', []);
-        this.fillProfiteers(expense, this.group.getPeopleAsMap(), true);
-        this.expense = expense;
-
+        this.setExpense(expense);
         break;
       }
       case CrudOperation.EDIT: {
@@ -52,8 +53,7 @@ export class ExpenseComponent implements OnInit {
         this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
           .subscribe(
             (expense: Expense) => {
-              this.fillProfiteers(expense, this.group.getPeopleAsMap(), false);
-              this.expense = expense;
+              this.setExpense(expense);
             }
           );
         break;
@@ -64,8 +64,14 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
+  private setExpense(expense: Expense) {
+    expense.fillProfiteers(this.group.getPeopleAsMap(), this.MODE === CrudOperation.CREATE ? true : false);
+    this.expense = expense;
+    this.updateTotalAmount(expense.amountDecimal);
+  }
+
   public onTotalAmountChanged(value: string) {
-    this.expense.amountDecimal = this.convertStringToNumber(value);
+    this.expense.amount = this.convertStringToNumber(value) * 100;
     this.expense.splitEvenly();
   }
 
@@ -84,11 +90,6 @@ export class ExpenseComponent implements OnInit {
   public toggleIsInvolved(event: Event, p: Profiteer) {
     event.stopPropagation();
     p.isInvolved = !p.isInvolved;
-
-    if (!p.isInvolved) {
-      p.updateShare(0);
-      p.setPercentageFormatted(0);
-    }
     this.expense.splitEvenly();
   }
 
@@ -109,23 +110,13 @@ export class ExpenseComponent implements OnInit {
     return false;
   }
 
-  private fillProfiteers(expenseToUpdate: Expense, people: Map<number, Person>, isInvolved: boolean) {
-    expenseToUpdate.profiteers.forEach((profiteer: Profiteer) => {
-      people.delete(profiteer.person.id);
-    });
-
-    people.forEach((person: Person) => {
-      expenseToUpdate.profiteers.push(
-        new Profiteer(person, 0, isInvolved)
-      );
-    });
-
-    expenseToUpdate.updatePercentage();
-  }
-
   private convertStringToNumber(value: string) {
     const parsedNumber = parseFloat(value);
     return isNaN(parsedNumber) ? 0 : parsedNumber;
+  }
+
+  public updateTotalAmount(value: number) {
+    this.totalAmount = value.toFixed(2);
   }
 
 }

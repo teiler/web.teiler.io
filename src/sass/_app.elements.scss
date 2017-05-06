@@ -227,7 +227,7 @@ button, input, select {
 
     .description {
       input {
-        width: rem-calc(18);
+        max-width: rem-calc(32);
         padding-right: rem-calc(2);
       }
     }

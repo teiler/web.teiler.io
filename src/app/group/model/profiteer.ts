@@ -1,23 +1,35 @@
 import {Person} from './person';
 
 export class Profiteer {
+  private _share: number;
   private _shareFormatted: string;
   private _percentageFormatted: string;
   private _isUpdatedManually = false;
+  private _isInvolved: boolean;
 
   static fromDto(dto: any): Profiteer {
     return new Profiteer(Person.fromDto(dto.person), parseInt(dto.share, 10));
   }
 
   constructor(public person: Person,
-              public share: number,
-              public isInvolved = true) {
-    this.setShareFormatted(share);
+              share: number,
+              isInvolved = true) {
+    this.share = share;
+    this.isInvolved = isInvolved;
   }
 
-  public updateShare(value: number) {
-    this.share = Math.floor(value);
-    this.setShareFormatted(value);
+  public set share(value: number) {
+    if (value > 0) {
+      this._share = Math.floor(value);
+      this.setShareFormatted(value);
+    } else {
+      this._share = 0;
+      this.setShareFormatted(0);
+    }
+  }
+
+  public get share(): number {
+    return this._share;
   }
 
   private setShareFormatted(value: number) {
@@ -28,19 +40,35 @@ export class Profiteer {
     return this._shareFormatted;
   }
 
+  public get isInvolved(): boolean {
+    return this._isInvolved;
+  }
+
+  public set isInvolved(value: boolean) {
+    this._isInvolved = value;
+
+    if (!value) {
+      this.share = 0;
+    }
+  }
+
   public get percentageFormatted() {
     return this._percentageFormatted;
   }
 
   public setPercentageFormatted(value: number) {
-    this._percentageFormatted = value.toFixed(1);
+    if (Math.abs(value - Math.floor(value)) > 0) {
+      this._percentageFormatted = value.toFixed(1);
+    } else {
+      this._percentageFormatted = value.toFixed(0);
+    }
   }
 
-  public get isUpdatedManually(): boolean{
+  public get isUpdatedManually(): boolean {
     return this._isUpdatedManually;
   }
 
-  public set isUpdatedManually(value: boolean){
+  public set isUpdatedManually(value: boolean) {
     this._isUpdatedManually = value;
   }
 }

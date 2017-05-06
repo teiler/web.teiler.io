@@ -63,7 +63,7 @@ export class CompensationComponent implements OnInit {
 
   public onTotalAmountChanged(value: number) {
     const totalValue = value ? value : 0;
-    this.compensation.amountDecimal = totalValue;
+    this.compensation.amount = value * 100;
   }
 
   public toggleIsInvolved(person: Person) {
