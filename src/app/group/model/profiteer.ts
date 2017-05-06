@@ -27,11 +27,11 @@ export class Profiteer {
     return this._shareFormatted;
   }
 
-  public get percentage() {
+  public get percentageFormatted() {
     return this._percentageFormatted;
   }
 
-  public setPercentage(value: number) {
+  public setPercentageFormatted(value: number) {
     this._percentageFormatted = value.toFixed(1);
   }
 }

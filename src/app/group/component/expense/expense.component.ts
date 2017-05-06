@@ -84,7 +84,7 @@ export class ExpenseComponent implements OnInit {
 
     if (!p.isInvolved) {
       p.updateShare(0);
-      p.setPercentage(0);
+      p.setPercentageFormatted(0);
     }
     this.expense.split();
   }
