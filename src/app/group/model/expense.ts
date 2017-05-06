@@ -26,7 +26,7 @@ export class Expense extends Transaction {
     super(id, payer, amount, createdTime, modifiedTime);
   }
 
-  public split() {
+  public splitEvenly() {
     const totalActive = this.getTotalActiveProfiteers();
 
     if (totalActive > 0) {
@@ -40,6 +40,23 @@ export class Expense extends Transaction {
       if (!this.checkSumOfSharedAmount()) {
         this.adjustSharedAmount();
       }
+    }
+  }
+
+  public splitRest() {
+    const totalActive = this.getTotalActiveProfiteers();
+    const totalManuallyUpdated = this.getTotalManuallyUpdatedProfiteers();
+    const rest = totalActive - totalManuallyUpdated;
+
+    if (rest > 0) {
+      const delta = this.amount - this.getSumOfSharedAmount();
+      const sharedDelta = delta / rest;
+
+      this.profiteers.forEach((profiteer: Profiteer) => {
+        if (profiteer.isInvolved && !profiteer.isUpdatedManually) {
+          this.updateProfiteer(profiteer, profiteer.share + sharedDelta);
+        }
+      });
     }
   }
 
@@ -61,6 +78,12 @@ export class Expense extends Transaction {
   public getTotalActiveProfiteers(): number {
     return this.profiteers.reduce((total: number, profiteer: Profiteer) => {
       return profiteer.isInvolved ? total + 1 : total;
+    }, 0);
+  }
+
+  private getTotalManuallyUpdatedProfiteers(): number {
+    return this.profiteers.reduce((total: number, profiteer: Profiteer) => {
+      return profiteer.isInvolved && profiteer.isUpdatedManually ? total + 1 : total;
     }, 0);
   }
 

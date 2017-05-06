@@ -66,12 +66,15 @@ export class ExpenseComponent implements OnInit {
 
   public onTotalAmountChanged(value: string) {
     this.expense.amountDecimal = this.convertStringToNumber(value);
-    this.expense.split();
+    this.expense.splitEvenly();
   }
 
   public onSharedAmountChanged(value: string, profiteer: Profiteer) {
     const sharedValue = this.convertStringToNumber(value);
     this.expense.updateProfiteer(profiteer, sharedValue * 100);
+    profiteer.isUpdatedManually = true;
+
+    this.expense.splitRest();
   }
 
   public onPayerChanged(payerId: string) {
@@ -86,7 +89,7 @@ export class ExpenseComponent implements OnInit {
       p.updateShare(0);
       p.setPercentageFormatted(0);
     }
-    this.expense.split();
+    this.expense.splitEvenly();
   }
 
   public saveExpense(expenseForm: NgForm): boolean {
