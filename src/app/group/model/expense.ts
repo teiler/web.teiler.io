@@ -90,7 +90,7 @@ export class Expense extends Transaction {
     return this.getSumOfSharedAmount() === this.amount;
   }
 
-  public updatePercentage() {
+  private updatePercentage() {
     this.profiteers.forEach((profiteer: Profiteer) => {
       this.updateProfiteer(profiteer);
     });

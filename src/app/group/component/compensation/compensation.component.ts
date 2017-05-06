@@ -20,6 +20,9 @@ export class CompensationComponent implements OnInit {
   public compensation: Compensation;
   public response: string;
 
+  // for ui customized properties
+  public totalAmount: string;
+
   constructor(private route: ActivatedRoute,
               private compensationService: CompensationService,
               private navigationService: NavigationService) {
@@ -41,7 +44,7 @@ export class CompensationComponent implements OnInit {
           selectedPayer = this.group.people[0];
         }
 
-        this.compensation = new Compensation(null, selectedPayer, 0, this.getPossibleProfiteer(selectedPayerId));
+        this.compensation = new Compensation(null, selectedPayer, 0, this.getPossibleProfiteer(selectedPayer.id));
         break;
       }
       case CrudOperation.EDIT: {
@@ -100,5 +103,9 @@ export class CompensationComponent implements OnInit {
   private getPossibleProfiteer(payerId: number): Person {
     return this.group.people[0].id === payerId ?
       this.group.people[1] : this.group.people[0];
+  }
+
+  public updateTotalAmount(value: number) {
+    this.totalAmount = value.toFixed(2);
   }
 }

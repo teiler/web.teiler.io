@@ -20,7 +20,7 @@ export class ExpenseComponent implements OnInit {
   public expense: Expense;
   public response: string;
 
-  // for ui costomized properties
+  // for ui customized properties
   public totalAmount: string;
 
   constructor(private route: ActivatedRoute,
