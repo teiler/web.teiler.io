@@ -54,7 +54,7 @@ describe('Expense', () => {
     profiteers[0].isInvolved = false;
     profiteers[1].share = 1000;
     profiteers[1].isUpdatedManually = true;
-    this.expense.splitRest();
+    this.expense.splitEvenlyAmongRestProfiteers();
     expect(profiteers[0].share).toBe(0);
     expect(profiteers[1].share).toBe(1000);
     expect(profiteers[2].share).toBe(500);
@@ -63,7 +63,7 @@ describe('Expense', () => {
     // second manual update & check
     profiteers[2].share = 800;
     profiteers[2].isUpdatedManually = true;
-    this.expense.splitRest();
+    this.expense.splitEvenlyAmongRestProfiteers();
     expect(profiteers[0].share).toBe(0);
     expect(profiteers[1].share).toBe(1000);
     expect(profiteers[2].share).toBe(800);
