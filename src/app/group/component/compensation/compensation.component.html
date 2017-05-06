@@ -25,7 +25,7 @@
   <section class="row align-center">
 
     <ng-container *ngFor="let p of group.people">
-      <div class="small-12 medium-2 column"
+      <div class="small-12 medium-4 column"
            (click)="toggleIsInvolved(p)" *ngIf="p.id != compensation.payer.id;">
         <div name="person" class="card person row"
              [ngClass]="{'disabled': p.id != compensation.profiteer.id}">
