@@ -1,6 +1,7 @@
 import {Expense} from './expense';
-import {ExpenseTestData} from '../../../test/data/expense-data';
+import {ExpenseTestData, GroupTestData} from '../../../test/index';
 import {Profiteer} from './profiteer';
+import {Group} from './group';
 
 describe('Expense', () => {
   beforeEach(() => {
@@ -67,5 +68,25 @@ describe('Expense', () => {
     expect(profiteers[1].share).toBe(1000);
     expect(profiteers[2].share).toBe(800);
     expect(profiteers[3].share).toBe(200);
+  });
+
+  it('should fill people as profiteers', () => {
+    const hsrCrew: Group = Group.fromDto(GroupTestData.hsrCrew);
+    const expense = new Expense(0, null, 0, 'Expense Test', []);
+    expense.profiteers.push(new Profiteer(hsrCrew.people[0], 0));
+
+    expect(expense).toBeTruthy();
+    expect(expense.profiteers.length).toEqual(1);
+    expense.fillProfiteers(hsrCrew.getPeopleAsMap(), true);
+    expect(expense.profiteers.length).toEqual(4);
+  });
+
+  it('should validate correctly', () => {
+    expect(this.expense.isValid()).toBeFalsy();
+
+    this.expense.amount = 1000;
+    expect(this.expense.isValid()).toBeFalsy();
+    this.expense.splitEvenly();
+    expect(this.expense.isValid()).toBeTruthy();
   });
 });

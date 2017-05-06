@@ -49,6 +49,7 @@ export class Profiteer {
 
     if (!value) {
       this.share = 0;
+      this.setPercentageFormatted(0);
     }
   }
 
