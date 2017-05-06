@@ -18,7 +18,7 @@
       </ng-template>
 
       <div class="row" *ngIf="group.people.length; else emptyPeopleBlock">
-        <div class="small-12 medium-4 column" *ngFor="let p of group.people">
+        <div class="small-12 medium-6 large-4 column" *ngFor="let p of group.people">
           <div name="person" class="card person negative">
             <div class="row">
               <h3 class="name small-12 column">{{p.name}}</h3>
@@ -47,7 +47,7 @@
     </ng-template>
   </section>
 
-  <section class="last-transactions small-12 medium-4 column">
+  <section class="last-transactions small-12 medium-6 large-4 column">
     <h2 class="small-12">Last Transactions</h2>
     <div class="card secondary">
       <table>
