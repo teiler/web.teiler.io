@@ -71,7 +71,7 @@ export class ExpenseComponent implements OnInit {
 
   public onSharedAmountChanged(value: string, profiteer: Profiteer) {
     const sharedValue = this.convertStringToNumber(value);
-    profiteer.updateShare(sharedValue * 100);
+    this.expense.updateProfiteer(profiteer, sharedValue * 100);
   }
 
   public onPayerChanged(payerId: string) {

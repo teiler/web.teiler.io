@@ -31,11 +31,9 @@ export class Expense extends Transaction {
 
     if (totalActive > 0) {
       const sharedValue = this.amount / totalActive;
-      const percentageValue = 100 / totalActive;
       this.profiteers.forEach((profiteer: Profiteer) => {
         if (profiteer.isInvolved) {
-          profiteer.updateShare(sharedValue);
-          profiteer.setPercentageFormatted(percentageValue);
+          this.updateProfiteer(profiteer, sharedValue);
         }
       });
 
@@ -48,8 +46,7 @@ export class Expense extends Transaction {
   private adjustSharedAmount() {
     const delta = this.amount - this.getSumOfSharedAmount();
     const firstProfiteer = this.getFirstActiveProfiteer();
-    firstProfiteer.updateShare(firstProfiteer.share + delta);
-    firstProfiteer.setPercentageFormatted(firstProfiteer.share / this.amount * 100);
+    this.updateProfiteer(firstProfiteer, firstProfiteer.share + delta);
   }
 
   private getFirstActiveProfiteer(): Profiteer {
@@ -73,12 +70,19 @@ export class Expense extends Transaction {
 
   public updatePercentage() {
     this.profiteers.forEach((profiteer: Profiteer) => {
-      if (this.amount) {
-        profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);
-      } else {
-        profiteer.setPercentageFormatted(0);
-      }
+      this.updateProfiteer(profiteer);
     });
+  }
+
+  public updateProfiteer(profiteer: Profiteer, share?: number) {
+    if (share) {
+      profiteer.updateShare(share);
+    }
+    if (this.amount) {
+      profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);
+    } else {
+      profiteer.setPercentageFormatted(0);
+    }
   }
 
   private getSumOfSharedAmount(): number {
