@@ -3,6 +3,7 @@ import {Person} from './person';
 export class Profiteer {
   private _shareFormatted: string;
   private _percentageFormatted: string;
+  private _isUpdatedManually = false;
 
   static fromDto(dto: any): Profiteer {
     return new Profiteer(Person.fromDto(dto.person), parseInt(dto.share, 10));
@@ -33,5 +34,13 @@ export class Profiteer {
 
   public setPercentageFormatted(value: number) {
     this._percentageFormatted = value.toFixed(1);
+  }
+
+  public get isUpdatedManually(): boolean{
+    return this._isUpdatedManually;
+  }
+
+  public set isUpdatedManually(value: boolean){
+    this._isUpdatedManually = value;
   }
 }
