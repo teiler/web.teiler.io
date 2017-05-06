@@ -5,7 +5,7 @@
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required min="0"
                [ngClass]="{'error': expense.amountDecimal <= 0}"
-               value="{{expense.amountDecimal}}"
+               value="{{totalAmount}}" (change)="updateTotalAmount(expense.amountDecimal)"
                (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
