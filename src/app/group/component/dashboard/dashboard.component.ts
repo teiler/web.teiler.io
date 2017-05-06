@@ -10,6 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {CompensationService} from '../../service/compensation.service';
 import {Compensation} from '../../model/compensation';
 import {Transaction} from '../../model/transaction';
+import {Person} from '../../model/person';
 
 @Component({
   selector: 'tylr-dashboard',
@@ -18,8 +19,9 @@ import {Transaction} from '../../model/transaction';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   public group: Group;
-  public groupSubscription: Subscription;
+  private groupSubscription: Subscription;
   public transactions: Transaction[] = [];
+  public selectedPerson: Person;
 
   constructor(private route: ActivatedRoute,
               private groupStorageService: GroupStorageService,
@@ -48,12 +50,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.loadTransactions();
   }
 
-  getTransactionEditLink(transaction: Transaction) {
+  public getTransactionEditLink(transaction: Transaction) {
     const endpoint = (transaction instanceof Expense) ? 'expenses' : 'compensations';
     return `${endpoint}/${transaction.id}/edit`;
   }
 
-  deleteTransaction(transaction: Transaction) {
+  public deleteTransaction(transaction: Transaction) {
     let deleteObs: Observable<boolean>;
     if (transaction instanceof Expense) {
       deleteObs = this.expenseService.deleteExpense(this.group.id, transaction.id);
@@ -73,7 +75,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  loadTransactions() {
+  private loadTransactions() {
     Observable.zip(
       this.expenseService.getExpenses(this.group.id),
       this.compensationService.getCompensations(this.group.id),
@@ -95,6 +97,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (transactions: Transaction[]) => {
         this.transactions = transactions;
       });
+  }
+
+  public onPersonSelected(p: Person) {
+    this.selectedPerson = (p === this.selectedPerson) ? null : p;
   }
 
   ngOnDestroy() {
