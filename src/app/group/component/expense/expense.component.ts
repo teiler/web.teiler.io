@@ -80,7 +80,7 @@ export class ExpenseComponent implements OnInit {
     this.expense.updateProfiteer(profiteer, sharedValue * 100);
     profiteer.isUpdatedManually = true;
 
-    this.expense.splitRest();
+    this.expense.splitEvenlyAmongRestProfiteers();
   }
 
   public onPayerChanged(payerId: string) {

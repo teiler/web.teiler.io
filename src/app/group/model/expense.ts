@@ -42,7 +42,7 @@ export class Expense extends Transaction {
     }
   }
 
-  public splitRest() {
+  public splitEvenlyAmongRestProfiteers() {
     const totalActive = this.getTotalActiveProfiteers();
     const totalManuallyUpdated = this.getTotalManuallyUpdatedProfiteers();
     const rest = totalActive - totalManuallyUpdated;
@@ -56,18 +56,24 @@ export class Expense extends Transaction {
           this.updateProfiteer(profiteer, profiteer.share + sharedDelta);
         }
       });
+
+      if (!this.checkSumOfSharedAmount()) {
+        this.adjustSharedAmount();
+      }
     }
   }
 
   private adjustSharedAmount() {
     const delta = this.amount - this.getSumOfSharedAmount();
     const firstProfiteer = this.getFirstActiveProfiteer();
-    this.updateProfiteer(firstProfiteer, firstProfiteer.share + delta);
+    if (firstProfiteer) {
+      this.updateProfiteer(firstProfiteer, firstProfiteer.share + delta);
+    }
   }
 
   private getFirstActiveProfiteer(): Profiteer {
     for (let i = 0; i < this.profiteers.length; i++) {
-      if (this.profiteers[i].isInvolved) {
+      if (this.profiteers[i].isInvolved && !this.profiteers[i].isUpdatedManually) {
         return this.profiteers[i];
       }
     }
