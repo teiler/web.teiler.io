@@ -84,6 +84,7 @@ export class ExpenseComponent implements OnInit {
 
     if (!p.isInvolved) {
       p.updateShare(0);
+      p.setPercentage(0);
     }
     this.expense.split();
   }
@@ -115,6 +116,8 @@ export class ExpenseComponent implements OnInit {
         new Profiteer(person, 0, isInvolved)
       );
     });
+
+    expenseToUpdate.updatePercentage();
   }
 
   private convertStringToNumber(value: string) {

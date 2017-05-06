@@ -2,7 +2,7 @@ import {Person} from './person';
 
 export class Profiteer {
   private _shareFormatted: string;
-  private _percentage: number;
+  private _percentageFormatted: string;
 
   static fromDto(dto: any): Profiteer {
     return new Profiteer(Person.fromDto(dto.person), parseInt(dto.share, 10));
@@ -28,10 +28,10 @@ export class Profiteer {
   }
 
   public get percentage() {
-    return this._percentage;
+    return this._percentageFormatted;
   }
 
-  public set percentage(value) {
-    this._percentage = value;
+  public setPercentage(value: number) {
+    this._percentageFormatted = value.toFixed(1);
   }
 }

@@ -40,7 +40,7 @@
                [disabled]="!p.isInvolved"
                (click)="$event.stopPropagation()"
                (change)="onSharedAmountChanged($event.target.value, p)">
-        <span class="description"><input value="33" [disabled]="!p.isInvolved"
+        <span class="description"><input value="{{p.percentage}}" [disabled]="!p.isInvolved"
                                          (click)="$event.stopPropagation()">
           % of payment
         </span>

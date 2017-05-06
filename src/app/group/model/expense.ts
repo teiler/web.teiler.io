@@ -1,6 +1,7 @@
 import {Transaction} from './transaction';
 import {Person} from './person';
 import {Profiteer} from './profiteer';
+import {del} from 'selenium-webdriver/http';
 
 export class Expense extends Transaction {
   public static fromDto(dto: any): Expense {
@@ -27,12 +28,37 @@ export class Expense extends Transaction {
 
   public split() {
     const totalActive = this.getTotalActiveProfiteers();
-    const sharedValue = this.amount / totalActive;
-    this.profiteers.forEach((profiteer: Profiteer) => {
-      if (profiteer.isInvolved) {
-        profiteer.updateShare(sharedValue);
+
+    if (totalActive > 0) {
+      const sharedValue = this.amount / totalActive;
+      const percentageValue = 100 / totalActive;
+      this.profiteers.forEach((profiteer: Profiteer) => {
+        if (profiteer.isInvolved) {
+          profiteer.updateShare(sharedValue);
+          profiteer.setPercentage(percentageValue);
+        }
+      });
+
+      if (!this.checkSumOfSharedAmount()) {
+        this.adjustSharedAmount();
       }
-    });
+    }
+  }
+
+  private adjustSharedAmount() {
+    const delta = this.amount - this.getSumOfSharedAmount();
+    const firstProfiteer = this.getFirstActiveProfiteer();
+    firstProfiteer.updateShare(firstProfiteer.share + delta);
+    firstProfiteer.setPercentage(firstProfiteer.share / this.amount * 100);
+  }
+
+  private getFirstActiveProfiteer(): Profiteer {
+    for (let i = 0; i < this.profiteers.length; i++) {
+      if (this.profiteers[i].isInvolved) {
+        return this.profiteers[i];
+      }
+    }
+    return null;
   }
 
   public getTotalActiveProfiteers(): number {
@@ -42,11 +68,25 @@ export class Expense extends Transaction {
   }
 
   public checkSumOfSharedAmount(): boolean {
+    return this.getSumOfSharedAmount() === this.amount;
+  }
+
+  public updatePercentage() {
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      if (this.amount) {
+        profiteer.setPercentage(profiteer.share / this.amount * 100);
+      } else {
+        profiteer.setPercentage(0);
+      }
+    });
+  }
+
+  private getSumOfSharedAmount(): number {
     let sum = 0;
     this.profiteers.forEach((profiteer: Profiteer) => {
       sum += profiteer.share;
     });
-    return sum === this.amount;
+    return sum;
   }
 
   public isValid(): boolean {
