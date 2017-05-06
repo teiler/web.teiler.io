@@ -21,7 +21,7 @@ export class Profiteer {
   public set share(value: number) {
     if (value > 0) {
       this._share = Math.floor(value);
-      this.setShareFormatted(value);
+      this.setShareFormatted(this._share);
     } else {
       this._share = 0;
       this.setShareFormatted(0);
