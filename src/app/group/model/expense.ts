@@ -35,7 +35,7 @@ export class Expense extends Transaction {
       this.profiteers.forEach((profiteer: Profiteer) => {
         if (profiteer.isInvolved) {
           profiteer.updateShare(sharedValue);
-          profiteer.setPercentage(percentageValue);
+          profiteer.setPercentageFormatted(percentageValue);
         }
       });
 
@@ -49,7 +49,7 @@ export class Expense extends Transaction {
     const delta = this.amount - this.getSumOfSharedAmount();
     const firstProfiteer = this.getFirstActiveProfiteer();
     firstProfiteer.updateShare(firstProfiteer.share + delta);
-    firstProfiteer.setPercentage(firstProfiteer.share / this.amount * 100);
+    firstProfiteer.setPercentageFormatted(firstProfiteer.share / this.amount * 100);
   }
 
   private getFirstActiveProfiteer(): Profiteer {
@@ -74,9 +74,9 @@ export class Expense extends Transaction {
   public updatePercentage() {
     this.profiteers.forEach((profiteer: Profiteer) => {
       if (this.amount) {
-        profiteer.setPercentage(profiteer.share / this.amount * 100);
+        profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);
       } else {
-        profiteer.setPercentage(0);
+        profiteer.setPercentageFormatted(0);
       }
     });
   }
