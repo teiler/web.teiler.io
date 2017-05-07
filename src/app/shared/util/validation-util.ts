@@ -15,4 +15,10 @@ export abstract class ValidationUtil {
       throw new Error(TylrWebError.EMPTY_EXPENSE_ID);
     }
   }
+
+  public static validateCompensationId(compensationId: number) {
+    if (!compensationId) {
+      throw new Error(TylrWebError.EMPTY_COMPENSATION_ID);
+    }
+  }
 }
