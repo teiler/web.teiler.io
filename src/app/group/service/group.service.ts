@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {GroupResourceService, PersonResourceService} from '../resource';
 import {Group, Person} from '../model';
 import {TylrErrorService} from '../../core/service/tylr-error.service';
+import {ValidationUtil} from '../../shared/util/validation-util';
 
 @Injectable()
 export class GroupService {
@@ -12,9 +13,12 @@ export class GroupService {
   }
 
   public createGroup(name: string): Observable<Group> {
-    if (!name || !name.trim()) {
-      return Observable.throw(new Error('Group name is empty'));
+    try {
+      ValidationUtil.validateGroupName(name);
+    } catch (error) {
+      return Observable.throw(error);
     }
+
     return this.groupResourceService.createGroup(name).map((dto: any) => {
       return Group.fromDto(dto);
     }).catch((error: Error) => {
@@ -23,9 +27,12 @@ export class GroupService {
   }
 
   public getGroup(id: string): Observable<Group> {
-    if (!id) {
-      return Observable.throw(new Error('Group ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(id);
+    } catch (error) {
+      return Observable.throw(error);
     }
+
     return this.groupResourceService.getGroup(id)
       .map((dto: any) => {
         return Group.fromDto(dto);
@@ -35,29 +42,25 @@ export class GroupService {
   }
 
   public updateGroup(group: Group, groupOriginal: Group): Observable<Group> {
-    if (!group || !group.id) {
-      return Observable.throw(new Error('Invalid group'));
+    try {
+      ValidationUtil.validateGroupId(group.id);
+      ValidationUtil.validateGroupName(group.name);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
-    if (!group.name || !group.name.trim()) {
-      return Observable.throw(new Error('Group name is empty'));
-    }
-
-    const groupObs: Observable<any> = this.groupResourceService.updateGroup(
-      group.id, group.name, group.currency);
+    // container for person CUD operations
     const newPersonObs: Observable<any>[] = [];
     const updatePersonObs: Observable<any>[] = [];
     const deletePersonObs: Observable<boolean>[] = [];
 
     const peopleOriginal: Map<number, Person> = groupOriginal.getPeopleAsMap();
-
-    // find out new and edited people
     group.people.forEach((person: Person) => {
-      // check new person
+      // person create
       if (!peopleOriginal.has(person.id)) {
         newPersonObs.push(this.personResourceService.createPerson(group.id, person.name));
       } else {
-        // check if person has been changed
+        // person edit
         const oldPerson = peopleOriginal.get(person.id);
         if (oldPerson.name !== person.name) {
           updatePersonObs.push(
@@ -71,6 +74,9 @@ export class GroupService {
       deletePersonObs.push(this.personResourceService.deletePerson(group.id, id));
     });
 
+    const groupObs: Observable<any> = this.groupResourceService.updateGroup(
+      group.id, group.name, group.currency);
+
     return Observable.zip(
       groupObs,
       newPersonObs.length ? Observable.forkJoin(...newPersonObs) : Observable.of([]),
@@ -83,8 +89,10 @@ export class GroupService {
   }
 
   public deleteGroup(id: string): Observable<boolean> {
-    if (!id) {
-      return Observable.throw(new Error('Group ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(id);
+    } catch (error) {
+      return Observable.throw(error);
     }
     return this.groupResourceService.deleteGroup(id);
   }

@@ -10,6 +10,12 @@ export abstract class ValidationUtil {
     }
   }
 
+  public static validateGroupName(name: string) {
+    if (!name || !name.trim()) {
+      throw new Error(TylrWebError.EMPTY_GROUP_NAME);
+    }
+  }
+
   public static validateExpenseId(expenseId: number) {
     if (!expenseId) {
       throw new Error(TylrWebError.EMPTY_EXPENSE_ID);
