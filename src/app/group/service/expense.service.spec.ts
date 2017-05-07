@@ -2,31 +2,17 @@ import {TestBed, inject} from '@angular/core/testing';
 
 import {ExpenseService} from './expense.service';
 import {ExpenseResourceService} from '../resource/expense-resource.service';
-import {ExpenseTestData} from '../../../test/data/expense-data';
-import {Observable} from 'rxjs/Observable';
+import {CrudOperation} from '../../shared/model/crud-operation';
+import {expenseSpyFactory} from '../../../test/spy-factory/expense-spy-factory';
+import {Expense} from '../model/expense';
+import {ExpenseTestData} from '../../../test/data/expense-test-data';
 
 describe('ExpenseService', () => {
   beforeEach(() => {
-    const expenseSpy = jasmine.createSpyObj('expenseResourceService',
-      ['getExpense', 'getExpenses']);
-
-    // DAL should return a Expense DTO
-    expenseSpy.getExpense.and.callFake((groupId, expenseId) => {
-      const expense = ExpenseTestData.hsrCrewExpense;
-      expense.id = expenseId;
-      return Observable.of<any>(expense);
-    });
-
-    expenseSpy.getExpenses.and.callFake((groupId) => {
-      const expenses = [];
-      expenses.push(ExpenseTestData.hsrCrewExpense);
-      return Observable.of<any>(expenses);
-    });
-
     TestBed.configureTestingModule({
       providers: [
         ExpenseService,
-        {provide: ExpenseResourceService, useValue: expenseSpy}
+        {provide: ExpenseResourceService, useValue: expenseSpyFactory(jasmine)}
       ]
     });
   });
@@ -48,6 +34,18 @@ describe('ExpenseService', () => {
       (expenses) => {
         expect(expenses).toBeTruthy();
         expect(expenses[0].title).toBeTruthy();
+      }
+    );
+  }));
+
+  it('should save an expense', inject([ExpenseService], (service: ExpenseService) => {
+    const expense: Expense = Expense.fromDto(ExpenseTestData.hsrCrewExpense);
+    expense.id = null;
+    service.saveExpense('1234', expense, CrudOperation.CREATE).subscribe(
+      (expenseSaved) => {
+        expect(expenseSaved).toBeTruthy();
+        expect(expenseSaved.id).toBeTruthy();
+        expect(expenseSaved.title).toBeTruthy();
       }
     );
   }));
