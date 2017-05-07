@@ -3,7 +3,7 @@
  */
 
 import {Compensation} from './compensation';
-import {CompensationTestData} from '../../../test/data/compensation-data';
+import {CompensationTestData} from '../../../test/data/compensation-test-data';
 
 describe('Compensation', () => {
   beforeEach(() => {

@@ -2,7 +2,7 @@ import {GroupService} from './group.service';
 import {inject, TestBed} from '@angular/core/testing';
 import {GroupResourceService, PersonResourceService} from '../resource/';
 import {Observable} from 'rxjs/Rx';
-import {GroupTestData} from '../../../test/index';
+import {GroupTestData} from '../../../test/data/index';
 import * as assert from 'assert';
 
 describe('GroupService', () => {
