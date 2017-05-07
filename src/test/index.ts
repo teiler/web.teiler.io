@@ -3,3 +3,4 @@
  */
 export {GroupTestData} from './data/group-data';
 export {ExpenseTestData} from './data/expense-data';
+export {CompensationTestData} from './data/compensation-data';
