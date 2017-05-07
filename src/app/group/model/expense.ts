@@ -25,14 +25,59 @@ export class Expense extends Transaction {
     super(id, payer, amount, createdTime, modifiedTime);
   }
 
-  public split() {
+  public splitEvenly() {
     const totalActive = this.getTotalActiveProfiteers();
-    const sharedValue = this.amount / totalActive;
-    this.profiteers.forEach((profiteer: Profiteer) => {
-      if (profiteer.isInvolved) {
-        profiteer.updateShare(sharedValue);
+
+    if (totalActive > 0) {
+      const sharedValue = this.amount / totalActive;
+      this.profiteers.forEach((profiteer: Profiteer) => {
+        if (profiteer.isInvolved) {
+          this.updateProfiteer(profiteer, sharedValue);
+        }
+      });
+
+      if (!this.checkSumOfSharedAmount()) {
+        this.adjustSharedAmount();
       }
-    });
+    }
+  }
+
+  public splitEvenlyAmongRestProfiteers() {
+    const totalActive = this.getTotalActiveProfiteers();
+    const totalManuallyUpdated = this.getTotalManuallyUpdatedProfiteers();
+    const rest = totalActive - totalManuallyUpdated;
+
+    if (rest > 0) {
+      const delta = this.amount - this.getSumOfSharedAmount();
+      const sharedDelta = delta / rest;
+
+      this.profiteers.forEach((profiteer: Profiteer) => {
+        if (profiteer.isInvolved && !profiteer.isUpdatedManually) {
+          this.updateProfiteer(profiteer, profiteer.share + sharedDelta);
+        }
+      });
+
+      if (!this.checkSumOfSharedAmount()) {
+        this.adjustSharedAmount();
+      }
+    }
+  }
+
+  private adjustSharedAmount() {
+    const delta = this.amount - this.getSumOfSharedAmount();
+    const firstProfiteer = this.getFirstActiveProfiteer();
+    if (firstProfiteer) {
+      this.updateProfiteer(firstProfiteer, firstProfiteer.share + delta);
+    }
+  }
+
+  private getFirstActiveProfiteer(): Profiteer {
+    for (let i = 0; i < this.profiteers.length; i++) {
+      if (this.profiteers[i].isInvolved && !this.profiteers[i].isUpdatedManually) {
+        return this.profiteers[i];
+      }
+    }
+    return null;
   }
 
   public getTotalActiveProfiteers(): number {
@@ -41,12 +86,39 @@ export class Expense extends Transaction {
     }, 0);
   }
 
+  private getTotalManuallyUpdatedProfiteers(): number {
+    return this.profiteers.reduce((total: number, profiteer: Profiteer) => {
+      return profiteer.isInvolved && profiteer.isUpdatedManually ? total + 1 : total;
+    }, 0);
+  }
+
   public checkSumOfSharedAmount(): boolean {
+    return this.getSumOfSharedAmount() === this.amount;
+  }
+
+  private updatePercentage() {
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      this.updateProfiteer(profiteer);
+    });
+  }
+
+  public updateProfiteer(profiteer: Profiteer, share?: number) {
+    if (typeof share !== 'undefined') {
+      profiteer.share = share;
+    }
+    if (this.amount) {
+      profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);
+    } else {
+      profiteer.setPercentageFormatted(0);
+    }
+  }
+
+  private getSumOfSharedAmount(): number {
     let sum = 0;
     this.profiteers.forEach((profiteer: Profiteer) => {
       sum += profiteer.share;
     });
-    return sum === this.amount;
+    return sum;
   }
 
   public isValid(): boolean {
@@ -55,5 +127,19 @@ export class Expense extends Transaction {
       && this.amount > 0
       && this.getTotalActiveProfiteers() > 0
       && this.checkSumOfSharedAmount();
+  }
+
+  public fillProfiteers(people: Map<number, Person>, isInvolved: boolean) {
+    this.profiteers.forEach((profiteer: Profiteer) => {
+      people.delete(profiteer.person.id);
+    });
+
+    people.forEach((person: Person) => {
+      this.profiteers.push(
+        new Profiteer(person, 0, isInvolved)
+      );
+    });
+
+    this.updatePercentage();
   }
 }
