@@ -43,8 +43,7 @@ export class GroupService {
 
   public updateGroup(group: Group, groupOriginal: Group): Observable<Group> {
     try {
-      ValidationUtil.validateGroupId(group.id);
-      ValidationUtil.validateGroupName(group.name);
+      ValidationUtil.validateGroup(group);
     } catch (error) {
       return Observable.throw(error);
     }

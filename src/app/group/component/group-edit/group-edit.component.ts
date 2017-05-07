@@ -8,6 +8,7 @@ import {GroupService} from '../../service';
 import {GroupStorageService} from '../../service/group-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {TylrErrorService} from '../../../core/service/tylr-error.service';
+import {TylrApiError} from '../../../shared/model/tylr-api-error';
 
 @Component({
   selector: 'tylr-group-edit',
@@ -56,6 +57,7 @@ export class GroupEditComponent implements OnInit {
             this.logService.error(error);
           }
         );
+
     }
     return false;
   }

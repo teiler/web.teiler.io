@@ -87,9 +87,7 @@ export class ExpenseComponent implements OnInit {
 
   public onSharedAmountChanged(value: string, profiteer: Profiteer) {
     const sharedValue = NumberUtil.convertStringToNumber(value);
-    this.expense.updateProfiteer(profiteer, sharedValue * 100);
-    profiteer.isUpdatedManually = true;
-
+    this.expense.updateProfiteer(profiteer, sharedValue * 100, true);
     this.expense.splitEvenlyAmongRestProfiteers();
   }
 
