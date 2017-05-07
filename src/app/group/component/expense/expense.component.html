@@ -5,13 +5,15 @@
         <span class="currency">{{group.currency}}</span>
         <input type="number" placeholder="0.00" name="amount" required min="0"
                [ngClass]="{'error': expense.amountDecimal <= 0}"
-               value="{{expense.amountDecimal}}" (keyup)="onTotalAmountChanged($event.target.value)">
+               value="{{totalAmount}}" (change)="updateTotalAmount(expense.amountDecimal)"
+               (keyup)="onTotalAmountChanged($event.target.value)">
       </label>
     </div>
     <div class="small-12 medium-3 column">
       <label>from
         <select (change)="onPayerChanged($event.target.value)">
-          <option *ngFor="let p of group.people" value="{{p.id}}" [selected]="p.id == expense.payer.id">
+          <option *ngFor="let p of group.people" value="{{p.id}}"
+                  [selected]="p.id == expense.payer.id">
             {{p.name}}
           </option>
         </select>
@@ -29,13 +31,17 @@
 
   <section class="row align-center">
 
-    <div class="small-12 medium-4 column" *ngFor="let p of expense?.profiteers" (click)="toggleIsInvolved($event, p)">
+    <div class="small-12 medium-4 column" *ngFor="let p of expense?.profiteers"
+         (click)="toggleIsInvolved($event, p)">
       <div name="person" class="card person row" [ngClass]="{'disabled': !p.isInvolved}">
         <h3 class="name small-12">{{p.person.name}}</h3>
         <span class="currency small-12">{{group.currency }}</span>
-        <input class="value small-12" type="number" value="{{p.shareFormatted}}" [disabled]="!p.isInvolved"
-               (click)="$event.stopPropagation()" (change)="onSharedAmountChanged($event.target.value, p)">
-        <span class="description"><input value="33" [disabled]="!p.isInvolved" (click)="$event.stopPropagation()">
+        <input class="value small-12" type="number" value="{{p.shareFormatted}}"
+               [disabled]="!p.isInvolved"
+               (click)="$event.stopPropagation()"
+               (change)="onSharedAmountChanged($event.target.value, p)">
+        <span class="description"><input value="{{p.percentageFormatted}}" [disabled]="!p.isInvolved"
+                                         (click)="$event.stopPropagation()">
           % of payment
         </span>
       </div>
@@ -48,7 +54,8 @@
 
   <section class="row align-center">
     <div class="small-12 medium-4 column">
-      <button class="big" [disabled]="expenseForm.invalid || !expense.isValid()">Save Expense</button>
+      <button class="big" [disabled]="expenseForm.invalid || !expense.isValid()">Save Expense
+      </button>
     </div>
   </section>
 </form>
