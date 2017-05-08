@@ -33,17 +33,6 @@ table {
   thead {
     font-weight: bold;
   }
-
-  tbody tr {
-    transition: 0.6s;
-
-    &:hover {
-      font-size: 105%;
-      transition: 0.6s;
-    }
-  }
-
-
 }
 
 button {

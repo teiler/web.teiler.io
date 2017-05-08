@@ -1,11 +1,11 @@
 <header class="row align-bottom">
-  <div class="small-12 large-4 column" routerLink="/groups/{{currentGroup.id}}">
+  <div class="small-12 large-4 column header-container" routerLink="/groups/{{currentGroup.id}}">
     <img class="logo" src="assets/logo.svg" alt="Logo Teiler.io" >
     <h1 class="title">Teiler.io</h1>
   </div>
   <div class="content small-12 large-8 column">
     <div class="row">
-      <nav class="main small-12 medium-10 column">
+      <nav class="main small-10 column">
         <div>
           <ul>
             <li *ngFor="let g of recentGroups" [ngClass]="{'active': g.id === currentGroup.id}">
