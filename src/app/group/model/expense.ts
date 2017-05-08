@@ -32,7 +32,7 @@ export class Expense extends Transaction {
       const sharedValue = this.amount / totalActive;
       this.profiteers.forEach((profiteer: Profiteer) => {
         if (profiteer.isInvolved) {
-          this.updateProfiteer(profiteer, sharedValue);
+          this.updateProfiteer(profiteer, sharedValue, false);
         }
       });
 
@@ -43,9 +43,7 @@ export class Expense extends Transaction {
   }
 
   public splitEvenlyAmongRestProfiteers() {
-    const totalActive = this.getTotalActiveProfiteers();
-    const totalManuallyUpdated = this.getTotalManuallyUpdatedProfiteers();
-    const rest = totalActive - totalManuallyUpdated;
+    const rest = this.getTotalActiveProfiteers() - this.getTotalManuallyUpdatedProfiteers();
 
     if (rest > 0) {
       const delta = this.amount - this.getSumOfSharedAmount();
@@ -102,9 +100,13 @@ export class Expense extends Transaction {
     });
   }
 
-  public updateProfiteer(profiteer: Profiteer, share?: number) {
+  public updateProfiteer(profiteer: Profiteer, share?: number, isUpdatedManually?: boolean) {
     if (typeof share !== 'undefined') {
       profiteer.share = share;
+
+      if (typeof isUpdatedManually !== 'undefined') {
+        profiteer.isUpdatedManually = isUpdatedManually;
+      }
     }
     if (this.amount) {
       profiteer.setPercentageFormatted(profiteer.share / this.amount * 100);

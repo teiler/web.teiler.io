@@ -1,5 +1,5 @@
 import {Expense} from './expense';
-import {ExpenseTestData, GroupTestData} from '../../../test/index';
+import {ExpenseTestData, GroupTestData} from '../../../test/data/index';
 import {Profiteer} from './profiteer';
 import {Group} from './group';
 
@@ -52,8 +52,7 @@ describe('Expense', () => {
 
     // first manual update & check
     profiteers[0].isInvolved = false;
-    profiteers[1].share = 1000;
-    profiteers[1].isUpdatedManually = true;
+    this.expense.updateProfiteer(profiteers[1], 1000, true);
     this.expense.splitEvenlyAmongRestProfiteers();
     expect(profiteers[0].share).toBe(0);
     expect(profiteers[1].share).toBe(1000);
@@ -61,8 +60,7 @@ describe('Expense', () => {
     expect(profiteers[3].share).toBe(500);
 
     // second manual update & check
-    profiteers[2].share = 800;
-    profiteers[2].isUpdatedManually = true;
+    this.expense.updateProfiteer(profiteers[2], 800, true);
     this.expense.splitEvenlyAmongRestProfiteers();
     expect(profiteers[0].share).toBe(0);
     expect(profiteers[1].share).toBe(1000);

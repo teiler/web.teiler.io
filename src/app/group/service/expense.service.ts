@@ -3,6 +3,8 @@ import {ExpenseResourceService} from '../resource/expense-resource.service';
 import {Observable} from 'rxjs/Observable';
 import {Expense} from '../model/expense';
 import {CrudOperation} from '../../shared/model/crud-operation';
+import {TylrWebError} from '../../shared/model/tylr-web-error';
+import {ValidationUtil} from '../../shared/util/validation-util';
 
 @Injectable()
 export class ExpenseService {
@@ -11,8 +13,10 @@ export class ExpenseService {
   }
 
   public getExpenses(groupId: string): Observable<Expense[]> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.expenseResource.getExpenses(groupId)
@@ -28,10 +32,11 @@ export class ExpenseService {
   }
 
   public getExpense(groupId: string, expenseId: number): Observable<Expense> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (!expenseId) {
-      return Observable.throw(new Error('Expense ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+      ValidationUtil.validateExpenseId(expenseId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.expenseResource.getExpense(groupId, expenseId)
@@ -43,10 +48,14 @@ export class ExpenseService {
   }
 
   public saveExpense(groupId: string, expense: Expense, mode: CrudOperation): Observable<Expense> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (mode === CrudOperation.EDIT && !expense.id) {
-      return Observable.throw(new Error('Expense ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+
+      if (mode === CrudOperation.EDIT) {
+        ValidationUtil.validateExpenseId(expense.id);
+      }
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     let saveObs: Observable<any>;
@@ -55,7 +64,7 @@ export class ExpenseService {
     } else if (mode === CrudOperation.EDIT) {
       saveObs = this.expenseResource.updateExpense(groupId, expense);
     } else {
-      return Observable.throw(new Error('Unsupported operation'));
+      return Observable.throw(new Error(TylrWebError.UNSUPPORTED_OPERATION));
     }
 
     return saveObs.map((dto: any) => {
@@ -66,10 +75,11 @@ export class ExpenseService {
   }
 
   public deleteExpense(groupId: string, expenseId: number): Observable<boolean> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (!expenseId) {
-      return Observable.throw(new Error('Expense ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+      ValidationUtil.validateExpenseId(expenseId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.expenseResource.deleteExpense(groupId, expenseId);

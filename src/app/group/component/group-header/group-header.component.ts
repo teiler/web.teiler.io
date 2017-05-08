@@ -14,7 +14,7 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
   private readonly NAME = 'GroupHeaderComponent';
   public recentGroups: GroupStorageAdapter[] = [];
   private recentGroupsSubscription: Subscription;
-  public groupSubscription: Subscription;
+  private groupSubscription: Subscription;
   public currentGroup: Group;
 
   constructor(private navigationService: NavigationService,

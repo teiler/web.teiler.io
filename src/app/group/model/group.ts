@@ -29,7 +29,7 @@ export class Group {
   }
 
   public clone(): Group {
-    return JSON.parse(JSON.stringify(this));
+    return Group.fromDto(JSON.parse(JSON.stringify(this)));
   }
 
   public getPeopleAsMap(): Map<number, Person> {
@@ -38,5 +38,23 @@ export class Group {
       peopleMap.set(person.id, person);
     });
     return peopleMap;
+  }
+
+  public hasDuplicatePerson(): boolean {
+    const names = this.people.map((person: Person) => person.name);
+    names.sort();
+    for (let i = 0; i < names.length - 1; i++) {
+      if (names[i].localeCompare(names[i + 1]) === 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public isValid() {
+    return this.id &&
+      this.name &&
+      this.currency &&
+      !this.hasDuplicatePerson();
   }
 }

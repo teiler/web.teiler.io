@@ -59,7 +59,7 @@
 
       <div class="small-12 medium-4 column">
         <button type="submit"
-                [disabled]="groupEditForm.invalid">
+                [disabled]="groupEditForm.invalid || !group.isValid()">
           Save
         </button>
       </div>
