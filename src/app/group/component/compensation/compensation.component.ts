@@ -8,6 +8,7 @@ import {NavigationService} from '../../../core/service/navigation.service';
 import {Profiteer} from '../../model/profiteer';
 import {Person} from '../../model/person';
 import {NgForm} from '@angular/forms';
+import {NumberUtil} from '../../../shared/util/number-util';
 
 @Component({
   selector: 'tylr-compensation',
@@ -35,27 +36,11 @@ export class CompensationComponent implements OnInit {
 
     switch (this.MODE) {
       case CrudOperation.CREATE: {
-        if (this.group.people.length < 2) {
-          this.navigationService.goToDashboard(this.group.id);
-        }
-        const selectedPayerId: number = parseInt(this.route.snapshot.queryParamMap.get('payerId'), 10);
-        let selectedPayer: Person = this.group.getPeopleAsMap().get(selectedPayerId);
-        if (!selectedPayer) {
-          selectedPayer = this.group.people[0];
-        }
-
-        this.compensation = new Compensation(null, selectedPayer, 0, this.getPossibleProfiteer(selectedPayer.id));
+        this.handleCreateMode();
         break;
       }
       case CrudOperation.EDIT: {
-        const expenseId = this.route.snapshot.paramMap.get('compensationId');
-        this.compensationService.getCompensation(this.group.id, parseInt(expenseId, 10))
-          .subscribe(
-            (compensation: Compensation) => {
-              this.compensation = compensation;
-            },
-            (error: any) => this.response = error.message
-          );
+        this.handleEditMode();
         break;
       }
       default: {
@@ -64,9 +49,33 @@ export class CompensationComponent implements OnInit {
     }
   }
 
-  public onTotalAmountChanged(value: number) {
-    const totalValue = value ? value : 0;
-    this.compensation.amount = value * 100;
+  private handleCreateMode() {
+    if (this.group.people.length < 2) {
+      this.navigationService.goToDashboard(this.group.id);
+    }
+    const selectedPayerId: number = parseInt(this.route.snapshot.queryParamMap.get('payerId'), 10);
+    let selectedPayer: Person = this.group.getPeopleAsMap().get(selectedPayerId);
+    if (!selectedPayer) {
+      selectedPayer = this.group.people[0];
+    }
+
+    this.compensation = new Compensation(null, selectedPayer, 0, this.getPossibleProfiteer(selectedPayer.id));
+  }
+
+  private handleEditMode() {
+    const expenseId = this.route.snapshot.paramMap.get('compensationId');
+    this.compensationService.getCompensation(this.group.id, parseInt(expenseId, 10))
+      .subscribe(
+        (compensation: Compensation) => {
+          this.compensation = compensation;
+          this.updateTotalAmount(compensation.amountDecimal);
+        },
+        (error: any) => this.response = error.message
+      );
+  }
+
+  public onTotalAmountChanged(value: string) {
+    this.compensation.amount = NumberUtil.convertStringToNumber(value) * 100;
   }
 
   public toggleIsInvolved(person: Person) {
@@ -86,7 +95,7 @@ export class CompensationComponent implements OnInit {
     if (compensationForm.form.valid) {
       this.compensationService.saveCompensation(this.group.id, this.compensation, this.MODE)
         .subscribe(
-          (compensation: Compensation) => {
+          () => {
             this.navigationService.goToDashboard(this.group.id);
           },
           (error: Error) => {
