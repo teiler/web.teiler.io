@@ -1,5 +1,5 @@
-$tylr-secondary-color: #848C97;
-$tylr-secondary-color-light: #BCBCBC;
+@import '~sass/app.settings';
+@import '~foundation-sites/scss/foundation';
 
 header {
   margin-top: 2em;
@@ -17,12 +17,19 @@ header {
     margin-bottom: 0;
   }
 
-  nav {
-    text-align: right;
+  .header-container {
+    margin-bottom: 1em;
+  }
 
+  nav {
 
     ul {
+      text-align: left;
       margin: 0;
+
+      @include breakpoint(medium) {
+        text-align: right;
+      }
 
       li {
         display: inline;
