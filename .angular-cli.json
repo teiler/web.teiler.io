@@ -53,5 +53,12 @@
   "defaults": {
     "styleExt": "scss",
     "component": {}
+  },
+
+  "stylePreprocessorOptions": {
+    "includePaths": [
+      "node_modules",
+      "src"
+    ]
   }
 }
