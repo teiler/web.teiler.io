@@ -3,6 +3,8 @@ import {CompensationResourceService} from '../resource/compensation-resource.ser
 import {Observable} from 'rxjs/Observable';
 import {Compensation} from '../model/compensation';
 import {CrudOperation} from '../../shared/model/crud-operation';
+import {ValidationUtil} from '../../shared/util/validation-util';
+import {TylrWebError} from '../../shared/model/tylr-web-error';
 
 @Injectable()
 export class CompensationService {
@@ -11,8 +13,10 @@ export class CompensationService {
   }
 
   public getCompensations(groupId: string): Observable<Compensation[]> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.compensationResource.getCompensations(groupId)
@@ -28,10 +32,11 @@ export class CompensationService {
   }
 
   public getCompensation(groupId: string, compensationId: number): Observable<Compensation> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (!compensationId) {
-      return Observable.throw(new Error('Compensation ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+      ValidationUtil.validateCompensationId(compensationId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.compensationResource.getCompensation(groupId, compensationId)
@@ -43,10 +48,14 @@ export class CompensationService {
   }
 
   public saveCompensation(groupId: string, compenssation: Compensation, mode: CrudOperation): Observable<Compensation> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (mode === CrudOperation.EDIT && !compenssation.id) {
-      return Observable.throw(new Error('Compensation ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+
+      if (mode === CrudOperation.EDIT) {
+        ValidationUtil.validateCompensationId(compenssation.id);
+      }
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     let saveObs: Observable<any>;
@@ -55,7 +64,7 @@ export class CompensationService {
     } else if (mode === CrudOperation.EDIT) {
       saveObs = this.compensationResource.updateExpense(groupId, compenssation);
     } else {
-      return Observable.throw(new Error('Unsupported operation'));
+      return Observable.throw(new Error(TylrWebError.UNSUPPORTED_OPERATION));
     }
 
     return saveObs.map((dto: any) => {
@@ -66,10 +75,11 @@ export class CompensationService {
   }
 
   public deleteCompensation(groupId: string, compensationId: number): Observable<boolean> {
-    if (!groupId) {
-      return Observable.throw(new Error('Group ID is empty'));
-    } else if (!compensationId) {
-      return Observable.throw(new Error('Expense ID is empty'));
+    try {
+      ValidationUtil.validateGroupId(groupId);
+      ValidationUtil.validateCompensationId(compensationId);
+    } catch (error) {
+      return Observable.throw(error);
     }
 
     return this.compensationResource.deleteCompensation(groupId, compensationId);

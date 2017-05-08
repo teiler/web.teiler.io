@@ -32,7 +32,6 @@ export class ExpenseResourceService extends ResourceBase {
 
   public updateExpense(groupId: string, expense: Expense): Observable<any> {
     const expenseDto = this.buildSaveExpenseDto(expense, CrudOperation.EDIT);
-
     return this.handleResponse(this.put(this.getRequestUrl(groupId, `/${expense.id}`), expenseDto));
   }
 
