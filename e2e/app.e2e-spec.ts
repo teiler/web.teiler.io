@@ -7,8 +7,17 @@ describe('tylr-web App', () => {
     page = new TylrWebPage();
   });
 
-  it('should display title saying teiler.io', () => {
+  it('should serve the app and display title saying teiler.io', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('teiler.io');
+    page.getParagraphText().then((text: string) => {
+      expect(text).toEqual('teiler.io');
+    });
+  });
+
+  it('should create a group', () => {
+    page.navigateTo();
+    page.getParagraphText().then((text: string) => {
+      expect(text).toEqual('teiler.io');
+    });
   });
 });
