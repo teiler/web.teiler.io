@@ -114,6 +114,8 @@ export class ExpenseComponent implements OnInit {
   }
 
   public updateTotalAmount(value: number) {
-    this.totalAmount = value.toFixed(2);
+    if (value) {
+      this.totalAmount = value.toFixed(2);
+    }
   }
 }
