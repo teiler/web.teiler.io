@@ -61,7 +61,8 @@ export class ExpenseComponent implements OnInit {
     }
 
     const expense = new Expense(null, selectedPayer, 0, '', []);
-    this.setExpense(expense);
+    expense.fillProfiteers(this.group.getPeopleAsMap(), true);
+    this.expense = expense;
   }
 
   private handleEditMode() {
@@ -69,15 +70,11 @@ export class ExpenseComponent implements OnInit {
     this.expenseService.getExpense(this.group.id, parseInt(expenseId, 10))
       .subscribe(
         (expense: Expense) => {
-          this.setExpense(expense);
+          expense.fillProfiteers(this.group.getPeopleAsMap(), false);
+          this.updateTotalAmount(expense.amountDecimal);
+          this.expense = expense;
         }
       );
-  }
-
-  private setExpense(expense: Expense) {
-    expense.fillProfiteers(this.group.getPeopleAsMap(), this.MODE === CrudOperation.CREATE ? true : false);
-    this.expense = expense;
-    this.updateTotalAmount(expense.amountDecimal);
   }
 
   public onTotalAmountChanged(value: string) {
