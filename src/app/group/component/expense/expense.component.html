@@ -53,6 +53,12 @@
   </section>
 
   <section class="row align-center">
+    <div class="small-12 medium-2 column">
+      <button class="secondary" (click)="onResetSplitClick($event)">Reset splitting
+      </button>
+    </div>
+  </section>
+  <section class="row align-center">
     <div class="small-12 medium-4 column">
       <button class="big" [disabled]="expenseForm.invalid || !expense.isValid()">Save Expense
       </button>
