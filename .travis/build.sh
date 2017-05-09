@@ -3,7 +3,5 @@
 set -e
 set -x
 
-[ -d node_modules ] && rm -rf node_modules
-
-npm install
+yarn install
 ng build --prod
