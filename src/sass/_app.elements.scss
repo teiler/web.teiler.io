@@ -60,9 +60,9 @@ button {
 
   &.add {
     background: $tylr-light-color;
-    border-style: solid;
-    border-width: 1px;
-    border-color: $tylr-secondary-color-light;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: $tylr-secondary-color-light;
     color: $tylr-secondary-color;
   }
 
@@ -87,9 +87,9 @@ input {
   }
 
   &.error {
-    border-color: $tylr-error-color;
-    border-style: solid;
-    border-width: 1px;
+    outline-color: $tylr-error-color;
+    outline-style: solid;
+    outline-width: 1px;
   }
 
   &.success {
@@ -133,9 +133,9 @@ button, input, select {
 .card {
   width: 100%;
   color: $tylr-secondary-color-light;
-  border-color: $tylr-secondary-color-light;
-  border-width: 1px;
-  border-style: solid;
+  outline-color: $tylr-secondary-color-light;
+  outline-width: 1px;
+  outline-style: solid;
   background-color: $tylr-light-color;
   border-radius: rem-calc(5);
   padding: 1em;
