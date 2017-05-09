@@ -98,6 +98,11 @@ export class ExpenseComponent implements OnInit {
     this.expense.splitEvenly();
   }
 
+  public onResetSplitClick(event: Event) {
+    event.stopPropagation();
+    this.expense.splitEvenly();
+  }
+
   public saveExpense(expenseForm: NgForm): boolean {
     if (expenseForm.form.valid) {
       this.expenseService.saveExpense(this.group.id, this.expense, this.MODE)
