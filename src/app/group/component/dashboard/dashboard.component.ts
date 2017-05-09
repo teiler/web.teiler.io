@@ -32,21 +32,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // initialize components (probably a loading icon)
-    this.group = this.route.snapshot.data['group'];
-    if (!this.group) {
-      this.navigationService.goHome();
-      return;
-    }
+    this.setGroup(this.route.snapshot.data['group']);
 
     this.groupSubscription = this.groupStorageService.onCurrentGroupChanged
       .subscribe(
         (currentGroup: Group) => {
           if (currentGroup) {
-            this.group = currentGroup;
+            this.setGroup(currentGroup);
           }
         }
       );
+  }
 
+  private setGroup(group: Group) {
+    this.group = group;
     this.loadTransactions();
   }
 
