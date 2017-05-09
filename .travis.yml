@@ -26,7 +26,7 @@ before_install:
 - sudo dpkg -i google-chrome*.deb
 
 install:
-- yarn install --test
+- yarn install
 
 before_script:
 # check code quality

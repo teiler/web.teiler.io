@@ -3,5 +3,5 @@
 set -e
 set -x
 
-yarn install
+yarn install --production
 ng build --prod
