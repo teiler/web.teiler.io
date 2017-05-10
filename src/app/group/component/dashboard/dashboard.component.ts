@@ -13,6 +13,7 @@ import {Transaction} from '../../model/transaction';
 import {Person} from '../../model/person';
 import {GroupService} from '../../service/group.service';
 import {Debt} from '../../model/debt';
+import {LogService} from '../../../core/service/log.service';
 
 @Component({
   selector: 'tylr-dashboard',
@@ -24,10 +25,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private groupSubscription: Subscription;
   public transactions: Transaction[] = [];
   public selectedPerson: Person;
+  public debts: Debt[] = [];
 
   constructor(private route: ActivatedRoute,
               private groupStorageService: GroupStorageService,
-              private navigationService: NavigationService,
+              private logService: LogService,
               private expenseService: ExpenseService,
               private compensationService: CompensationService,
               private groupService: GroupService) {
@@ -50,11 +52,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private setGroup(group: Group) {
     this.group = group;
     this.loadTransactions();
+    this.loadDebts();
+  }
 
-    this.groupService.getDebts(group.id)
+  private loadDebts() {
+    this.groupService.getDebts(this.group.id)
       .subscribe(
-        (debts: Debt[]) => console.log(debts),
-        (error: Error) => console.error(error.message)
+        (debts: Debt[]) => this.debts = debts,
+        (error: Error) => this.logService.error(error)
       );
   }
 
