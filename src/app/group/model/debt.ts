@@ -14,4 +14,8 @@ export class Debt {
   constructor(public person: Person,
               public balance: number) {
   }
+
+  public get balanceDecimal(){
+    return this.balance ? this.balance / 100 : 0;
+  }
 }
