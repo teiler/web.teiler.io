@@ -1,38 +1,37 @@
-sudo: required
+sudo: false
 dist: trusty
 language: node_js
 
 node_js:
 - '6'
 
-
 addons:
   ssh_known_hosts: web.teiler.io
+  apt:
+    packages:
+    - google-chrome-stable
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_46ef87e06650_key -iv $encrypted_46ef87e06650_iv
   -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
-# install chrome for unit test
-- export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sudo apt-get update
-- sudo apt-get install -y libappindicator1 fonts-liberation
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo dpkg -i google-chrome*.deb
+- sh -e /etc/init.d/xvfb start &
+- sleep 3
 
 install:
-- npm i --test
+- yarn install
 
 before_script:
-# check code quality
-- npm run lint
+- yarn run lint
 
 script:
-# unit test
 - ng test --single-run
-# build production
-- .travis/build.sh
+- ng build --prod
 
 deploy:
   - provider: script
