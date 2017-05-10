@@ -107,8 +107,11 @@ export class GroupService {
     return this.groupResourceService.getDebts(id)
       .map((dto: any) => {
         const debts: Debt[] = [];
-        dto.forEach((debt: any) => {
-          debts.push(Debt.fromDto(debt));
+        dto.forEach((debtDto: any) => {
+          const debt: Debt = Debt.fromDto(debtDto);
+          if (debt.person.active) {
+            debts.push(debt);
+          }
         });
         return debts;
       }).catch((error: Error) => {
