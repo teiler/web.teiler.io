@@ -11,6 +11,8 @@ import {CompensationService} from '../../service/compensation.service';
 import {Compensation} from '../../model/compensation';
 import {Transaction} from '../../model/transaction';
 import {Person} from '../../model/person';
+import {GroupService} from '../../service/group.service';
+import {Debt} from '../../model/debt';
 
 @Component({
   selector: 'tylr-dashboard',
@@ -27,7 +29,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private groupStorageService: GroupStorageService,
               private navigationService: NavigationService,
               private expenseService: ExpenseService,
-              private compensationService: CompensationService) {
+              private compensationService: CompensationService,
+              private groupService: GroupService) {
   }
 
   ngOnInit() {
@@ -47,6 +50,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private setGroup(group: Group) {
     this.group = group;
     this.loadTransactions();
+
+    this.groupService.getDebts(group.id)
+      .subscribe(
+        (debts: Debt[]) => console.log(debts),
+        (error: Error) => console.error(error.message)
+      );
   }
 
   public getTransactionEditLink(transaction: Transaction) {
