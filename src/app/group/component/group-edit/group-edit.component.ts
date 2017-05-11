@@ -9,6 +9,7 @@ import {GroupStorageService} from '../../service/group-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {TylrErrorService} from '../../../core/service/tylr-error.service';
 import {TylrApiError} from '../../../shared/model/tylr-api-error';
+import {Debt} from '../../model/debt';
 
 @Component({
   selector: 'tylr-group-edit',
@@ -18,6 +19,7 @@ import {TylrApiError} from '../../../shared/model/tylr-api-error';
 export class GroupEditComponent implements OnInit {
   private readonly NAME = 'GroupEditComponent';
   public group: Group;
+  private debts: Map<number, number> = new Map();
   public response: string;
 
   constructor(private groupService: GroupService,
@@ -37,11 +39,24 @@ export class GroupEditComponent implements OnInit {
       this.navigationService.goHome();
     } else {
       this.group = currentGroup.clone();
+      this.loadDebts();
     }
 
     if (action === 'add') {
       this.addPerson();
     }
+  }
+
+  private loadDebts() {
+    this.groupService.getDebts(this.group.id)
+      .subscribe(
+        (debts: Debt[]) => {
+          debts.forEach((debt: Debt) => {
+            this.debts.set(debt.person.id, debt.balance);
+          });
+        },
+        (error: Error) => this.logService.error(error)
+      );
   }
 
   public saveGroup(groupEditForm: NgForm): boolean {
@@ -62,7 +77,7 @@ export class GroupEditComponent implements OnInit {
     return false;
   }
 
-  public delete() {
+  public  delete() {
     const currentGroupId = this.groupStorageService.getCurrentGroup().id;
     const deleteConfirmation = prompt(
       'Are you sure that you want to delete the group?\nIf so, please enter the first 4 characters of the group id.');
@@ -83,15 +98,20 @@ export class GroupEditComponent implements OnInit {
     }
   }
 
-  public addPerson() {
+  public  addPerson() {
     this.group.people.push(new Person());
   }
 
-  public deletePerson(i: number) {
-    this.group.people.splice(i, 1);
+  public  deletePerson(i: number) {
+    const person: Person = this.group.people[i];
+    if (this.debts.get(person.id) === 0) {
+      this.group.people.splice(i, 1);
+    } else {
+      this.response = `${person.name} has unsettled debts and cannot be deleted`;
+    }
   }
 
-  public onCancel() {
+  public  onCancel() {
     this.navigationService.goBack();
   }
 }
