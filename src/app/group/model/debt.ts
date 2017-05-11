@@ -15,7 +15,7 @@ export class Debt {
               public balance: number) {
   }
 
-  public get balanceDecimal(){
+  public get balanceDecimal(): number {
     return this.balance ? this.balance / 100 : 0;
   }
 }
