@@ -104,10 +104,11 @@ export class GroupEditComponent implements OnInit {
 
   public  deletePerson(i: number) {
     const person: Person = this.group.people[i];
-    if (this.debts.get(person.id) === 0) {
+    if (!this.debts.has(person.id) || this.debts.get(person.id) === 0) {
       this.group.people.splice(i, 1);
     } else {
-      this.response = `${person.name} has unsettled debts and cannot be deleted`;
+      const errorMessage = TylrApiError.PERSON_HAS_UNSETTLED_DEBTS;
+      this.response = errorMessage.replace('Person', person.name);
     }
   }
 
