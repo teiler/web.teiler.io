@@ -60,9 +60,7 @@ button {
 
   &.add {
     background: $tylr-light-color;
-    outline-style: solid;
-    outline-width: 1px;
-    outline-color: $tylr-secondary-color-light;
+    border: 1px solid $tylr-secondary-color-light;
     color: $tylr-secondary-color;
   }
 
@@ -87,15 +85,8 @@ input {
   }
 
   &.error {
-    outline-color: $tylr-error-color;
-    outline-style: solid;
-    outline-width: 1px;
+    border: 1px solid $tylr-error-color;
   }
-
-  &.success {
-    border-color: $tylr-success-color;
-  }
-
 }
 
 select {
@@ -109,9 +100,16 @@ input, select {
 }
 
 button, input, select {
-  appearance: none; // disables browser styles
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 
-  border-radius: rem-calc(5);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: rem-calc(3);
   border: 0;
   box-shadow: $tylr-shadow;
 
@@ -133,22 +131,23 @@ button, input, select {
 .card {
   width: 100%;
   color: $tylr-secondary-color-light;
-  outline-color: $tylr-secondary-color-light;
-  outline-width: 1px;
-  outline-style: solid;
+  border: 1px solid $tylr-secondary-color-light;
+  border-radius: rem-calc(3);
   background-color: $tylr-light-color;
-  border-radius: rem-calc(5);
   padding: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
   box-shadow: $tylr-shadow;
-  transition: box-shadow 0.3s ease-in-out;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 
   cursor: pointer;
 
   &:hover {
     box-shadow: none;
-    transition: box-shadow 0.3s ease-in-out;
   }
 
   &.secondary {
@@ -177,8 +176,8 @@ button, input, select {
   &.person {
     color: $tylr-secondary-color;
     border-color: $tylr-active-color;
-
     padding-bottom: 0;
+    background: $tylr-light-color;
 
     &.negative {
       border-color: $tylr-error-color;
@@ -188,6 +187,7 @@ button, input, select {
       background: $tylr-primary-gradient;
       color: $tylr-light-color;
       border: none;
+      background-position: 0 -102%;
     }
 
     &.disabled {
