@@ -1,6 +1,10 @@
 @import '~sass/app.settings';
 @import '~foundation-sites/scss/foundation';
 
+*:focus {
+  outline: none;
+}
+
 header {
   margin-top: 2em;
   margin-bottom: 3em;
