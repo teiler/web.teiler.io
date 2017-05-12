@@ -17,16 +17,16 @@
         </a>
       </ng-template>
 
-      <div class="row" *ngIf="group.people.length; else emptyPeopleBlock">
-        <div class="small-12 medium-6 large-4 column" *ngFor="let p of group.people"
-             (click)="onPersonSelected(p)">
+      <div class="row" *ngIf="debts.length; else emptyPeopleBlock">
+        <div class="small-12 medium-6 large-4 column" *ngFor="let debt of debts"
+             (click)="onPersonSelected(debt.person)">
           <div name="person" class="card person"
-               [ngClass]="{'active': p.id == selectedPerson?.id,
-                           'negative': p.id !== selectedPerson?.id}">
+               [ngClass]="{'active': debt.person.id == selectedPerson?.id,
+                           'negative': debt.person.id !== selectedPerson?.id}">
             <div class="row">
-              <h3 class="name small-12 column">{{p.name}}</h3>
+              <h3 class="name small-12 column">{{debt.person.name}}</h3>
               <span class="currency small-2 column">{{group.currency}}</span>
-              <span class="value small-10 column">0.00</span>
+              <span class="value small-10 column">{{debt.balanceDecimal | amountFormat}}</span>
             </div>
           </div>
         </div>

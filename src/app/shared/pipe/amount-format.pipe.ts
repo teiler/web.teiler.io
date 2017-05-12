@@ -9,7 +9,7 @@ export class AmountFormatPipe implements PipeTransform {
     if (typeof value === 'string') {
       return value;
     } else if (typeof value === 'number') {
-      return value === 0 ? value : value.toFixed(2);
+      return value.toFixed(2);
     }
     return null;
   }
