@@ -4,6 +4,7 @@ import {GroupResourceService, PersonResourceService} from '../resource';
 import {Group, Person} from '../model';
 import {TylrErrorService} from '../../core/service/tylr-error.service';
 import {ValidationUtil} from '../../shared/util/validation-util';
+import {Debt} from '../model/debt';
 
 @Injectable()
 export class GroupService {
@@ -94,5 +95,27 @@ export class GroupService {
       return Observable.throw(error);
     }
     return this.groupResourceService.deleteGroup(id);
+  }
+
+  public getDebts(id: string): Observable<Debt[]> {
+    try {
+      ValidationUtil.validateGroupId(id);
+    } catch (error) {
+      return Observable.throw(error);
+    }
+
+    return this.groupResourceService.getDebts(id)
+      .map((dto: any) => {
+        const debts: Debt[] = [];
+        dto.forEach((debtDto: any) => {
+          const debt: Debt = Debt.fromDto(debtDto);
+          if (debt.person.active) {
+            debts.push(debt);
+          }
+        });
+        return debts;
+      }).catch((error: Error) => {
+        return Observable.throw(error);
+      });
   }
 }

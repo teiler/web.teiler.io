@@ -10,5 +10,7 @@ export const TylrApiError = {
   PAYER_INACTIVE: 'Payer is not active', // 410
   PROFITEER_INACTIVE: 'Profiteer is not active', // 410
   CURRENCY_NOT_VALID: 'Unsupported currency', // 416
-  GENERAL_SERVER_ERROR: 'Oops. Something went wrong, try to reload the page and try again. If it still doesn\'t work, contact us' // 500
+  PERSON_HAS_UNSETTLED_DEBTS: 'Person has unsettled debts and cannot be deleted', // 417
+  GENERAL_SERVER_ERROR: 'Oops. Something went wrong, try to reload the page and try again. ' +
+  'If it still doesn\'t work, contact us' // 500
 };
