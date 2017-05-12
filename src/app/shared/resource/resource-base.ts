@@ -35,6 +35,10 @@ export abstract class ResourceBase {
     return this.http.delete(environment.serverBaseUrl + path);
   }
 
+  protected handleApiJsonResponse(response: Response): any {
+    return response.json();
+  }
+
   // caller should bind `this` to the function
   protected handleApiError(error: any) {
     const message = this.tylrErrorService.getApiErrorMessage(error.json().error);

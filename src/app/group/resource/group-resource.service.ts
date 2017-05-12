@@ -20,16 +20,14 @@ export class GroupResourceService extends ResourceBase {
     };
 
     return this.post(this.getRequesturl(''), requestBody)
-      .map((response: Response) => {
-        return response.json();
-      }).catch(super.handleApiError.bind(this));
+      .map(super.handleApiJsonResponse.bind(this))
+      .catch(super.handleApiError.bind(this));
   }
 
   public getGroup(id: string): Observable<any> {
     return this.get(this.getRequesturl(`/${id}`))
-      .map((response: Response) => {
-        return response.json();
-      }).catch(super.handleApiError.bind(this));
+      .map(super.handleApiJsonResponse.bind(this))
+      .catch(super.handleApiError.bind(this));
   }
 
   public updateGroup(id: string, name: string, currency: string): Observable<any> {
@@ -39,9 +37,8 @@ export class GroupResourceService extends ResourceBase {
     };
 
     return this.put(this.getRequesturl(`/${id}`), requestBody)
-      .map((response: Response) => {
-        return response.json();
-      }).catch(super.handleApiError.bind(this));
+      .map(super.handleApiJsonResponse.bind(this))
+      .catch(super.handleApiError.bind(this));
   }
 
   public deleteGroup(id: string): Observable<boolean> {
@@ -53,9 +50,14 @@ export class GroupResourceService extends ResourceBase {
 
   public getDebts(id: string): Observable<any> {
     return this.get(this.getRequesturl(`/${id}/debts`))
-      .map((response: Response) => {
-        return response.json();
-      }).catch(super.handleApiError.bind(this));
+      .map(super.handleApiJsonResponse.bind(this))
+      .catch(super.handleApiError.bind(this));
+  }
+
+  public getPaymentSuggestions(id: string): Observable<any> {
+    return this.get(this.getRequesturl(`/${id}/settleup`))
+      .map(super.handleApiJsonResponse.bind(this))
+      .catch(super.handleApiError.bind(this));
   }
 
   private getRequesturl(endpoint: string): string {
