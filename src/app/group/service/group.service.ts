@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {GroupResourceService, PersonResourceService} from '../resource';
 import {Group, Person} from '../model';
-import {TylrErrorService} from '../../core/service/tylr-error.service';
 import {ValidationUtil} from '../../shared/util/validation-util';
 import {Debt} from '../model/debt';
+import {Compensation} from 'app/group/model/compensation';
 
 @Injectable()
 export class GroupService {
@@ -114,6 +114,25 @@ export class GroupService {
           }
         });
         return debts;
+      }).catch((error: Error) => {
+        return Observable.throw(error);
+      });
+  }
+
+  public getSuggestedPayments(id: string): Observable<Compensation[]> {
+    try {
+      ValidationUtil.validateGroupId(id);
+    } catch (error) {
+      return Observable.throw(error);
+    }
+
+    return this.groupResourceService.getSuggestedPayments(id)
+      .map((dto: any) => {
+        const compensations: Compensation[] = [];
+        dto.forEach((compensation: any) => {
+          compensations.push(Compensation.fromDto(compensation));
+        });
+        return compensations;
       }).catch((error: Error) => {
         return Observable.throw(error);
       });
