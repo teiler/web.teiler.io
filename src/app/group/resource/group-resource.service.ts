@@ -54,7 +54,7 @@ export class GroupResourceService extends ResourceBase {
       .catch(super.handleApiError.bind(this));
   }
 
-  public getPaymentSuggestions(id: string): Observable<any> {
+  public getSuggestedPayments(id: string): Observable<any> {
     return this.get(this.getRequesturl(`/${id}/settleup`))
       .map(super.handleApiJsonResponse.bind(this))
       .catch(super.handleApiError.bind(this));
