@@ -1,47 +1,35 @@
 <section class="align-center">
 
-  <section class="row align-middle">
-    <div class="small-12 medium-4 column">
-      <div name="person" class="card person row">
-        <h3 class="name small-12">Demian</h3>
-      </div>
-    </div>
-    <div class="small-12 medium-2 column suggest-payments-value">
-      <span class="value small-12">65.00</span>
-      <span class="currency">EUR</span>
-      <br>
-      <img src="assets/next.svg" class="self">
-    </div>
-    <div class="small-12 medium-4 column">
-      <div name="person" class="card person row">
-        <h3 class="name small-12">Patrick</h3>
-      </div>
-    </div>
-    <div class="small-12 medium-2 column">
-      <button>Paid</button>
-    </div>
-  </section>
-  <hr>
-  <section class="row align-middle">
-    <div class="small-12 medium-4 column">
-      <div name="person" class="card person row">
-        <h3 class="name small-12">Lukas</h3>
-      </div>
-    </div>
-    <div class="small-12 medium-2 column suggest-payments-value">
-      <span class="value small-12">73.00</span>
-      <span class="currency">EUR</span>
-      <br>
-      <img src="assets/next.svg" class="self">
-    </div>
-    <div class="small-12 medium-4 column">
-      <div name="person" class="card person row">
-        <h3 class="name small-12">Demian</h3>
-      </div>
-    </div>
-    <div class="small-12 medium-2 column">
-      <button>Paid</button>
-    </div>
-  </section>
+  <ng-template #emptySuggestedPayments>
+    <p>
+      Great! There are no debts. Everything's settled up.
+    </p>
+  </ng-template>
 
+  <div *ngIf="compensations.length; else emptySuggestedPayments">
+    <ng-template ngFor let-comp let-i="index" [ngForOf]="compensations">
+      <section class="row align-middle">
+        <div class="small-12 medium-4 column">
+          <div name="person" class="card person row">
+            <h3 class="name small-12">{{comp.payer.name}}</h3>
+          </div>
+        </div>
+        <div class="small-12 medium-2 column suggest-payments-value">
+          <span class="value small-12">{{comp.amountDecimal | amountFormat}}</span>
+          <span class="currency">{{group.currency}}</span>
+          <br>
+          <img src="assets/next.svg" class="self">
+        </div>
+        <div class="small-12 medium-4 column">
+          <div name="person" class="card person row">
+            <h3 class="name small-12">{{comp.profiteer.name}}</h3>
+          </div>
+        </div>
+        <div class="small-12 medium-2 column">
+          <button (click)="pay(i)">Pay</button>
+        </div>
+      </section>
+      <hr *ngIf="i !== compensations.length-1">
+    </ng-template>
+  </div>
 </section>
