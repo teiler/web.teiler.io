@@ -1,4 +1,5 @@
-import { TylrWebPage } from './app.po';
+import {TylrWebPage} from './app.po';
+import {browser, element, by} from 'protractor';
 
 describe('tylr-web App', () => {
   let page: TylrWebPage;
@@ -16,8 +17,8 @@ describe('tylr-web App', () => {
 
   it('should create a group', () => {
     page.navigateTo();
-    page.getParagraphText().then((text: string) => {
-      expect(text).toEqual('teiler.io');
-    });
+    page.getCreateGroupInput().sendKeys('e2e test');
+    element(by.css('tylr-group-create button')).click();
+    browser.getCurrentUrl().then(url => console.log);
   });
 });
