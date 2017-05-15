@@ -26,7 +26,7 @@
              (click)="onPersonSelected(debt.person)">
           <div name="person" class="card person"
                [ngClass]="{'active': debt.person.id == selectedPerson?.id,
-                           'negative': debt.person.id !== selectedPerson?.id}">
+                           'negative': debt.balance < 0}">
             <div class="row">
               <h3 class="name small-12 column">{{debt.person.name}}</h3>
               <span class="currency small-2 column">{{group.currency}}</span>
