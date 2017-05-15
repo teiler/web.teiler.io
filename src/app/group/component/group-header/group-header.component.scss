@@ -44,12 +44,12 @@ header {
 
 
         a {
-          color: $tylr-secondary-color-light;
+          color: $tylr-text-color-light;
         }
 
         &.active {
           a {
-            color: $tylr-secondary-color;
+            color: $tylr-text-color;
           }
         }
       }

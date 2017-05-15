@@ -1,22 +1,18 @@
-$tylr-primary-color: #f9fcff;
-$tylr-secondary-color: #848C97;
-$tylr-secondary-color-light: #BCBCBC;
+$tylr-background-color: #f9fcff;
+$tylr-text-color: #848C97;
+$tylr-text-color-light: #BCBCBC;
 
 $tylr-light-color: #FFFFFF;
 $tylr-dark-color: #000000;
-//$tylr-primary-gradient: linear-gradient(-45deg, #0072ff, #00c6ff);
-$tylr-primary-gradient: #0072ff;
+$tylr-highlight-color: #0072ff;
 $tylr-primary-disabled: #99c7ff;
-//$tylr-secondary-gradient: linear-gradient(-45deg, #2C3E50, #A0A8AF);
-$tylr-secondary-gradient: #2C3E50;
-$tylr-secondary-disabled: #A0A8AF;
-//$tylr-error-gradient: linear-gradient(-45deg, #9F031B, #F5515F);
-$tylr-error-gradient: #9F031B;
+$tylr-darken-color: #2C3E50;
+$tylr-disabled-color: #A0A8AF;
 
-
-$tylr-active-color: #00c6ff;
+$tylr-active-color: #0072ff;
 $tylr-error-color: #EF615C;
 $tylr-success-color: #B8E986;
+
 $tylr-font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $tylr-font-weight: 400;
 
