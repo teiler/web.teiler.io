@@ -22,7 +22,9 @@ header {
   }
 
   .header-container {
-    margin-bottom: 1em;
+    @include breakpoint(small only) {
+      margin-bottom: 1em;
+    }
   }
 
   nav {
