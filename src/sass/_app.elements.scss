@@ -36,7 +36,7 @@ table {
 }
 
 button {
-  background: $tylr-primary-gradient;
+  background: $tylr-highlight-color;
   color: $tylr-light-color;
 
   &[disabled] {
@@ -47,21 +47,21 @@ button {
   max-width: none;
 
   &.secondary {
-    background: $tylr-secondary-gradient;
+    background: $tylr-darken-color;
     &[disabled] {
-      background: $tylr-secondary-disabled;
+      background: $tylr-disabled-color;
       box-shadow: none;
     }
   }
 
   &.error {
-    background: $tylr-error-gradient;
+    background: $tylr-error-color;
   }
 
   &.add {
     background: $tylr-light-color;
-    border: 1px solid $tylr-secondary-color-light;
-    color: $tylr-secondary-color;
+    border: 1px solid $tylr-text-color-light;
+    color: $tylr-text-color;
   }
 
   &:hover{
@@ -70,7 +70,7 @@ button {
 }
 
 @include placeholder {
-  color: $tylr-secondary-color-light;
+  color: $tylr-text-color-light;
 }
 
 input {
@@ -95,7 +95,7 @@ select {
 
 input, select {
   background-color: $tylr-light-color;
-  color: $tylr-secondary-color;
+  color: $tylr-text-color;
 
 }
 
@@ -130,8 +130,8 @@ button, input, select {
 
 .card {
   width: 100%;
-  color: $tylr-secondary-color-light;
-  border: 1px solid $tylr-secondary-color-light;
+  color: $tylr-text-color-light;
+  border: 1px solid $tylr-text-color-light;
   border-radius: rem-calc(3);
   background-color: $tylr-light-color;
   padding: 1em;
@@ -153,11 +153,13 @@ button, input, select {
   &.secondary {
     border: none;
     color: $tylr-light-color;
-    background: $tylr-secondary-gradient;
+    background: $tylr-darken-color;
   }
 
   &.add {
     padding: 0.5em;
+    color: $tylr-darken-color;
+    border-color: $tylr-darken-color;
 
     .symbol, .description {
       width: 100%;
@@ -174,7 +176,7 @@ button, input, select {
   }
 
   &.person {
-    color: $tylr-secondary-color;
+    color: $tylr-text-color;
     border-color: $tylr-active-color;
     padding-bottom: 0;
     background: $tylr-light-color;
@@ -184,7 +186,7 @@ button, input, select {
     }
 
     &.active {
-      background: $tylr-primary-gradient;
+      background: $tylr-highlight-color;
       color: $tylr-light-color;
       border: none;
       background-position: 0 -102%;
@@ -192,11 +194,11 @@ button, input, select {
 
     &.disabled {
       box-shadow: none;
-      border-color: $tylr-secondary-color-light;
-      color: $tylr-secondary-color-light;
+      border-color: $tylr-text-color-light;
+      color: $tylr-text-color-light;
 
       input {
-        color: $tylr-secondary-color-light;
+        color: $tylr-text-color-light;
       }
     }
 
