@@ -30,6 +30,16 @@ fieldset {
 table {
   width: 100%;
 
+  @include breakpoint(small) {
+    td.time{
+      display:none;
+      width:0;
+      height:0;
+      opacity:0;
+      visibility: collapse;
+    }
+  }
+
   thead {
     font-weight: bold;
   }

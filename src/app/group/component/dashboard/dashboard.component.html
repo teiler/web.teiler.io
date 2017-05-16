@@ -63,7 +63,7 @@
       <table>
         <thead>
         <tr>
-          <td>Time</td>
+          <td class="time">Time</td>
           <td>Amount</td>
           <td>Description</td>
           <td></td>
@@ -73,7 +73,7 @@
         <tbody>
 
         <tr *ngFor="let t of transactions">
-          <td>{{t.modifiedTime | date:'H:mm'}}</td>
+          <td class="time">{{t.modifiedTime | date:'H:mm'}}</td>
           <td>
             <span class="currency">{{group.currency}}</span>
             {{t.amountDecimal | number:'2.2-2'}}
