@@ -1,6 +1,6 @@
 <div class="row">
   <section class="overview small-12 xlarge-8 column">
-    <h2 class="small-12">{{group?.name}} Overview <a href=""><img src="assets/share.svg"></a></h2>
+    <h2 class="small-12">{{group?.name}} Overview <a class="share" [routerLink]=""><img src="assets/share.svg"></a></h2>
 
     <div *ngIf="group; else nullGroupBlock">
 
@@ -38,15 +38,15 @@
     </div>
 
     <div class="row">
-      <div class="small-12 medium-4 large-3 column"
+      <div class="small-12 medium-4 xxlarge-3 column"
            routerLink="expenses/create" [queryParams]="{payerId: selectedPerson?.id}">
         <button [disabled]="this.group.people.length < 2">Add Expense</button>
       </div>
-      <div class="small-12 medium-4 large-3 column"
+      <div class="small-12 medium-4 xxlarge-3 column"
            routerLink="compensations/create" [queryParams]="{payerId: selectedPerson?.id}">
         <button [disabled]="this.group.people.length < 2">Add Compensation</button>
       </div>
-      <div class="small-12 medium-4 large-3 column" routerLink="suggest-payments">
+      <div class="small-12 medium-4 xxlarge-3 column" routerLink="suggest-payments">
         <button class="secondary" [disabled]="this.transactions.length < 1">Suggest Payments
         </button>
       </div>
