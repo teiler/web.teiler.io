@@ -3,7 +3,7 @@ import {GroupService} from '../../service/group.service';
 import {ActivatedRoute} from '@angular/router';
 import {Group} from '../../model/group';
 import {Compensation} from '../../model/compensation';
-import {LogService} from '../../../core/service/log.service';
+import {LogService, NavigationService} from 'app/core';
 import {CompensationService} from '../../service/compensation.service';
 import {CrudOperation} from '../../../shared/model/crud-operation';
 
@@ -21,6 +21,7 @@ export class SuggestPaymentsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
               private logService: LogService,
+              private navigationService: NavigationService,
               private compensationService: CompensationService) {
   }
 
@@ -49,5 +50,9 @@ export class SuggestPaymentsComponent implements OnInit {
           (error: Error) => this.message = error.message
         );
     }, 2000);
+  }
+
+  public  onCancel() {
+    this.navigationService.goBack();
   }
 }
