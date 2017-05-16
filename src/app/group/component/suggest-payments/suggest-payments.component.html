@@ -20,7 +20,7 @@
             </h2>
           </div>
           <div class="small-12 column">
-            <button [ngClass]="{'success': saved}" (click)="pay(i)">Paid</button>
+            <button [ngClass]="{'success': isPaid[i]}" (click)="pay(i)">Pay</button>
           </div>
         </div>
       </section>
