@@ -16,7 +16,7 @@ export class SuggestPaymentsComponent implements OnInit {
   public group: Group;
   public compensations: Compensation[] = [];
   public message: string;
-  public saved: boolean;
+  public isPaid: boolean[] = [];
 
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
@@ -38,14 +38,16 @@ export class SuggestPaymentsComponent implements OnInit {
   }
 
   public pay(index: number) {
-    this.saved = true;
-    const compensation = this.compensations[index];
-    this.compensationService.saveCompensation(this.group.id, compensation, CrudOperation.CREATE)
-      .subscribe(
-        () => {
-          this.compensations.splice(index, 1);
-        },
-        (error: Error) => this.message = error.message
-      );
+    this.isPaid[index] = true;
+    setTimeout(() => {
+      const compensation = this.compensations[index];
+      this.compensationService.saveCompensation(this.group.id, compensation, CrudOperation.CREATE)
+        .subscribe(
+          () => {
+            this.compensations.splice(index, 1);
+          },
+          (error: Error) => this.message = error.message
+        );
+    }, 2000);
   }
 }
