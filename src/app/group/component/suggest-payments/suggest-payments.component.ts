@@ -39,17 +39,17 @@ export class SuggestPaymentsComponent implements OnInit {
   }
 
   public pay(index: number) {
-    this.isPaid[index] = true;
-    setTimeout(() => {
-      const compensation = this.compensations[index];
-      this.compensationService.saveCompensation(this.group.id, compensation, CrudOperation.CREATE)
-        .subscribe(
-          () => {
-            this.compensations.splice(index, 1);
-          },
-          (error: Error) => this.message = error.message
-        );
-    }, 2000);
+    const compensation = this.compensations[index];
+    this.compensationService.saveCompensation(this.group.id, compensation, CrudOperation.CREATE)
+      .map(() => {
+        this.isPaid[index] = true;
+      }).delay(2000)
+      .subscribe(
+        () => {
+          this.compensations.splice(index, 1);
+        },
+        (error: Error) => this.message = error.message
+      );
   }
 
   public  onCancel() {
