@@ -48,6 +48,7 @@ export class SuggestPaymentsComponent implements OnInit {
       .subscribe(
         () => {
           this.compensations.splice(index, 1);
+          this.isPaid.splice(index, 1);
         },
         (error: Error) => this.message = error.message
       );
