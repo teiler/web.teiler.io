@@ -43,7 +43,8 @@ export class SuggestPaymentsComponent implements OnInit {
     this.compensationService.saveCompensation(this.group.id, compensation, CrudOperation.CREATE)
       .map(() => {
         this.isPaid[index] = true;
-      }).delay(2000)
+      })
+      .delay(2000)
       .subscribe(
         () => {
           this.compensations.splice(index, 1);
