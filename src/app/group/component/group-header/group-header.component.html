@@ -5,7 +5,7 @@
   </div>
   <div class="content small-12 large-8 column">
     <div class="row">
-      <nav class="main small-10 column">
+      <nav class="main column">
         <div>
           <ul>
             <li *ngFor="let g of recentGroups" [ngClass]="{'active': g.id === currentGroup.id}">
@@ -14,13 +14,14 @@
           </ul>
         </div>
       </nav>
-      <a class="small-1" (click)="edit()">
-        <img src="assets/settings.svg">
-      </a>
-      <a class="small-1" (click)="logout()">
-        <img src="assets/logout.svg">
-      </a>
+      <div class="shrink column">
+        <a (click)="edit()">
+          <img src="assets/settings.svg">
+        </a>
+        <a (click)="logout()">
+          <img src="assets/logout.svg">
+        </a>
+      </div>
     </div>
-
   </div>
 </header>
