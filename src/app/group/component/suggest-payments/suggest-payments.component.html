@@ -1,4 +1,6 @@
-<section class="align-center">
+<section class="small-12 column">
+
+  <p class="error">{{message}}</p>
 
   <ng-template #emptySuggestedPayments>
     <p>
@@ -6,30 +8,32 @@
     </p>
   </ng-template>
 
-  <div *ngIf="compensations.length; else emptySuggestedPayments">
+  <div class="row" *ngIf="compensations.length; else emptySuggestedPayments">
     <ng-template ngFor let-comp let-i="index" [ngForOf]="compensations">
-      <section class="row align-middle">
-        <div class="small-12 medium-4 column">
-          <div name="person" class="card person row">
-            <h3 class="name small-12">{{comp.payer.name}}</h3>
+      <section class="small-12 medium-2 column">
+        <div class="row">
+          <div class="small-12 column">
+            From <span class="name">{{comp.payer.name}}</span>
+            to <span class="name">{{comp.profiteer.name}}</span>
           </div>
-        </div>
-        <div class="small-12 medium-2 column suggest-payments-value">
-          <span class="value small-12">{{comp.amountDecimal | amountFormat}}</span>
-          <span class="currency">{{group.currency}}</span>
-          <br>
-          <img src="assets/next.svg" class="self">
-        </div>
-        <div class="small-12 medium-4 column">
-          <div name="person" class="card person row">
-            <h3 class="name small-12">{{comp.profiteer.name}}</h3>
+          <div class="small-12 column">
+            <h2>
+              <span class="currency">{{group.currency}}</span> {{comp.amountDecimal | amountFormat}}
+            </h2>
           </div>
-        </div>
-        <div class="small-12 medium-2 column">
-          <button (click)="pay(i)">Pay</button>
+          <div class="small-12 column">
+            <button [ngClass]="{'success': isPaid[i]}" (click)="pay(i)">Pay</button>
+          </div>
         </div>
       </section>
-      <hr *ngIf="i !== compensations.length-1">
     </ng-template>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-2 column">
+      <button type="button" class="secondary"
+              (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
   </div>
 </section>
