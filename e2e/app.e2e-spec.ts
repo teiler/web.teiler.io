@@ -44,6 +44,7 @@ describe('tylr-web App', () => {
 
     page.getGroupSavebutton().click();
     setTimeout(() => {
+      browser.getCurrentUrl().then(url => expect(url.endsWith(`groups/${groupId}`)).toBeTruthy());
       page.getAllPersonCards().count()
         .then(value => {
           expect(value).toEqual(totalPeople);
@@ -67,6 +68,10 @@ describe('tylr-web App', () => {
     // delete group
     request.delete(`https://api.teiler.io/v1/groups/${groupId}`)
       .then(() => {
+        page.navigateTo(`/groups/${groupId}`);
+
+        // browser should be navigated to home page
+        browser.getCurrentUrl().then(url => expect(url.indexOf(`groups`)).toEqual(-1));
         done();
       })
       .catch(error => {
