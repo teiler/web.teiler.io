@@ -12,4 +12,8 @@ export class TylrWebPage {
   getCreateGroupInput() {
     return element(by.id('groupName'));
   }
+
+  getCreateButton() {
+    return element(by.css('tylr-group-create button'));
+  }
 }
