@@ -1,10 +1,9 @@
 import {TylrWebPage} from './app.po';
 import {browser, element, by} from 'protractor';
-import * as request from 'request';
+import request = require('request-promise');
 
 describe('tylr-web App', () => {
   let page: TylrWebPage;
-  let groupId: string;
 
   beforeEach(() => {
     page = new TylrWebPage();
@@ -17,21 +16,25 @@ describe('tylr-web App', () => {
     });
   });
 
-  it('should create a group', () => {
+  it('should create a group', (done) => {
     page.navigateTo();
     page.getCreateGroupInput().sendKeys('e2e test');
     page.getCreateButton().click();
     browser.getCurrentUrl().then(url => {
       expect(url).toContain('groups');
       const splittedUrl = url.split('/');
-      groupId = splittedUrl[splittedUrl.length - 1];
+      const groupId = splittedUrl[splittedUrl.length - 1];
       expect(groupId).toBeDefined();
 
-      console.log(groupId);
-      request.delete(`https://web.teiler.io/groups/${groupId}`, (error, response, body) => {
-        expect(error).toBeUndefined();
-        console.log(response);
-      });
+      // delete group
+      request.delete(`https://api.teiler.io/v1/groups/${groupId}`)
+        .then(() => {
+          done();
+        })
+        .catch(error => {
+          expect(error).toBeUndefined();
+          done();
+        });
     });
   });
 });
