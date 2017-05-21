@@ -47,12 +47,12 @@ export class CompensationService {
       });
   }
 
-  public saveCompensation(groupId: string, compenssation: Compensation, mode: CrudOperation): Observable<Compensation> {
+  public saveCompensation(groupId: string, compensation: Compensation, mode: CrudOperation): Observable<Compensation> {
     try {
       ValidationUtil.validateGroupId(groupId);
 
       if (mode === CrudOperation.EDIT) {
-        ValidationUtil.validateCompensationId(compenssation.id);
+        ValidationUtil.validateCompensationId(compensation.id);
       }
     } catch (error) {
       return Observable.throw(error);
@@ -60,9 +60,9 @@ export class CompensationService {
 
     let saveObs: Observable<any>;
     if (mode === CrudOperation.CREATE) {
-      saveObs = this.compensationResource.createCompensation(groupId, compenssation);
+      saveObs = this.compensationResource.createCompensation(groupId, compensation);
     } else if (mode === CrudOperation.EDIT) {
-      saveObs = this.compensationResource.updateExpense(groupId, compenssation);
+      saveObs = this.compensationResource.updateExpense(groupId, compensation);
     } else {
       return Observable.throw(new Error(TylrWebError.UNSUPPORTED_OPERATION));
     }
