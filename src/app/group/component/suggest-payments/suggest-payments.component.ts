@@ -17,6 +17,7 @@ export class SuggestPaymentsComponent implements OnInit {
   public compensations: Compensation[] = [];
   public message: string;
   public isPaid: boolean[] = [];
+  public helpHidden = true;
 
   constructor(private route: ActivatedRoute,
               private groupService: GroupService,
@@ -56,5 +57,9 @@ export class SuggestPaymentsComponent implements OnInit {
 
   public  onCancel() {
     this.navigationService.goBack();
+  }
+
+  public toggleHelp() {
+    this.helpHidden = !this.helpHidden;
   }
 }
