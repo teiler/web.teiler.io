@@ -2,26 +2,21 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/thde/tylr-web.svg?token=870f14a6ce537b4bc771e09860d0167040213d6bdaa0f5ad2984273fb3000f83)](https://greenkeeper.io/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+Run `npm install` or `yarn install` to install the latest dependencies before following the instructions below. 
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Run [ng serve](https://github.com/angular/angular-cli/wiki/serve) for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run [ng build](https://github.com/angular/angular-cli/wiki/build) to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-### Coverage
-`ng test -cc`
+Run `ng test -cc` to execute the test coverage. The results will be stored in **coverage/index.html**.
 
 ## Running end-to-end tests
 
