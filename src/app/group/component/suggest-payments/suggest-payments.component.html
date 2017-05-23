@@ -29,7 +29,7 @@
     </ng-template>
   </div>
   <div>
-    <p (click)="toggleHelp()">How is this calculated?</p>
+    <a (click)="toggleHelp()">How is this calculated?</a>
     <div class="help" [hidden]="helpHidden">
       <p>The algorithm we use minimizes the amount of payments needed to settle the group up. How do we do this?</p>
       <p>Let's say you have a group of friends, Tony, Sara and Simon. Tony owes 20 to Sara and Sara owes 20 to Simon</p>
