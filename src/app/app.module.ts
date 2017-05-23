@@ -7,7 +7,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {WelcomeModule} from './welcome';
 import {GroupModule} from './group';
 import {CoreModule} from './core/core.module';
-import {MockModule} from './mock/mock.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +15,6 @@ import {MockModule} from './mock/mock.module';
   imports: [
     BrowserModule,
     HttpModule,
-
-    // MockModule,
-
     CoreModule.forRoot(),
     WelcomeModule.forRoot(),
     GroupModule.forRoot(),
