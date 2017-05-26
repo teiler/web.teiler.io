@@ -260,13 +260,21 @@ button, input, select {
 
 .payment {
   label {
-    white-space: nowrap;
-    display: block;
-    padding-right: 0.2em;
-    padding-left: 1em;
+    @include breakpoint(small only) {
+      input, select {
+        margin-bottom: 2em;
+      }
+    }
 
-    input, select {
-      margin-left: 0.5em;
+    @include breakpoint(medium) {
+      white-space: nowrap;
+      display: block;
+      padding-left: 1.5em;
+      padding-right: 0.2em;
+
+      input, select {
+        margin-left: 0.5em;
+      }
     }
   }
 }
