@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {Observable} from "rxjs/Observable";
-import {Group} from "../model/group";
-import {GroupService} from "./group.service";
-import {GroupStorageService} from "./group-storage.service";
-import {LogService} from "../../core/service/log.service";
-import {NavigationService} from "../../core/service/navigation.service";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {Group} from '../model/group';
+import {GroupService} from './group.service';
+import {GroupStorageService} from './group-storage.service';
+import {LogService} from '../../core/service/log.service';
+import {NavigationService} from '../../core/service/navigation.service';
 
 @Injectable()
 export class GroupResolverService implements Resolve<Group> {

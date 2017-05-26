@@ -1,11 +1,11 @@
-import {inject, TestBed} from "@angular/core/testing";
-import {CompensationService} from "./compensation.service";
-import {CompensationResourceService} from "../resource/compensation-resource.service";
-import {compensationSpyFactory} from "../../../test/spy-factory/compensation-spy-factory";
-import {Compensation} from "../model/compensation";
-import {CompensationTestData} from "../../../test/data/compensation-test-data";
-import {CrudOperation} from "../../shared/model/crud-operation";
-import * as assert from "assert";
+import {inject, TestBed} from '@angular/core/testing';
+import {CompensationService} from './compensation.service';
+import {CompensationResourceService} from '../resource/compensation-resource.service';
+import {compensationSpyFactory} from '../../../test/spy-factory/compensation-spy-factory';
+import {Compensation} from '../model/compensation';
+import {CompensationTestData} from '../../../test/data/compensation-test-data';
+import {CrudOperation} from '../../shared/model/crud-operation';
+import * as assert from 'assert';
 
 describe('CompensationService', () => {
   beforeEach(() => {

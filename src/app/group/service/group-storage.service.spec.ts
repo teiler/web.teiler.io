@@ -1,9 +1,9 @@
-import {inject, TestBed} from "@angular/core/testing";
+import {inject, TestBed} from '@angular/core/testing';
 
-import {GroupStorageService} from "./group-storage.service";
-import {LogService} from "../../core/service/log.service";
-import {GroupTestData} from "../../../test/data/group-test-data";
-import {Group} from "../model/group";
+import {GroupStorageService} from './group-storage.service';
+import {LogService} from '../../core/service/log.service';
+import {GroupTestData} from '../../../test/data/group-test-data';
+import {Group} from '../model/group';
 
 describe('GroupStorageService', () => {
   beforeEach(() => {
