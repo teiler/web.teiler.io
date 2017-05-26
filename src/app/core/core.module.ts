@@ -1,8 +1,8 @@
-import {ModuleWithProviders, NgModule, Optional, SkipSelf} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {LogService, NavigationService} from "./service";
-import {TylrErrorService} from "./service/tylr-error.service";
-import {SharedModule} from "../shared/shared.module";
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {LogService, NavigationService} from './service';
+import {TylrErrorService} from './service/tylr-error.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [

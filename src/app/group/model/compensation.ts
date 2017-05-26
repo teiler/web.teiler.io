@@ -1,5 +1,5 @@
-import {Transaction} from "./transaction";
-import {Person} from "./person";
+import {Transaction} from './transaction';
+import {Person} from './person';
 
 export class Compensation extends Transaction {
   public static fromDto(dto: any): Compensation {

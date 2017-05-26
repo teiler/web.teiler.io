@@ -1,7 +1,7 @@
-import {Expense} from "./expense";
-import {ExpenseTestData, GroupTestData} from "../../../test/data/index";
-import {Profiteer} from "./profiteer";
-import {Group} from "./group";
+import {Expense} from './expense';
+import {ExpenseTestData, GroupTestData} from '../../../test/data/index';
+import {Profiteer} from './profiteer';
+import {Group} from './group';
 
 describe('Expense', () => {
   beforeEach(() => {

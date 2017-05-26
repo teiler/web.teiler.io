@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {GroupService} from "../../service/group.service";
-import {NgForm} from "@angular/forms";
-import {Group} from "../../model/group";
-import {NavigationService} from "app/core";
-import {LogService} from "../../../core/service/log.service";
-import {GroupStorageService} from "../../service/group-storage.service";
+import {Component, OnInit} from '@angular/core';
+import {GroupService} from '../../service/group.service';
+import {NgForm} from '@angular/forms';
+import {Group} from '../../model/group';
+import {NavigationService} from 'app/core';
+import {LogService} from '../../../core/service/log.service';
+import {GroupStorageService} from '../../service/group-storage.service';
 
 @Component({
   selector: 'tylr-group-login',

@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {CrudOperation} from "../../../shared/model/crud-operation";
-import {NumberUtil} from "../../../shared/util/number-util";
-import {Group} from "../../model/group";
-import {ExpenseService} from "../../service/expense.service";
-import {Expense} from "../../model/expense";
-import {Person} from "../../model/person";
-import {Profiteer} from "../../model/profiteer";
-import {NgForm} from "@angular/forms";
-import {NavigationService} from "../../../core/service/navigation.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CrudOperation} from '../../../shared/model/crud-operation';
+import {NumberUtil} from '../../../shared/util/number-util';
+import {Group} from '../../model/group';
+import {ExpenseService} from '../../service/expense.service';
+import {Expense} from '../../model/expense';
+import {Person} from '../../model/person';
+import {Profiteer} from '../../model/profiteer';
+import {NgForm} from '@angular/forms';
+import {NavigationService} from '../../../core/service/navigation.service';
 
 
 @Component({

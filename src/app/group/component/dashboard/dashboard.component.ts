@@ -1,18 +1,18 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Group} from "../../model/group";
-import {ActivatedRoute} from "@angular/router";
-import {GroupStorageService} from "../../service/group-storage.service";
-import {Subscription} from "rxjs/Subscription";
-import {ExpenseService} from "../../service/expense.service";
-import {Expense} from "../../model/expense";
-import {Observable} from "rxjs/Observable";
-import {CompensationService} from "../../service/compensation.service";
-import {Compensation} from "../../model/compensation";
-import {Transaction} from "../../model/transaction";
-import {Person} from "../../model/person";
-import {GroupService} from "../../service/group.service";
-import {Debt} from "../../model/debt";
-import {LogService} from "../../../core/service/log.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Group} from '../../model/group';
+import {ActivatedRoute} from '@angular/router';
+import {GroupStorageService} from '../../service/group-storage.service';
+import {Subscription} from 'rxjs/Subscription';
+import {ExpenseService} from '../../service/expense.service';
+import {Expense} from '../../model/expense';
+import {Observable} from 'rxjs/Observable';
+import {CompensationService} from '../../service/compensation.service';
+import {Compensation} from '../../model/compensation';
+import {Transaction} from '../../model/transaction';
+import {Person} from '../../model/person';
+import {GroupService} from '../../service/group.service';
+import {Debt} from '../../model/debt';
+import {LogService} from '../../../core/service/log.service';
 
 @Component({
   selector: 'tylr-dashboard',

@@ -1,9 +1,9 @@
-import {ModuleWithProviders, NgModule} from "@angular/core";
+import {ModuleWithProviders, NgModule} from '@angular/core';
 
-import {SharedModule} from "app/shared";
-import {WelcomeRoutingModule} from "./welcome-routing.module";
-import {DesignComponent, HomeComponent, WelcomeComponent} from "./component";
-import {GroupModule} from "app/group";
+import {SharedModule} from 'app/shared';
+import {WelcomeRoutingModule} from './welcome-routing.module';
+import {DesignComponent, HomeComponent, WelcomeComponent} from './component';
+import {GroupModule} from 'app/group';
 
 @NgModule({
   declarations: [HomeComponent, DesignComponent, WelcomeComponent],

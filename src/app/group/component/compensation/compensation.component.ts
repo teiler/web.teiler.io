@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {Group} from "../../model/group";
-import {ActivatedRoute} from "@angular/router";
-import {CompensationService} from "../../service/compensation.service";
-import {CrudOperation} from "../../../shared/model/crud-operation";
-import {Compensation} from "../../model/compensation";
-import {NavigationService} from "../../../core/service/navigation.service";
-import {Person} from "../../model/person";
-import {NgForm} from "@angular/forms";
-import {NumberUtil} from "../../../shared/util/number-util";
+import {Component, OnInit} from '@angular/core';
+import {Group} from '../../model/group';
+import {ActivatedRoute} from '@angular/router';
+import {CompensationService} from '../../service/compensation.service';
+import {CrudOperation} from '../../../shared/model/crud-operation';
+import {Compensation} from '../../model/compensation';
+import {NavigationService} from '../../../core/service/navigation.service';
+import {Person} from '../../model/person';
+import {NgForm} from '@angular/forms';
+import {NumberUtil} from '../../../shared/util/number-util';
 
 @Component({
   selector: 'tylr-compensation',
