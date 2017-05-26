@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {CompensationResourceService} from "../resource/compensation-resource.service";
-import {Observable} from "rxjs/Observable";
-import {Compensation} from "../model/compensation";
-import {CrudOperation} from "../../shared/model/crud-operation";
-import {ValidationUtil} from "../../shared/util/validation-util";
-import {TylrWebError} from "../../shared/model/tylr-web-error";
+import {Injectable} from '@angular/core';
+import {CompensationResourceService} from '../resource/compensation-resource.service';
+import {Observable} from 'rxjs/Observable';
+import {Compensation} from '../model/compensation';
+import {CrudOperation} from '../../shared/model/crud-operation';
+import {ValidationUtil} from '../../shared/util/validation-util';
+import {TylrWebError} from '../../shared/model/tylr-web-error';
 
 @Injectable()
 export class CompensationService {

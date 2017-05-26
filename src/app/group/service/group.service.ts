@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import {GroupResourceService, PersonResourceService} from "../resource";
-import {Group, Person} from "../model";
-import {ValidationUtil} from "../../shared/util/validation-util";
-import {Debt} from "../model/debt";
-import {Compensation} from "app/group/model/compensation";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {GroupResourceService, PersonResourceService} from '../resource';
+import {Group, Person} from '../model';
+import {ValidationUtil} from '../../shared/util/validation-util';
+import {Debt} from '../model/debt';
+import {Compensation} from 'app/group/model/compensation';
 
 @Injectable()
 export class GroupService {

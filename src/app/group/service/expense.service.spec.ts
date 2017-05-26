@@ -1,11 +1,11 @@
-import {inject, TestBed} from "@angular/core/testing";
+import {inject, TestBed} from '@angular/core/testing';
 
-import {ExpenseService} from "./expense.service";
-import {ExpenseResourceService} from "../resource/expense-resource.service";
-import {CrudOperation} from "../../shared/model/crud-operation";
-import {expenseSpyFactory} from "../../../test/spy-factory/expense-spy-factory";
-import {Expense} from "../model/expense";
-import {ExpenseTestData} from "../../../test/data/expense-test-data";
+import {ExpenseService} from './expense.service';
+import {ExpenseResourceService} from '../resource/expense-resource.service';
+import {CrudOperation} from '../../shared/model/crud-operation';
+import {expenseSpyFactory} from '../../../test/spy-factory/expense-spy-factory';
+import {Expense} from '../model/expense';
+import {ExpenseTestData} from '../../../test/data/expense-test-data';
 
 describe('ExpenseService', () => {
   beforeEach(() => {

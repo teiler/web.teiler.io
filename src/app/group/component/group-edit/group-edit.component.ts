@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {NgForm} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
-import {LogService, NavigationService} from "app/core";
+import {LogService, NavigationService} from 'app/core';
 
-import {Group, Person} from "../../model";
-import {GroupService} from "../../service";
-import {GroupStorageService} from "../../service/group-storage.service";
-import {ActivatedRoute} from "@angular/router";
-import {TylrApiError} from "../../../shared/model/tylr-api-error";
-import {Debt} from "../../model/debt";
+import {Group, Person} from '../../model';
+import {GroupService} from '../../service';
+import {GroupStorageService} from '../../service/group-storage.service';
+import {ActivatedRoute} from '@angular/router';
+import {TylrApiError} from '../../../shared/model/tylr-api-error';
+import {Debt} from '../../model/debt';
 
 @Component({
   selector: 'tylr-group-edit',
