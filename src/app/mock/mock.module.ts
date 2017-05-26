@@ -8,7 +8,7 @@ import {InMemoryDataService} from './service/in-memory-data.service';
   imports: [
     CommonModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
-      passThruUnknownUrl : true
+      passThruUnknownUrl: true
     })
   ],
   exports: [

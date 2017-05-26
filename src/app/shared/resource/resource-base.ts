@@ -1,4 +1,4 @@
-import {Response, Http, Headers, RequestOptionsArgs} from '@angular/http';
+import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
 import {environment} from '../../../environments/environment';

@@ -1,8 +1,16 @@
 @mixin placeholder {
-  ::-webkit-input-placeholder {@content}
-  :-moz-placeholder           {@content}
-  ::-moz-placeholder          {@content}
-  :-ms-input-placeholder      {@content}
+  ::-webkit-input-placeholder {
+    @content
+  }
+  :-moz-placeholder {
+    @content
+  }
+  ::-moz-placeholder {
+    @content
+  }
+  :-ms-input-placeholder {
+    @content
+  }
 }
 
 h1, h2, h3, h4, h5 {
@@ -32,11 +40,11 @@ table {
   font-size: 1rem;
 
   @include breakpoint(small) {
-    td.time{
-      display:none;
-      width:0;
-      height:0;
-      opacity:0;
+    td.time {
+      display: none;
+      width: 0;
+      height: 0;
+      opacity: 0;
       visibility: collapse;
     }
   }
@@ -77,16 +85,15 @@ button {
 
   &.success {
     background-color: $tylr-success-color;
-    opacity:0;
-    transition:opacity 1s linear;
+    opacity: 0;
+    transition: opacity 1s linear;
     &::after {
       padding-left: 1em;
       content: url("assets/tick.svg");
     }
   }
 
-
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
@@ -97,7 +104,7 @@ button {
 
 input {
   &[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -260,13 +267,21 @@ button, input, select {
 
 .payment {
   label {
-    white-space: nowrap;
-    display: block;
-    padding-right: 0.2em;
-    padding-left: 1em;
+    @include breakpoint(small only) {
+      input, select {
+        margin-bottom: 2em;
+      }
+    }
 
-    input, select {
-      margin-left: 0.5em;
+    @include breakpoint(medium) {
+      white-space: nowrap;
+      display: block;
+      padding-left: 1.5em;
+      padding-right: 0.2em;
+
+      input, select {
+        margin-left: 0.5em;
+      }
     }
   }
 }

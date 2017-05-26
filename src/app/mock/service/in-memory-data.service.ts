@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {ResponseOptions, RequestMethod} from '@angular/http';
+import {ResponseOptions} from '@angular/http';
 import {GroupTestData} from '../../../test/data/index';
 
 @Injectable()

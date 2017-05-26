@@ -1,7 +1,6 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Group} from '../../model/group';
 import {ActivatedRoute} from '@angular/router';
-import {NavigationService} from '../../../core/service/navigation.service';
 import {GroupStorageService} from '../../service/group-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ExpenseService} from '../../service/expense.service';
