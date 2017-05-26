@@ -24,7 +24,7 @@ export class Compensation extends Transaction {
 
   public isValid(): boolean {
     return this.amount > 0
-    && this.payer !== null
-    && this.profiteer !== null;
+      && this.payer !== null
+      && this.profiteer !== null;
   }
 }
