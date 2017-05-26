@@ -1,9 +1,9 @@
-import {GroupService} from './group.service';
-import {inject, TestBed} from '@angular/core/testing';
-import {GroupResourceService, PersonResourceService} from '../resource/';
-import * as assert from 'assert';
-import {groupSpyFactory} from '../../../test/spy-factory/group-spy-factory';
-import {personSpyFactory} from '../../../test/spy-factory/person-spy-factory';
+import {GroupService} from "./group.service";
+import {inject, TestBed} from "@angular/core/testing";
+import {GroupResourceService, PersonResourceService} from "../resource/";
+import * as assert from "assert";
+import {groupSpyFactory} from "../../../test/spy-factory/group-spy-factory";
+import {personSpyFactory} from "../../../test/spy-factory/person-spy-factory";
 
 describe('GroupService', () => {
   beforeEach(() => {

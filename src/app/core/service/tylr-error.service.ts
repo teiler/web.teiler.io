@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {TylrApiError} from '../../shared/model/tylr-api-error';
+import {Injectable} from "@angular/core";
+import {TylrApiError} from "../../shared/model/tylr-api-error";
 
 @Injectable()
 export class TylrErrorService {

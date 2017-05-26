@@ -1,5 +1,5 @@
-import {Observable} from 'rxjs/Observable';
-import {GroupTestData} from '../data/group-test-data';
+import {Observable} from "rxjs/Observable";
+import {GroupTestData} from "../data/group-test-data";
 /**
  * Created by Keerthikan on 07-May-17.
  */

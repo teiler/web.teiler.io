@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {GroupService, GroupStorageService} from '../../service';
-import {Group} from '../../model/group';
-import {LogService, NavigationService} from 'app/core';
+import {Component, OnInit} from "@angular/core";
+import {NgForm} from "@angular/forms";
+import {GroupService, GroupStorageService} from "../../service";
+import {Group} from "../../model/group";
+import {LogService, NavigationService} from "app/core";
 
 @Component({
   selector: 'tylr-group-create',

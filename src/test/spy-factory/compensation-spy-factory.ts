@@ -2,8 +2,8 @@
  * Created by Keerthikan on 07-May-17.
  */
 
-import {CompensationTestData} from '../data/compensation-test-data';
-import {Observable} from 'rxjs/Observable';
+import {CompensationTestData} from "../data/compensation-test-data";
+import {Observable} from "rxjs/Observable";
 
 export let compensationSpyFactory = (jasmine) => {
   const compensationSpy = jasmine.createSpyObj('compensationResourceService',

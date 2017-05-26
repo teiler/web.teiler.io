@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ExpenseResourceService} from '../resource/expense-resource.service';
-import {Observable} from 'rxjs/Observable';
-import {Expense} from '../model/expense';
-import {CrudOperation} from '../../shared/model/crud-operation';
-import {TylrWebError} from '../../shared/model/tylr-web-error';
-import {ValidationUtil} from '../../shared/util/validation-util';
+import {Injectable} from "@angular/core";
+import {ExpenseResourceService} from "../resource/expense-resource.service";
+import {Observable} from "rxjs/Observable";
+import {Expense} from "../model/expense";
+import {CrudOperation} from "../../shared/model/crud-operation";
+import {TylrWebError} from "../../shared/model/tylr-web-error";
+import {ValidationUtil} from "../../shared/util/validation-util";
 
 @Injectable()
 export class ExpenseService {
