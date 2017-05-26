@@ -1,4 +1,4 @@
-import {Person} from "./person";
+import {Person} from './person';
 export abstract class Transaction {
   constructor(public id: number,
               public payer: Person,

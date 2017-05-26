@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
-import {Location} from "@angular/common";
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Injectable()
 export class NavigationService {

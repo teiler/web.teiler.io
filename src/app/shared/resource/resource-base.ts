@@ -1,9 +1,9 @@
-import {Headers, Http, RequestOptionsArgs, Response} from "@angular/http";
-import {Observable} from "rxjs/Rx";
+import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 
-import {environment} from "../../../environments/environment";
-import {ApiRequestOptions} from "../model";
-import {TylrErrorService} from "../../core/service/tylr-error.service";
+import {environment} from '../../../environments/environment';
+import {ApiRequestOptions} from '../model';
+import {TylrErrorService} from '../../core/service/tylr-error.service';
 
 export abstract class ResourceBase {
   static JSON_HEADERS: RequestOptionsArgs = {headers: new Headers({'content-type': 'application/json'})};

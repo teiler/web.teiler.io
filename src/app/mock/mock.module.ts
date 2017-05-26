@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import {InMemoryWebApiModule} from "angular-in-memory-web-api";
-import {InMemoryDataService} from "./service/in-memory-data.service";
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './service/in-memory-data.service';
 
 @NgModule({
   imports: [
