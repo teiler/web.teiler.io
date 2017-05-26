@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {GroupComponent, DashboardComponent, ExpenseComponent} from './component';
+import {RouterModule, Routes} from '@angular/router';
+import {DashboardComponent, ExpenseComponent, GroupComponent} from './component';
 import {GroupEditComponent} from './component/group-edit/group-edit.component';
 import {GroupResolverService} from './service/group-resolver.service';
 import {CompensationComponent} from './component/compensation/compensation.component';

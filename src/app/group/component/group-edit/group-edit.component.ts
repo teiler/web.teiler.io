@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 import {LogService, NavigationService} from 'app/core';
@@ -7,7 +7,6 @@ import {Group, Person} from '../../model';
 import {GroupService} from '../../service';
 import {GroupStorageService} from '../../service/group-storage.service';
 import {ActivatedRoute} from '@angular/router';
-import {TylrErrorService} from '../../../core/service/tylr-error.service';
 import {TylrApiError} from '../../../shared/model/tylr-api-error';
 import {Debt} from '../../model/debt';
 

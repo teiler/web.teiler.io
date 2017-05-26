@@ -1,4 +1,4 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
 import {GroupStorageService} from './group-storage.service';
 import {LogService} from '../../core/service/log.service';
