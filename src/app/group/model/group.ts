@@ -1,4 +1,4 @@
-import {Person} from './person';
+import {Person} from "./person";
 export class Group {
   private _fetchedTime: Date;
 

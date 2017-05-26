@@ -1,9 +1,9 @@
 /**
  * Created by Keerthikan on 07-May-17.
  */
-import {TylrWebError} from '../model/tylr-web-error';
-import {Group} from '../../group/model/group';
-import {TylrApiError} from '../model/tylr-api-error';
+import {TylrWebError} from "../model/tylr-web-error";
+import {Group} from "../../group/model/group";
+import {TylrApiError} from "../model/tylr-api-error";
 
 export abstract class ValidationUtil {
 

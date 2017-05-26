@@ -1,4 +1,4 @@
-import {Person} from './person';
+import {Person} from "./person";
 /**
  * Created by Keerthikan on 10-May-17.
  */

@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GroupStorageService} from 'app/group';
-import {Subscription} from 'rxjs/Subscription';
-import {LogService, NavigationService} from 'app/core';
-import {GroupStorageAdapter} from '../../model/group-storage-adapter';
-import {Group} from '../../model/group';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {GroupStorageService} from "app/group";
+import {Subscription} from "rxjs/Subscription";
+import {LogService, NavigationService} from "app/core";
+import {GroupStorageAdapter} from "../../model/group-storage-adapter";
+import {Group} from "../../model/group";
 
 @Component({
   selector: 'tylr-group-header',

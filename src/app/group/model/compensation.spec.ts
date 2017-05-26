@@ -2,8 +2,8 @@
  * Created by Keerthikan on 07-May-17.
  */
 
-import {Compensation} from './compensation';
-import {CompensationTestData} from '../../../test/data/compensation-test-data';
+import {Compensation} from "./compensation";
+import {CompensationTestData} from "../../../test/data/compensation-test-data";
 
 describe('Compensation', () => {
   beforeEach(() => {

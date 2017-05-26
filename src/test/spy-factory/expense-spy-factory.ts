@@ -1,6 +1,6 @@
-import {ExpenseTestData} from '../data/expense-test-data';
-import {Observable} from 'rxjs/Observable';
-import {Expense} from '../../app/group/model/expense';
+import {ExpenseTestData} from "../data/expense-test-data";
+import {Observable} from "rxjs/Observable";
+import {Expense} from "../../app/group/model/expense";
 /**
  * Created by Keerthikan on 07-May-17.
  */

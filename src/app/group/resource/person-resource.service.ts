@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ResourceBase} from '../../shared/resource/resource-base';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {TylrErrorService} from '../../core/service/tylr-error.service';
+import {Injectable} from "@angular/core";
+import {ResourceBase} from "../../shared/resource/resource-base";
+import {Http, Response} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {TylrErrorService} from "../../core/service/tylr-error.service";
 
 @Injectable()
 export class PersonResourceService extends ResourceBase {

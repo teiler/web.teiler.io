@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {GroupService} from '../../service/group.service';
-import {ActivatedRoute} from '@angular/router';
-import {Group} from '../../model/group';
-import {Compensation} from '../../model/compensation';
-import {LogService, NavigationService} from 'app/core';
-import {CompensationService} from '../../service/compensation.service';
-import {CrudOperation} from '../../../shared/model/crud-operation';
+import {Component, OnInit} from "@angular/core";
+import {GroupService} from "../../service/group.service";
+import {ActivatedRoute} from "@angular/router";
+import {Group} from "../../model/group";
+import {Compensation} from "../../model/compensation";
+import {LogService, NavigationService} from "app/core";
+import {CompensationService} from "../../service/compensation.service";
+import {CrudOperation} from "../../../shared/model/crud-operation";
 
 @Component({
   selector: 'tylr-suggest-payments',

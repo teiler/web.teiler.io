@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ResourceBase} from '../../shared/resource/resource-base';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {Expense} from '../model/expense';
-import {Profiteer} from '../model/profiteer';
-import {CrudOperation} from '../../shared/model/crud-operation';
-import {TylrErrorService} from '../../core/service/tylr-error.service';
+import {Injectable} from "@angular/core";
+import {ResourceBase} from "../../shared/resource/resource-base";
+import {Http, Response} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {Expense} from "../model/expense";
+import {Profiteer} from "../model/profiteer";
+import {CrudOperation} from "../../shared/model/crud-operation";
+import {TylrErrorService} from "../../core/service/tylr-error.service";
 
 @Injectable()
 export class ExpenseResourceService extends ResourceBase {

@@ -1,7 +1,7 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Group} from '../model/group';
-import {LogService} from 'app/core';
-import {GroupStorageAdapter} from '../model/group-storage-adapter';
+import {EventEmitter, Injectable} from "@angular/core";
+import {Group} from "../model/group";
+import {LogService} from "app/core";
+import {GroupStorageAdapter} from "../model/group-storage-adapter";
 
 @Injectable()
 export class GroupStorageService {

@@ -1,4 +1,4 @@
-import { AmountFormatPipe } from './amount-format.pipe';
+import {AmountFormatPipe} from "./amount-format.pipe";
 
 describe('AmountFormatPipe', () => {
   it('create an instance', () => {
