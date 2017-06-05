@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
 /* Settings */
 @import 'sass/app.settings';
 @import 'sass/foundation.settings';
-
 /* Library imports from node_modules */
 @import '~normalize.css/normalize.css';
 @import '~foundation-sites/scss/foundation';
@@ -16,7 +14,6 @@
 
 @import 'sass/app.body';
 @import 'sass/app.elements';
-
 
 /* These are unused Foundation components. Just uncomment to activate. */
 

@@ -1,4 +1,4 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {CompensationService} from './compensation.service';
 import {CompensationResourceService} from '../resource/compensation-resource.service';
 import {compensationSpyFactory} from '../../../test/spy-factory/compensation-spy-factory';

@@ -5,7 +5,6 @@ import {CompensationService} from '../../service/compensation.service';
 import {CrudOperation} from '../../../shared/model/crud-operation';
 import {Compensation} from '../../model/compensation';
 import {NavigationService} from '../../../core/service/navigation.service';
-import {Profiteer} from '../../model/profiteer';
 import {Person} from '../../model/person';
 import {NgForm} from '@angular/forms';
 import {NumberUtil} from '../../../shared/util/number-util';

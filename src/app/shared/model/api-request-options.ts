@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RequestOptions, Headers} from '@angular/http';
+import {Headers, RequestOptions} from '@angular/http';
 
 @Injectable()
 export class ApiRequestOptions extends RequestOptions {
