@@ -37,7 +37,7 @@
     "@types/node": "~8.0.0",
     "@types/request": "2.0.8",
     "@types/request-promise": "^4.1.33",
-    "codelyzer": "~3.2.0",
+    "codelyzer": "~4.0.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.0",
     "karma": "~2.0.0",
