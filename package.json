@@ -35,7 +35,7 @@
     "@types/jasmine": "2.6.3",
     "@types/jquery": "^3.2.0",
     "@types/node": "~8.5.0",
-    "@types/request": "2.0.8",
+    "@types/request": "2.0.12",
     "@types/request-promise": "^4.1.33",
     "codelyzer": "~4.0.0",
     "jasmine-core": "~2.8.0",
