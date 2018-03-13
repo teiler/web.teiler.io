@@ -7,9 +7,7 @@ node_js:
 
 addons:
   ssh_known_hosts: web.teiler.io
-  apt:
-    packages:
-    - google-chrome-stable
+  chrome: stable
 
 cache:
   yarn: true
@@ -17,9 +15,7 @@ cache:
     - node_modules
 
 before_install:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 install:
 - yarn install
