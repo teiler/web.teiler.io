@@ -14,9 +14,6 @@ cache:
   directories:
     - node_modules
 
-before_install:
-- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-
 install:
 - yarn install
 
